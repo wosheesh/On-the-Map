@@ -27,21 +27,114 @@ class UClient: NSObject {
         super.init()
     }
     
-    // MARK: Get Session ID
+    // MARK: Authenticate
     
-//    TODO: get session id
-    /* get sessionid to login */
-    func getSession(email: String, password: String, completionHandler: (result: String?, error: String?) -> Void) {
+    func authenticateWithUserCredentials(email: String, password: String, completionHandler: (success: Bool, errorString: String?) -> Void) {
         if email.isEmpty {
-            completionHandler(result: nil, error: "Email is Empty")
+            completionHandler(success: false, errorString: "Email is Empty")
         } else if password.isEmpty {
-            completionHandler(result: nil, error: "Password is Empty")
+            completionHandler(success: false, errorString: "Password is Empty")
         } else {
-            completionHandler(result: "success", error: nil)
+            getSessionID(email, password: password) { (success, sessionID, errorString) in
+                if success {
+                    /* Success we have sessionID */
+                    self.sessionID = sessionID
+                    completionHandler(success: success, errorString: errorString)
+                } else {
+                    completionHandler(success: success, errorString: errorString)
+                }
+            }
         }
     }
     
     
+    func getSessionID(email: String, password: String, completionHandler: (success: Bool, sessionID: String?, errorString: String?) -> Void) {
+        
+        /* 1. Specify HTTP Body */
+        let jsonBody : [String:AnyObject] = [
+            "udacity": [
+                UClient.JSONBodyKeys.Username: email as String,
+                UClient.JSONBodyKeys.Password: password as String
+            ]
+        ]
+        
+        print(jsonBody)
+        
+        /* 2. Make the request */
+        taskForPOSTMethod(UClient.Methods.UdacitySession, jsonBody: jsonBody) { JSONResult, error in
+            
+            print("JSONResult : \(JSONResult)")
+            
+            /* 3. Send the desired value to completion handler */
+            /* check for errors */
+            if let error = error {
+                print(error)
+                completionHandler(success: false, sessionID: nil, errorString: "Login Failed (Session ID).")
+                
+            /* what if 403 ie invalid credentials? */
+            } else if let error = JSONResult[UClient.JSONResponseKeys.ErrorMessage] as? String {
+                print("\(error)")
+                if JSONResult[UClient.JSONResponseKeys.Status] as? Int == 403 {
+                    completionHandler(success: false, sessionID: nil, errorString: "Invalid username or password")
+                } else {
+                    completionHandler(success: false, sessionID: nil, errorString: error)
+                }
+                
+            /* do we have session? */
+            } else if let sessionID = JSONResult.valueForKeyPath(UClient.JSONResponseKeys.SessionID)! as? String {
+                print("found session ID: \(sessionID)")
+                completionHandler(success: true, sessionID: sessionID, errorString: nil)
+            } else {
+                print("Could not find \(UClient.JSONResponseKeys.SessionID) in \(JSONResult)")
+                completionHandler(success: false, sessionID: nil, errorString: "Login Failed (Session ID).")
+            }
+            
+        }
+    }
+    
+    // MARK: Convenience functions
+    
+    func taskForPOSTMethod(method: String, jsonBody: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        
+        /* 1. Build the URL */
+        let urlString = Constants.BaseURL + method
+        let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        
+        /* 2. Configure the request */
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
+        }
+        
+        /* 3. Make the request */
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            /* GUARD: was there an error? */
+            guard (error == nil) else {
+                print("There was an error: \(error) while calling method: \(method)")
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("[StartUdacitySession] No data was returned by request!")
+                return
+            }
+            
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
+            
+            /* 4. Parse the data and use the data in completion handler */
+            UClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+        }
+        
+        /* 5. Start the request */
+        task.resume()
+
+        return task
+    }
 
     // MARK: Shared Instance
     
@@ -55,30 +148,21 @@ class UClient: NSObject {
         return Singleton.sharedInstance
     }
     
+    // MARK: Helpers
     
-    
-    
-// MARK: Helpers
-    
-    /* Helper function: Given a dictionary of parameters, convert to a string for an url */
-//    class func escapedParameters(parameters: [String : AnyObject]) -> String {
-//        
-//        var urlVars = [String]()
-//        
-//        for (key, value) in parameters {
-//            
-//            /* Make sure it's a string value */
-//            let stringValue = "\(value)"
-//            
-//            /* Escape it */
-//            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-//            
-//            /* Append it */
-//            urlVars += [key + ":" + "\(escapedValue)"]
-//            
-//        }
-//        
-//        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
-//    }
-    
+    /* Helper: Given raw JSON, return a usable Foundation object */
+    class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        
+        var parsedResult: AnyObject!
+        do {
+            parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+        } catch {
+            let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
+            completionHandler(result: nil, error: NSError(domain: "parseJSONWithCompletionHandler", code: 1, userInfo: userInfo))
+        }
+        
+        completionHandler(result: parsedResult, error: nil)
+    }
 }
+
+    

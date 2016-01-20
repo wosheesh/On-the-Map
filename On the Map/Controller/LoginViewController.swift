@@ -38,15 +38,16 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonTouch(sender: AnyObject) {
         // TODO: loginButtonTouch
+        self.debugTextLabel.text = ""
+        self.setUIEnabled(enabled: false)
         
-        UClient.sharedInstance().getSession(emailTextField.text!, password: passwordTextField.text!) { (result, error) in
-            if (result != nil) {
-                self.debugTextLabel.text = result
+        UClient.sharedInstance().authenticateWithUserCredentials(emailTextField.text!, password: passwordTextField.text!) { (success, errorString) in
+            if success {
+                self.completeLogin()
             } else {
-                self.displayError(error)
+                self.displayError(errorString)
             }
         }
-
     }
     
     // MARK: LoginViewController
@@ -54,18 +55,33 @@ class LoginViewController: UIViewController {
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
             self.debugTextLabel.text = "Login Complete"
+            self.setUIEnabled(enabled: true)
             // TODO: instantiate login view
         })
     }
     
     func displayError(errorString: String?) {
         dispatch_async(dispatch_get_main_queue(), {
+            self.setUIEnabled(enabled: true)
             if let errorString = errorString {
                 self.debugTextLabel.text = errorString
             }
         })
     }
     
+    // MARK: LoginViewController - Configure UI
     
+    func setUIEnabled(enabled enabled: Bool) {
+        emailTextField.enabled = enabled
+        passwordTextField.enabled = enabled
+        loginButton.enabled = enabled
+        debugTextLabel.enabled = enabled
+        
+        if enabled {
+            loginButton.alpha = 1.0
+        } else {
+            loginButton.alpha = 0.5
+        }
+    }
     
 }
