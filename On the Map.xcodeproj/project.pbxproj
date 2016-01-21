@@ -11,6 +11,7 @@
 		FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1E56A01C4F38AB0042B258 /* UConstants.swift */; };
 		FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */; };
 		FE6C2C491C5132A9004A0963 /* StudentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */; };
+		FE6C2C4B1C514DCF004A0963 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C4A1C514DCF004A0963 /* ParseClient.swift */; };
 		FEDAFE521C422F81006055B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFE511C422F81006055B6 /* AppDelegate.swift */; };
 		FEDAFE571C422F81006055B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEDAFE551C422F81006055B6 /* Main.storyboard */; };
 		FEDAFE591C422F81006055B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEDAFE581C422F81006055B6 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		FE1E56A01C4F38AB0042B258 /* UConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UConstants.swift; path = Model/Udacity/UConstants.swift; sourceTree = "<group>"; };
 		FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentsMapViewController.swift; path = Controller/StudentsMapViewController.swift; sourceTree = "<group>"; };
 		FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentsListViewController.swift; path = Controller/StudentsListViewController.swift; sourceTree = "<group>"; };
+		FE6C2C4A1C514DCF004A0963 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseClient.swift; path = Model/Parse/ParseClient.swift; sourceTree = "<group>"; };
 		FEDAFE4E1C422F80006055B6 /* On the Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On the Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEDAFE511C422F81006055B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEDAFE561C422F81006055B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,6 +52,14 @@
 				FE1E56A01C4F38AB0042B258 /* UConstants.swift */,
 			);
 			name = Udacity;
+			sourceTree = "<group>";
+		};
+		FE6C2C4C1C514DDE004A0963 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				FE6C2C4A1C514DCF004A0963 /* ParseClient.swift */,
+			);
+			name = Parse;
 			sourceTree = "<group>";
 		};
 		FEDAFE451C422F80006055B6 = {
@@ -86,6 +96,7 @@
 		FEDAFE631C422FA2006055B6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FE6C2C4C1C514DDE004A0963 /* Parse */,
 				FE1E56A21C4F3FD70042B258 /* Udacity */,
 			);
 			name = Model;
@@ -182,6 +193,7 @@
 			files = (
 				FEDAFE671C42332A006055B6 /* LoginViewController.swift in Sources */,
 				FE6C2C491C5132A9004A0963 /* StudentsListViewController.swift in Sources */,
+				FE6C2C4B1C514DCF004A0963 /* ParseClient.swift in Sources */,
 				FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */,
 				FE1E569F1C4F351E0042B258 /* UClient.swift in Sources */,
 				FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */,

@@ -20,7 +20,7 @@ class StudentsListViewController: UIViewController {
         
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.setLeftBarButtonItem(button1, animated: true)
-        navigationItem.setRightBarButtonItems([button2, button3], animated: true)
+        navigationItem.setRightBarButtonItems([button3, button2], animated: true)
         
     }
 }
