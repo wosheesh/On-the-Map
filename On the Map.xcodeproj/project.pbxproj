@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FE1E569F1C4F351E0042B258 /* UClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1E569E1C4F351E0042B258 /* UClient.swift */; };
 		FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1E56A01C4F38AB0042B258 /* UConstants.swift */; };
+		FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */; };
+		FE6C2C491C5132A9004A0963 /* StudentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */; };
 		FEDAFE521C422F81006055B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFE511C422F81006055B6 /* AppDelegate.swift */; };
 		FEDAFE571C422F81006055B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEDAFE551C422F81006055B6 /* Main.storyboard */; };
 		FEDAFE591C422F81006055B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEDAFE581C422F81006055B6 /* Assets.xcassets */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		FE1E569E1C4F351E0042B258 /* UClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UClient.swift; path = Model/Udacity/UClient.swift; sourceTree = "<group>"; };
 		FE1E56A01C4F38AB0042B258 /* UConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UConstants.swift; path = Model/Udacity/UConstants.swift; sourceTree = "<group>"; };
+		FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentsMapViewController.swift; path = Controller/StudentsMapViewController.swift; sourceTree = "<group>"; };
+		FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentsListViewController.swift; path = Controller/StudentsListViewController.swift; sourceTree = "<group>"; };
 		FEDAFE4E1C422F80006055B6 /* On the Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On the Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEDAFE511C422F81006055B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEDAFE561C422F81006055B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				FEDAFE661C42332A006055B6 /* LoginViewController.swift */,
+				FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */,
+				FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -175,8 +181,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEDAFE671C42332A006055B6 /* LoginViewController.swift in Sources */,
+				FE6C2C491C5132A9004A0963 /* StudentsListViewController.swift in Sources */,
 				FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */,
 				FE1E569F1C4F351E0042B258 /* UClient.swift in Sources */,
+				FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */,
 				FEDAFE521C422F81006055B6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
