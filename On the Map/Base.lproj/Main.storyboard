@@ -132,7 +132,7 @@
         <!--Tabs-->
         <scene sceneID="Qtv-g9-L0A">
             <objects>
-                <tabBarController storyboardIdentifier="Tabs" id="GXe-oA-Nqt" userLabel="Tabs" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabsController" id="GXe-oA-Nqt" userLabel="Tabs" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ljN-50-iLn"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="j79-w0-ELd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

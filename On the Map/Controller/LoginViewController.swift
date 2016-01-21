@@ -55,8 +55,10 @@ class LoginViewController: UIViewController {
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
             self.debugTextLabel.text = "Login Complete"
-            self.setUIEnabled(enabled: true)
+            self.setUIEnabled(enabled: false)
             // TODO: instantiate login view
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabsController") as! UITabBarController
+            self.presentViewController(controller, animated: true, completion: nil)
         })
     }
     
@@ -64,7 +66,8 @@ class LoginViewController: UIViewController {
         dispatch_async(dispatch_get_main_queue(), {
             self.setUIEnabled(enabled: true)
             if let errorString = errorString {
-                self.debugTextLabel.text = errorString
+                
+                self.showAlert("Alert", message: errorString)
             }
         })
     }
@@ -82,6 +85,26 @@ class LoginViewController: UIViewController {
         } else {
             loginButton.alpha = 0.5
         }
+    }
+    
+    // MARK: AlertViewController
+    
+    func showAlert(title: String, message: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action: UIAlertAction!) in
+//            print("You have pressed the Cancel button")
+//        }
+        
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { action in
+            print("OK pressed on Alert Controller")
+        }
+        
+        alertController.addAction(OKAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
 }

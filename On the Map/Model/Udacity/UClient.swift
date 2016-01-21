@@ -58,24 +58,28 @@ class UClient: NSObject {
             ]
         ]
         
-        print(jsonBody)
-        
         /* 2. Make the request */
         taskForPOSTMethod(UClient.Methods.UdacitySession, jsonBody: jsonBody) { JSONResult, error in
             
             print("JSONResult : \(JSONResult)")
             
             /* 3. Send the desired value to completion handler */
-            /* check for errors */
+            /* check for errors and return info to user */
             if let error = error {
                 print(error)
-                completionHandler(success: false, sessionID: nil, errorString: "Login Failed (Session ID).")
+                
+                /* catching the timeout error */
+                if error.code == NSURLErrorTimedOut {
+                    completionHandler(success: false, sessionID: nil, errorString: "Cannot connect to Udacity server. Please check your connection.")
+                } else {
+                    completionHandler(success: false, sessionID: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")
+                }
                 
             /* what if 403 ie invalid credentials? */
             } else if let error = JSONResult[UClient.JSONResponseKeys.ErrorMessage] as? String {
                 print("\(error)")
                 if JSONResult[UClient.JSONResponseKeys.Status] as? Int == 403 {
-                    completionHandler(success: false, sessionID: nil, errorString: "Invalid username or password")
+                    completionHandler(success: false, sessionID: nil, errorString: "Invalid username or password. Try again.")
                 } else {
                     completionHandler(success: false, sessionID: nil, errorString: error)
                 }
@@ -86,7 +90,7 @@ class UClient: NSObject {
                 completionHandler(success: true, sessionID: sessionID, errorString: nil)
             } else {
                 print("Could not find \(UClient.JSONResponseKeys.SessionID) in \(JSONResult)")
-                completionHandler(success: false, sessionID: nil, errorString: "Login Failed (Session ID).")
+                completionHandler(success: false, sessionID: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")
             }
             
         }
@@ -110,11 +114,22 @@ class UClient: NSObject {
         }
         
         /* 3. Make the request */
+        
+        // Set the session interval timeout
+        let urlconfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        urlconfig.timeoutIntervalForRequest = 15
+        urlconfig.timeoutIntervalForResource = 15
+        self.session = NSURLSession(configuration: urlconfig, delegate: nil, delegateQueue: nil)
+        
+        // request
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             
             /* GUARD: was there an error? */
             guard (error == nil) else {
                 print("There was an error: \(error) while calling method: \(method)")
+                if error?.code == NSURLErrorTimedOut {
+                    completionHandler(result: nil, error: error)
+                }
                 return
             }
             
