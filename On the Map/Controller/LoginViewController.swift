@@ -38,15 +38,16 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonTouch(sender: AnyObject) {
         // TODO: loginButtonTouch
+        self.debugTextLabel.text = ""
+        self.setUIEnabled(enabled: false)
         
-        UClient.sharedInstance().getSession(emailTextField.text!, password: passwordTextField.text!) { (result, error) in
-            if (result != nil) {
-                self.debugTextLabel.text = result
+        UClient.sharedInstance().authenticateWithUserCredentials(emailTextField.text!, password: passwordTextField.text!) { (success, errorString) in
+            if success {
+                self.completeLogin()
             } else {
-                self.displayError(error)
+                self.displayError(errorString)
             }
         }
-
     }
     
     // MARK: LoginViewController
@@ -54,18 +55,56 @@ class LoginViewController: UIViewController {
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
             self.debugTextLabel.text = "Login Complete"
+            self.setUIEnabled(enabled: false)
             // TODO: instantiate login view
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabsController") as! UITabBarController
+            self.presentViewController(controller, animated: true, completion: nil)
         })
     }
     
     func displayError(errorString: String?) {
         dispatch_async(dispatch_get_main_queue(), {
+            self.setUIEnabled(enabled: true)
             if let errorString = errorString {
-                self.debugTextLabel.text = errorString
+                
+                self.showAlert("Alert", message: errorString)
             }
         })
     }
     
+    // MARK: LoginViewController - Configure UI
     
+    func setUIEnabled(enabled enabled: Bool) {
+        emailTextField.enabled = enabled
+        passwordTextField.enabled = enabled
+        loginButton.enabled = enabled
+        debugTextLabel.enabled = enabled
+        
+        if enabled {
+            loginButton.alpha = 1.0
+        } else {
+            loginButton.alpha = 0.5
+        }
+    }
+    
+    // MARK: AlertViewController
+    
+    func showAlert(title: String, message: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action: UIAlertAction!) in
+//            print("You have pressed the Cancel button")
+//        }
+        
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { action in
+            print("OK pressed on Alert Controller")
+        }
+        
+        alertController.addAction(OKAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
     
 }

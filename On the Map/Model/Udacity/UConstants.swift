@@ -33,23 +33,24 @@ extension UClient {
     }
     
     // MARK: Parameter Keys
-    struct ParameterKeys {
+    struct JSONBodyKeys {
         
         static let Username = "username"
         static let Password = "password"
         static let FBAccessToken = "access_token"
+        
     }
     
     // MARK: JSON Response Keys
     struct JSONResponseKeys {
         
         // MARK: General
-        static let StatusMessage = "status"
+        static let Status = "status"
         static let ErrorMessage = "error"
         
         // MARK: Authorization
         static let UserID = "key"
-        static let SessionID = "id"
+        static let SessionID = "session.id"
         
         // MARK: Public User Data
         static let FirstName = "first_name"

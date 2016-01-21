@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GXe-oA-Nqt">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -41,7 +41,7 @@
                                 <color key="textColor" red="0.9957399081176711" green="1" blue="0.98662330953824662" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e4k-pj-s2a">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="e4k-pj-s2a">
                                 <rect key="frame" x="174" y="229" width="253" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="253" id="qZV-dr-d6X"/>
@@ -56,10 +56,10 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17U-pk-lvL">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17U-pk-lvL">
                                 <rect key="frame" x="174" y="267" width="253" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.56470588235294117" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
@@ -108,7 +108,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Reb-LH-bVI">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Reb-LH-bVI">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="On the Map" id="iuc-E0-dAH">
@@ -122,8 +122,13 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Reb-LH-bVI" firstAttribute="centerX" secondItem="8NC-wl-EDL" secondAttribute="centerX" id="Wf9-po-beM"/>
+                            <constraint firstItem="Reb-LH-bVI" firstAttribute="top" secondItem="X0B-W9-sXM" secondAttribute="bottom" id="o31-p9-Nqm"/>
+                            <constraint firstItem="Reb-LH-bVI" firstAttribute="width" secondItem="8NC-wl-EDL" secondAttribute="width" id="qhQ-0S-iU5"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="VFn-QZ-cOt"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="VFn-QZ-cOt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oet-Jr-k4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -132,7 +137,7 @@
         <!--Tabs-->
         <scene sceneID="Qtv-g9-L0A">
             <objects>
-                <tabBarController storyboardIdentifier="Tabs" id="GXe-oA-Nqt" userLabel="Tabs" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabsController" id="GXe-oA-Nqt" userLabel="Tabs" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ljN-50-iLn"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="j79-w0-ELd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -160,7 +165,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9GG-o4-tMb">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9GG-o4-tMb">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="On the Map" id="vOz-cV-cXL">
@@ -174,8 +179,13 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9GG-o4-tMb" firstAttribute="centerX" secondItem="G6T-uz-oob" secondAttribute="centerX" id="Fm4-Xp-hCj"/>
+                            <constraint firstItem="9GG-o4-tMb" firstAttribute="width" secondItem="G6T-uz-oob" secondAttribute="width" id="Orc-JB-LfK"/>
+                            <constraint firstItem="9GG-o4-tMb" firstAttribute="top" secondItem="SC5-vV-bxJ" secondAttribute="bottom" id="Y78-eD-9cp"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="408-Rd-6F4"/>
+                    <tabBarItem key="tabBarItem" title="List" id="408-Rd-6F4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPv-G9-qId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
