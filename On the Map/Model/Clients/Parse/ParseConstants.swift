@@ -37,4 +37,48 @@ extension ParseClient {
         static let StudentLocation = "classes/StudentLocation"
     }
     
+    // MARK: JSON Response Keys
+    
+    struct JSONResponseKeys {
+        
+        // MARK: Student Location
+        static let ObjectId = "objectId"
+        static let UniqueKey = "uniqueKey"
+        static let FirstName = "firstName"
+        static let LastName = "lastName"
+        static let MapString = "mapString"
+        static let MediaURL = "mediaURL"
+        static let Latitude = "latitude"
+        static let Longitude = "longitude"
+        
+        static let Results = "results"
+    }
+    
+    // MARK: Student Location Keys
+    
+    /* for convenience */
+    enum Keys : Int {
+        case KeyObjectId, KeyUniqueKey, KeyFirstName, KeyLastName, KeyMapString, KeyMediaURL, KeyLatitude, KeyLongitude
+        func toKey() -> String! {
+            switch self {
+            case .KeyObjectId:
+                return "objectId"
+            case .KeyUniqueKey:
+                return "uniqueKey"
+            case .KeyFirstName:
+                return "firstName"
+            case .KeyLastName:
+                return "lastName"
+            case .KeyMapString:
+                return "mapString"
+            case .KeyMediaURL:
+                return "mediaURL"
+            case .KeyLatitude:
+                return "latitude"
+            case .KeyLongitude:
+                return "longitude"
+            }
+        }
+    }
+    
 }

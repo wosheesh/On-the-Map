@@ -24,12 +24,26 @@ class ParseClient: NSObject {
     
     // MARK: getStudentLocations
     
-    func getStudentLocations() {
+    func getStudentLocations(completionHandler: (result: [StudentInformation]?, error: NSError?) -> Void) {
         
+        // TODO: Limit to last 100 entries
+        
+        /* Make the request */
         taskForGETMethod(Methods.StudentLocation) { JSONResult, error in
-            print("JSONResult : \(JSONResult)")
+            
+            /* check for errors */
+            if let error = error {
+                print(error)
+                completionHandler(result: nil, error: error)
+            } else {
+                if let results = JSONResult[ParseClient.JSONResponseKeys.Results] as? [[String:AnyObject]] {
+                    let students = StudentInformation.StudentInformationFromResults(results)
+                    completionHandler(result: students, error: nil)
+                } else {
+                    completionHandler(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse Student Data"]))
+                }
+            }
         }
-        
     }
     
     // MARK: Convenience functions

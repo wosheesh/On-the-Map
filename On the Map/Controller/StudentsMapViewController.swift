@@ -13,6 +13,7 @@ class StudentsMapViewController: UIViewController {
     // MARK: Properties
     
     var session: NSURLSession!
+    var students: [StudentInformation] = [StudentInformation]()
     
     // MARK: LifeCycle
 
@@ -37,13 +38,18 @@ class StudentsMapViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // load the data
-        ParseClient.sharedInstance().getStudentLocations()
+        // MARK: Load StudentLocations
+        ParseClient.sharedInstance().getStudentLocations { students, error in
+            if let students = students {
+                self.students = students
+                dispatch_async(dispatch_get_main_queue()) {
+                    print(self.students)
+                }
+            } else {
+                print(error)
+            }
+        }
     }
-    
-    
-    // MARK: Load StudentLocations
-    
 
     
 }
