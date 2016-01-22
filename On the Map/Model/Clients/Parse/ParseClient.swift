@@ -33,7 +33,7 @@ class ParseClient: NSObject {
             
             /* check for errors */
             if let error = error {
-                print(error)
+//                print(error)
                 completionHandler(result: nil, error: error)
             } else {
                 if let results = JSONResult[ParseClient.JSONResponseKeys.Results] as? [[String:AnyObject]] {
@@ -63,10 +63,9 @@ class ParseClient: NSObject {
         
         // Set the session interval timeout
         let urlconfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        urlconfig.timeoutIntervalForRequest = Constants.RequestTimeout
-        urlconfig.timeoutIntervalForResource = Constants.ResourceTimeout
+        urlconfig.timeoutIntervalForRequest = ParseClient.Constants.RequestTimeout
+        urlconfig.timeoutIntervalForResource = ParseClient.Constants.ResourceTimeout
         self.session = NSURLSession(configuration: urlconfig, delegate: nil, delegateQueue: nil)
-        
         
         
         /* 3. Make the request */
@@ -75,7 +74,7 @@ class ParseClient: NSObject {
             /* GUARD was there an error? */
             guard (error == nil) else {
                 print("[Parse GET Method: \(method)] There was an error: \(error)")
-                if error?.code == NSURLErrorTimedOut {
+                if error!.code == NSURLErrorTimedOut {
                     completionHandler(result: nil, error: error)
                 }
                 return
@@ -84,6 +83,7 @@ class ParseClient: NSObject {
             /* GUARD was there any data returned? */
             guard let data = data else {
                 print("[Parse GET Method: \(method)] No data returned by request")
+                completionHandler(result: nil, error: NSError(domain: "parseJSONWithCompletionHandler", code: 1, userInfo: [NSLocalizedDescriptionKey : "Could not receive any data"]))
                 return
             }
             
