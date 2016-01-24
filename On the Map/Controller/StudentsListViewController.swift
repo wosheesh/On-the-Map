@@ -9,18 +9,9 @@
 import UIKit
 
 
-class StudentsListViewController: UIViewController {
+class StudentsListViewController: OTMViewController {
     override func viewDidLoad() {
-        
-        let button1 = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "Logout")
-        let button2 = UIBarButtonItem(title: "Pin", style: .Plain, target: self, action: "SetStudentLocation")
-        let button3 = UIBarButtonItem(title: "Refresh", style: .Plain, target: self, action: "RefreshStudentData")
-        
-        navigationItem.hidesBackButton = true
-        
-        navigationItem.leftItemsSupplementBackButton = true
-        navigationItem.setLeftBarButtonItem(button1, animated: true)
-        navigationItem.setRightBarButtonItems([button3, button2], animated: true)
+        super.viewDidLoad()
         
     }
 }

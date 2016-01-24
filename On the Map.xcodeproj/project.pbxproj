@@ -14,6 +14,7 @@
 		FE6C2C4B1C514DCF004A0963 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C4A1C514DCF004A0963 /* ParseClient.swift */; };
 		FE6C2C4E1C5235B2004A0963 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C4D1C5235B2004A0963 /* ParseConstants.swift */; };
 		FED22F491C52584F00685B8A /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED22F481C52584F00685B8A /* StudentInformation.swift */; };
+		FED22F511C554F0C00685B8A /* OTMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED22F501C554F0C00685B8A /* OTMViewController.swift */; };
 		FEDAFE521C422F81006055B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFE511C422F81006055B6 /* AppDelegate.swift */; };
 		FEDAFE571C422F81006055B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEDAFE551C422F81006055B6 /* Main.storyboard */; };
 		FEDAFE591C422F81006055B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEDAFE581C422F81006055B6 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		FE6C2C4A1C514DCF004A0963 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseClient.swift; path = Model/Clients/Parse/ParseClient.swift; sourceTree = "<group>"; };
 		FE6C2C4D1C5235B2004A0963 /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseConstants.swift; path = Model/Clients/Parse/ParseConstants.swift; sourceTree = "<group>"; };
 		FED22F481C52584F00685B8A /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentInformation.swift; path = Model/StudentModel/StudentInformation.swift; sourceTree = "<group>"; };
+		FED22F501C554F0C00685B8A /* OTMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OTMViewController.swift; path = Controller/OTMViewController.swift; sourceTree = "<group>"; };
 		FEDAFE4E1C422F80006055B6 /* On the Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On the Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEDAFE511C422F81006055B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEDAFE561C422F81006055B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		FEDAFE651C422FC2006055B6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FED22F501C554F0C00685B8A /* OTMViewController.swift */,
 				FEDAFE661C42332A006055B6 /* LoginViewController.swift */,
 				FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */,
 				FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */,
@@ -220,6 +223,7 @@
 				FE6C2C4B1C514DCF004A0963 /* ParseClient.swift in Sources */,
 				FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */,
 				FE1E569F1C4F351E0042B258 /* UClient.swift in Sources */,
+				FED22F511C554F0C00685B8A /* OTMViewController.swift in Sources */,
 				FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */,
 				FEDAFE521C422F81006055B6 /* AppDelegate.swift in Sources */,
 				FE6C2C4E1C5235B2004A0963 /* ParseConstants.swift in Sources */,
