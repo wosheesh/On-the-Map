@@ -10,8 +10,5 @@ import UIKit
 
 
 class StudentsListViewController: OTMViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+
 }
