@@ -47,7 +47,9 @@ struct StudentInformation {
 //        longitude = dictionary[ParseClient.JSONResponseKeys.Longitude] as! Float
         
         for (key, value) in dictionary {
-            studentLocation.updateValue(value, forKey: key)
+            if studentLocation[key] != nil {
+                studentLocation.updateValue(value, forKey: key)
+            }
         }
         
     }

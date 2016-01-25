@@ -15,7 +15,7 @@ class OTMViewController: UIViewController {
     // MARK: Properties
     
     var session: NSURLSession!
-    var students: [StudentInformation] = [StudentInformation]()
+    
     
     // MARK: LifeCycle
     
@@ -42,12 +42,11 @@ class OTMViewController: UIViewController {
         
     }
     
-    func loadStudentData(completionHandler: (success: Bool, students: [StudentInformation]) -> Void) {
+    func loadStudentData(completionHandler: (success: Bool, results: [StudentInformation]) -> Void) {
         // MARK: Load StudentLocations
         ParseClient.sharedInstance().getStudentLocations { students, error in
             if let students = students {
-                self.students = students
-                completionHandler(success: true, students: self.students)
+                completionHandler(success: true, results: students)
 //                dispatch_async(dispatch_get_main_queue(), {
 //                    for student in self.students {
 //                        print(student)
