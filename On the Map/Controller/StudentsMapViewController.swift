@@ -7,9 +7,21 @@
 //
 
 import UIKit
+import MapKit
 
-class StudentsMapViewController: OTMViewController {
+class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     
+    var mapView: MKMapView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var mapView = MKMapView()
+        
+        mapView.mapType = .Standard
+        mapView.frame = view.frame
+        mapView.delegate = self
+        view.addSubview(mapView)
+    }
 
 }
 
