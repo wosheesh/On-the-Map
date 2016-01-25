@@ -39,14 +39,21 @@ class OTMViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+    }
+    
+    func loadStudentData(completionHandler: (success: Bool, students: [StudentInformation]) -> Void) {
         // MARK: Load StudentLocations
         ParseClient.sharedInstance().getStudentLocations { students, error in
             if let students = students {
                 self.students = students
-                dispatch_async(dispatch_get_main_queue(), {
-                    print(self.students)
-                    print("number of student locations entries: \(self.students.count)")
-                })
+                completionHandler(success: true, students: self.students)
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    for student in self.students {
+//                        print(student)
+//                    }
+//                    print("number of student locations entries: \(self.students.count)")
+//                })
             } else {
                 print(error)
                 if error?.code == NSURLErrorTimedOut {
@@ -54,9 +61,11 @@ class OTMViewController: UIViewController {
                 } else {
                     self.displayError("Oops", message: "Something went wrong while fetching Student data. Try again later.")
                 }
+                return
             }
         }
     }
+    
     
     // MARK: AlertViewController
     

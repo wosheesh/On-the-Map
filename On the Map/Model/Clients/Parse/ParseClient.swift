@@ -33,7 +33,7 @@ class ParseClient: NSObject {
             
             /* check for errors */
             if let error = error {
-//                print(error)
+                print(error)
                 completionHandler(result: nil, error: error)
             } else {
                 if let results = JSONResult[ParseClient.JSONResponseKeys.Results] as? [[String:AnyObject]] {
