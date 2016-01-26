@@ -20,6 +20,7 @@
 		FEDAFE591C422F81006055B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEDAFE581C422F81006055B6 /* Assets.xcassets */; };
 		FEDAFE5C1C422F81006055B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEDAFE5A1C422F81006055B6 /* LaunchScreen.storyboard */; };
 		FEDAFE671C42332A006055B6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFE661C42332A006055B6 /* LoginViewController.swift */; };
+		FEFE4BF11C57B1EF00C525DE /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFE4BF01C57B1EF00C525DE /* InformationPostingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		FEDAFE5B1C422F81006055B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEDAFE5D1C422F81006055B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEDAFE661C42332A006055B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controller/LoginViewController.swift; sourceTree = "<group>"; };
+		FEFE4BF01C57B1EF00C525DE /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationPostingViewController.swift; path = Controller/InformationPostingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,10 +139,11 @@
 		FEDAFE651C422FC2006055B6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FED22F501C554F0C00685B8A /* OTMViewController.swift */,
 				FEDAFE661C42332A006055B6 /* LoginViewController.swift */,
+				FED22F501C554F0C00685B8A /* OTMViewController.swift */,
 				FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */,
 				FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */,
+				FEFE4BF01C57B1EF00C525DE /* InformationPostingViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				FED22F511C554F0C00685B8A /* OTMViewController.swift in Sources */,
 				FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */,
 				FEDAFE521C422F81006055B6 /* AppDelegate.swift in Sources */,
+				FEFE4BF11C57B1EF00C525DE /* InformationPostingViewController.swift in Sources */,
 				FE6C2C4E1C5235B2004A0963 /* ParseConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

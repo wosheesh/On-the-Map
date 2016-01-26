@@ -6,6 +6,8 @@
 //  Copyright © 2016 Wojtek Materka. All rights reserved.
 //
 
+// TODO: Reload data func
+
 import UIKit
 
 

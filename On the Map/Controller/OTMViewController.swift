@@ -61,6 +61,16 @@ class OTMViewController: UIViewController {
         }
     }
     
+    // MARK: setStudentLocation
+    
+    @IBAction func setStudentLocation() {
+
+        let nextController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationPosting") as! InformationPostingViewController
+        print(nextController)
+        
+        self.presentViewController(nextController, animated: true, completion: nil)
+    }
+    
     
     // MARK: AlertViewController
     

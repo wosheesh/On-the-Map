@@ -126,15 +126,63 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZaU-Z1-vQc"/>
+                    <connections>
+                        <segue destination="CkP-gJ-sqI" kind="presentation" id="LBN-er-cyb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oet-Jr-k4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2290" y="-27"/>
         </scene>
-        <!--Students List View Controller-->
+        <!--Information Posting View Controller-->
+        <scene sceneID="4t0-uc-MOp">
+            <objects>
+                <viewController storyboardIdentifier="InformationPosting" id="CkP-gJ-sqI" customClass="InformationPostingViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7hV-3q-dHf"/>
+                        <viewControllerLayoutGuide type="bottom" id="SY8-Th-nmF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uwa-WE-xoZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ivz-9W-Lnd">
+                                <rect key="frame" x="279" y="90" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8e-tc-61p">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="7wf-26-Ca5"/>
+                                    <barButtonItem systemItem="cancel" id="T3y-69-zvn">
+                                        <connections>
+                                            <action selector="cancelButtonTouchUp:" destination="CkP-gJ-sqI" id="cO5-nx-gPm"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C8e-tc-61p" firstAttribute="centerX" secondItem="uwa-WE-xoZ" secondAttribute="centerX" id="TGC-Wh-jZe"/>
+                            <constraint firstItem="C8e-tc-61p" firstAttribute="top" secondItem="7hV-3q-dHf" secondAttribute="bottom" constant="8" id="X7h-MB-mdd"/>
+                            <constraint firstItem="C8e-tc-61p" firstAttribute="width" secondItem="uwa-WE-xoZ" secondAttribute="width" id="tGJ-xb-ULJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="T3y-69-zvn" id="tah-68-UiZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aso-oQ-oN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3135" y="300"/>
+        </scene>
+        <!--List-->
         <scene sceneID="VQT-T6-Oln">
             <objects>
-                <viewController id="5J5-Bd-ddn" customClass="StudentsListViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="List" id="5J5-Bd-ddn" customClass="StudentsListViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yMB-Y3-HsK"/>
                         <viewControllerLayoutGuide type="bottom" id="ebs-VQ-HOR"/>
@@ -183,6 +231,7 @@
                     <navigationItem key="navigationItem" id="4Op-gC-iPW"/>
                     <connections>
                         <outlet property="StudentTableView" destination="cjX-Az-Meh" id="Rxj-UJ-Jzf"/>
+                        <segue destination="CkP-gJ-sqI" kind="presentation" id="TMQ-ko-7mu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwB-jV-weT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -229,4 +278,7 @@
     <resources>
         <image name="Udacity U" width="246" height="246"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="TMQ-ko-7mu"/>
+    </inferredMetricsTieBreakers>
 </document>
