@@ -18,15 +18,24 @@ class StudentsListViewController: OTMViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print("vvvvvvvvvvvvvvvvvvvvvvvvvvv data from: \(__FUNCTION__) in \(__FILE__)")
-        print(ParseClient.sharedInstance().studentInformationArray)
-        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^ data from: \(__FUNCTION__) in \(__FILE__)")
         
-        StudentTableView.reloadData()
+        refreshStudentData()
     }
     
     @IBAction func refreshStudentData() {
-        StudentTableView.reloadData()
+        loadStudentData { success, error in
+            if success {
+                print("vvvvvvvvvvvvvvvvvvvvvvvvvvv data from: \(__FUNCTION__) in \(__FILE__)")
+                print(ParseClient.sharedInstance().studentInformationArray)
+                print("^^^^^^^^^^^^^^^^^^^^^^^^^^^ data from: \(__FUNCTION__) in \(__FILE__)")
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.StudentTableView.reloadData()
+                })
+            } else {
+                print("Error: \(error) in \(__FUNCTION__)")
+            }
+        }
     }
     
 }
