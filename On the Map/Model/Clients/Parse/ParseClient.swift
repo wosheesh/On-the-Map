@@ -12,6 +12,9 @@ class ParseClient: NSObject {
     
     // MARK: Properties
 
+    /* Array to hold studentInformation in a single place */
+    var studentInformationArray: [StudentInformation] = [StudentInformation]()
+
     /* Shared session */
     var session: NSURLSession
     
@@ -24,7 +27,7 @@ class ParseClient: NSObject {
     
     // MARK: getStudentLocations
     
-    func getStudentLocations(completionHandler: (result: [StudentInformation]?, error: NSError?) -> Void) {
+    func getStudentLocations(completionHandler: (success: Bool, error: NSError?) -> Void) {
         
         // TODO: Limit to last 100 entries
         
@@ -34,13 +37,16 @@ class ParseClient: NSObject {
             /* check for errors */
             if let error = error {
                 print(error)
-                completionHandler(result: nil, error: error)
+                completionHandler(success: false, error: error)
             } else {
+                
+                /* if JSON parse successful store the student informations as an array of ParseClient singleton */
                 if let results = JSONResult[ParseClient.JSONResponseKeys.Results] as? [[String:AnyObject]] {
-                    let students = StudentInformation.StudentInformationFromResults(results)
-                    completionHandler(result: students, error: nil)
+                    self.studentInformationArray = StudentInformation.StudentInformationFromResults(results)
+                    completionHandler(success: true, error: nil)
+                    
                 } else {
-                    completionHandler(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse Student Data"]))
+                    completionHandler(success: false, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse Student Data"]))
                 }
             }
         }

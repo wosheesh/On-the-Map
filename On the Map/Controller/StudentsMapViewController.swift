@@ -13,36 +13,40 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     
     // var mapView: MKMapView!
     var students: [StudentInformation] = [StudentInformation]()
+    let mapView = MKMapView()
     
     // MARK: Lifecycle
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
         /* Add a mapView */
-        var mapView = MKMapView()
-        
         mapView.mapType = .Standard
         mapView.frame = view.frame
         mapView.delegate = self
         view.addSubview(mapView)
         
+        /* inital load of data */
+        refreshStudentData()
+        
+    }
+    
+    // MARK: refreshStudentData
+    
+    @IBAction func refreshStudentData() {
         /* define the allocations and load the array with student location data */
         var annotations = [MKPointAnnotation]()
+        self.mapView.removeAnnotations(annotations)
         
-        loadStudentData { success, results in
-            
+        loadStudentData { success, error in
             if success {
-                self.students = results
-                
-                for student in self.students {
+                print("-----------------")
+                print(ParseClient.sharedInstance().studentInformationArray)
+                print("-----------------")
+                for student in ParseClient.sharedInstance().studentInformationArray {
                     let lat = CLLocationDegrees(student.studentLocation[ParseClient.JSONResponseKeys.Latitude] as! Double)
                     let long = CLLocationDegrees(student.studentLocation[ParseClient.JSONResponseKeys.Longitude] as! Double)
-
+                    
                     /* Create a coordinate */
                     let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                     
@@ -60,16 +64,51 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
                     annotations.append(annotation)
                 }
                 
+                /* add annotations to the map */
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.mapView.addAnnotations(annotations)
+                })
+                
             } else {
                 print("[StudentsMapViewController didn't receive students array")
             }
-            
-            /* add annotations to the map */
-            mapView.addAnnotations(annotations)
         }
     }
     
-    // MARK: 
+    
+    // MARK: MKMapDelegate
+    
+    /* View for annotations */
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = UIColor(red: 0.984, green: 0.227, blue: 0.184, alpha: 1.00)
+            pinView!.animatesDrop = true
+            pinView?.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        } else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    /* open safari on annotation tap */
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.sharedApplication()
+            if let toOpen = view.annotation?.subtitle! {
+                app.openURL(NSURL(string: toOpen)!)
+            }
+        }
+    }
+    
+    
 
 }
 

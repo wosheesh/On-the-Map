@@ -11,4 +11,11 @@ import UIKit
 
 class StudentsListViewController: OTMViewController {
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("--------!---------")
+        print(ParseClient.sharedInstance().studentInformationArray)
+        print("----------!-------")
+    }
+    
 }

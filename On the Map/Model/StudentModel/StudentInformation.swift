@@ -6,6 +6,8 @@
 //  Copyright © 2016 Wojtek Materka. All rights reserved.
 //
 
+// TODO: Create an array to hold the StudentInformation outside of viewcontrollers
+
 import Foundation
 
 struct StudentInformation {

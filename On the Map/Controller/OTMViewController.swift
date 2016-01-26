@@ -25,9 +25,9 @@ class OTMViewController: UIViewController {
         /* Configure the navbar */
         
         // TODO: see if this can be abstracted
-        let button1 = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "Logout")
-        let button2 = UIBarButtonItem(title: "Pin", style: .Plain, target: self, action: "SetStudentLocation")
-        let button3 = UIBarButtonItem(title: "Refresh", style: .Plain, target: self, action: "RefreshStudentData")
+        let button1 = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logout")
+        let button2 = UIBarButtonItem(title: "Pin", style: .Plain, target: self, action: "setStudentLocation")
+        let button3 = UIBarButtonItem(title: "Refresh", style: .Plain, target: self, action: "refreshStudentData")
         
         self.navigationItem.hidesBackButton = true
         
@@ -42,17 +42,13 @@ class OTMViewController: UIViewController {
         
     }
     
-    func loadStudentData(completionHandler: (success: Bool, results: [StudentInformation]) -> Void) {
-        // MARK: Load StudentLocations
-        ParseClient.sharedInstance().getStudentLocations { students, error in
-            if let students = students {
-                completionHandler(success: true, results: students)
-//                dispatch_async(dispatch_get_main_queue(), {
-//                    for student in self.students {
-//                        print(student)
-//                    }
-//                    print("number of student locations entries: \(self.students.count)")
-//                })
+    // MARK: loadStudentData
+    
+    func loadStudentData(completionHandler: (success: Bool, error: NSError?) -> Void) {
+        
+        ParseClient.sharedInstance().getStudentLocations { success, error in
+            if success {
+                completionHandler(success: true, error: nil)
             } else {
                 print(error)
                 if error?.code == NSURLErrorTimedOut {
@@ -91,5 +87,7 @@ class OTMViewController: UIViewController {
             }
         })
     }
+    
+
     
 }
