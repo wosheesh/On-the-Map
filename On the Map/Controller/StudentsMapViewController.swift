@@ -14,6 +14,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     // var mapView: MKMapView!
     var students: [StudentInformation] = [StudentInformation]()
     let mapView = MKMapView()
+    var annotations = [MKPointAnnotation]()
     
     // MARK: Lifecycle
     
@@ -34,10 +35,12 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     // MARK: refreshStudentData
     
     @IBAction func refreshStudentData() {
-        /* define the allocations and load the array with student location data */
-        var annotations = [MKPointAnnotation]()
-        self.mapView.removeAnnotations(annotations)
         
+        /* clear the existing annotations */
+        self.mapView.removeAnnotations(mapView.annotations)
+        annotations = []
+        
+        /* define the allocations and load the array with student location data */
         loadStudentData { success, error in
             if success {
                 print("-----------------")
@@ -60,13 +63,13 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
                     annotation.title = "\(firstName) \(lastName)"
                     annotation.subtitle = mediaURL
                     
-                    /* append annotations to the array */
-                    annotations.append(annotation)
+                    /* append new annotation to the array */
+                    self.annotations.append(annotation)
                 }
                 
-                /* add annotations to the map */
+                /* add new annotations to the map */
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.mapView.addAnnotations(annotations)
+                    self.mapView.addAnnotations(self.annotations)
                 })
                 
             } else {
@@ -102,8 +105,15 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
+            /* if annotation has a subtitle than try open safari */
             if let toOpen = view.annotation?.subtitle! {
-                app.openURL(NSURL(string: toOpen)!)
+                
+                /* check if they left http(s) prefix - many students don't and safari fails to open */
+                if toOpen.hasPrefix("http://") || toOpen.hasPrefix("https://") {
+                    app.openURL(NSURL(string: toOpen)!)
+                } else {
+                    app.openURL(NSURL(fileURLWithPath: toOpen, relativeToURL: NSURL(string: "http://")))
+                }
             }
         }
     }
