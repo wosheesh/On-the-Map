@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
+    // TODO: signup at Udacity
     
     var session: NSURLSession!
     
@@ -93,10 +94,6 @@ class LoginViewController: UIViewController {
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action: UIAlertAction!) in
-//            print("You have pressed the Cancel button")
-//        }
-        
         let OKAction = UIAlertAction(title: "OK", style: .Default) { action in
             print("OK pressed on Alert Controller")
         }
@@ -104,7 +101,6 @@ class LoginViewController: UIViewController {
         alertController.addAction(OKAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
-        
     }
     
 }

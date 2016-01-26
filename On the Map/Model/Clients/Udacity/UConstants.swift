@@ -13,6 +13,10 @@ extension UClient {
         
         // MARK: URLs
         static let BaseURL: String = "https://www.udacity.com/api/"
+        
+        // MARK: Timouts
+        static let RequestTimeout : Double = 15
+        static let ResourceTimeout : Double = 15
     }
     
     // MARK: Methods

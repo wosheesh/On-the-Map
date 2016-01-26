@@ -117,8 +117,8 @@ class UClient: NSObject {
         
         // Set the session interval timeout
         let urlconfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        urlconfig.timeoutIntervalForRequest = 15
-        urlconfig.timeoutIntervalForResource = 15
+        urlconfig.timeoutIntervalForRequest = Constants.RequestTimeout
+        urlconfig.timeoutIntervalForResource = Constants.ResourceTimeout
         self.session = NSURLSession(configuration: urlconfig, delegate: nil, delegateQueue: nil)
         
         // request
