@@ -43,9 +43,9 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
         /* define the allocations and load the array with student location data */
         loadStudentData { success, error in
             if success {
-                print("-----------------")
+                print("vvvvvvvvvvvvvvvvvvvvvvvvvvv data from: \(__FUNCTION__) in \(__FILE__)")
                 print(ParseClient.sharedInstance().studentInformationArray)
-                print("-----------------")
+                print("^^^^^^^^^^^^^^^^^^^^^^^^^^^ data from: \(__FUNCTION__) in \(__FILE__)")
                 for student in ParseClient.sharedInstance().studentInformationArray {
                     let lat = CLLocationDegrees(student.studentLocation[ParseClient.JSONResponseKeys.Latitude] as! Double)
                     let long = CLLocationDegrees(student.studentLocation[ParseClient.JSONResponseKeys.Longitude] as! Double)
