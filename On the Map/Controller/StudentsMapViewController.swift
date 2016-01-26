@@ -73,7 +73,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
                 })
                 
             } else {
-                print("[StudentsMapViewController didn't receive students array")
+                print("Error: \(error) in \(__FUNCTION__)")
             }
         }
     }
