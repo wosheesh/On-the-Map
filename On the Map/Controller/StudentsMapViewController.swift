@@ -40,7 +40,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
         self.mapView.removeAnnotations(mapView.annotations)
         annotations = []
         
-        /* define the allocations and load the array with student location data */
+        /* define the allocations and load the array with student location data  */
         loadStudentData { success, error in
             if success {
                 print("vvvvvvvvvvvvvvvvvvvvvvvvvvv data from: \(__FUNCTION__) in \(__FILE__)")
