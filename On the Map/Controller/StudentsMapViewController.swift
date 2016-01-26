@@ -104,16 +104,10 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     /* open safari on annotation tap */
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.sharedApplication()
+            
             /* if annotation has a subtitle than try open safari */
-            if let toOpen = view.annotation?.subtitle! {
-                
-                /* check if they left http(s) prefix - many students don't and safari fails to open */
-                if toOpen.hasPrefix("http://") || toOpen.hasPrefix("https://") {
-                    app.openURL(NSURL(string: toOpen)!)
-                } else {
-                    app.openURL(NSURL(fileURLWithPath: toOpen, relativeToURL: NSURL(string: "http://")))
-                }
+            if let urlString = view.annotation?.subtitle! {
+                openSafariWithURLString(urlString)
             }
         }
     }

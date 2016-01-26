@@ -23,6 +23,10 @@ class StudentsListViewController: OTMViewController {
         StudentTableView.reloadData()
     }
     
+    @IBAction func refreshStudentData() {
+        StudentTableView.reloadData()
+    }
+    
 }
 
 extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -37,9 +41,10 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         /* Set cell defaults */
         let firstName = student.studentLocation[ParseClient.JSONResponseKeys.FirstName] as! String
         let lastName = student.studentLocation[ParseClient.JSONResponseKeys.LastName] as! String
-//        let mediaURL = student.studentLocation[ParseClient.JSONResponseKeys.MediaURL] as! String
+        let mediaURL = student.studentLocation[ParseClient.JSONResponseKeys.MediaURL] as! String
         
         cell.textLabel!.text = "\(firstName) \(lastName)"
+        cell.detailTextLabel?.text = mediaURL
         
         return cell
     }
@@ -49,19 +54,13 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
 
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let app = UIApplication.sharedApplication()
+    /* open safari on cell select */
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedCell = ParseClient.sharedInstance().studentInformationArray[indexPath.row]
         
         /* if the corresponding studentLocation has mediaURL try open safari */
-        if let toOpen = selectedCell.studentLocation[ParseClient.JSONResponseKeys.MediaURL] as? String {
-            
-            /* check if they left http(s) prefix - many students don't and safari fails to open */
-            if toOpen.hasPrefix("http://") || toOpen.hasPrefix("https://") {
-                app.openURL(NSURL(string: toOpen)!)
-            } else {
-                app.openURL(NSURL(fileURLWithPath: toOpen, relativeToURL: NSURL(string: "http://")))
-            }
+        if let urlString = selectedCell.studentLocation[ParseClient.JSONResponseKeys.MediaURL] as? String {
+            openSafariWithURLString(urlString)
         }
 
     }

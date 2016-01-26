@@ -88,6 +88,17 @@ class OTMViewController: UIViewController {
         })
     }
     
+    func openSafariWithURLString(urlString: String) {
+        let app = UIApplication.sharedApplication()
+        
+        /* check if they left http(s) prefix - many students don't and safari fails to open */
+        if urlString.hasPrefix("http://") || urlString.hasPrefix("https://") {
+            app.openURL(NSURL(string: urlString)!)
+        } else {
+            app.openURL(NSURL(fileURLWithPath: urlString, relativeToURL: NSURL(string: "http://")))
+        }
+    }
+    
 
     
 }
