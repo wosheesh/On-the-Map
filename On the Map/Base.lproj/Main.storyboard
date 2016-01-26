@@ -95,10 +95,10 @@
             </objects>
             <point key="canvasLocation" x="-655" y="398"/>
         </scene>
-        <!--Map-->
+        <!--MapNav-->
         <scene sceneID="Xcg-Wi-pFs">
             <objects>
-                <navigationController id="cAX-sb-N4A" sceneMemberID="viewController">
+                <navigationController id="cAX-sb-N4A" userLabel="MapNav" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="w2o-Rd-JkY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rW8-2c-vJ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -125,12 +125,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="VFn-QZ-cOt"/>
                     <navigationItem key="navigationItem" id="ZaU-Z1-vQc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oet-Jr-k4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2290" y="-27"/>
+        </scene>
+        <!--Students List View Controller-->
+        <scene sceneID="VQT-T6-Oln">
+            <objects>
+                <viewController id="5J5-Bd-ddn" customClass="StudentsListViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yMB-Y3-HsK"/>
+                        <viewControllerLayoutGuide type="bottom" id="ebs-VQ-HOR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HVO-9H-eJ1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cjX-Az-Meh">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentsListViewCell" id="zDC-qV-PJU">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zDC-qV-PJU" id="vp4-k6-L4p">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="5J5-Bd-ddn" id="bOR-S1-FuA"/>
+                                    <outlet property="delegate" destination="5J5-Bd-ddn" id="K4U-lU-9SK"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4Op-gC-iPW"/>
+                    <connections>
+                        <outlet property="StudentTableView" destination="cjX-Az-Meh" id="Rxj-UJ-Jzf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cwB-jV-weT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2290" y="667"/>
         </scene>
         <!--Tabs-->
         <scene sceneID="Qtv-g9-L0A">
@@ -151,37 +192,17 @@
             </objects>
             <point key="canvasLocation" x="856" y="328"/>
         </scene>
-        <!--List-->
-        <scene sceneID="PN0-kP-VqS">
-            <objects>
-                <viewController title="List" id="bOe-V1-HC3" userLabel="List" customClass="StudentsListViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="SC5-vV-bxJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="fem-7m-iBc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="G6T-uz-oob">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="List" id="408-Rd-6F4"/>
-                    <navigationItem key="navigationItem" id="rAS-YE-mnS"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SPv-G9-qId" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2290" y="667"/>
-        </scene>
-        <!--List-->
+        <!--ListNav-->
         <scene sceneID="NmR-7O-umy">
             <objects>
-                <navigationController id="OXW-qY-UOV" sceneMemberID="viewController">
+                <navigationController id="OXW-qY-UOV" userLabel="ListNav" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" id="Sdi-XN-FJr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jlp-Qo-4Nv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="bOe-V1-HC3" kind="relationship" relationship="rootViewController" id="Qiw-Xq-0Zi"/>
+                        <segue destination="5J5-Bd-ddn" kind="relationship" relationship="rootViewController" id="P83-3N-Il1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1V7-6K-wNj" userLabel="First Responder" sceneMemberID="firstResponder"/>
