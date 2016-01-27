@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class InformationPostingViewController: UIViewController, EnterLocationVCDelegate {
+class InformationPostingViewController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var EnterLocationContainer: UIView!
@@ -25,13 +25,6 @@ class InformationPostingViewController: UIViewController, EnterLocationVCDelegat
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "EnterLocationSegue" {
-            let childViewController = segue.destinationViewController as! EnterLocationVC
-            childViewController.delegate = self
-        }
-    }
-    
     @IBAction func cancelButtonTouchUp(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -41,10 +34,22 @@ class InformationPostingViewController: UIViewController, EnterLocationVCDelegat
         PostLocationContainer.hidden = false
     }
     
+
+    
+}
+
+extension InformationPostingViewController: EnterLocationVCDelegate {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "EnterLocationSegue" {
+            let childViewController = segue.destinationViewController as! EnterLocationVC
+            childViewController.delegate = self
+        }
+    }
+    
     // MARK: EnterLocationVCDelegate
     func enterLocationVCDidPressButton(childViewController: EnterLocationVC) {
         print("button clicked")
         self.changeViews()
     }
-    
 }

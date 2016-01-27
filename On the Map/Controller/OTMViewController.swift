@@ -64,6 +64,8 @@ class OTMViewController: UIViewController {
     // MARK: setStudentLocation
     
     @IBAction func setStudentLocation() {
+        
+        // TODO: Check if the user has a student location already set
 
         let nextController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationPosting") as! InformationPostingViewController
         print(nextController)
