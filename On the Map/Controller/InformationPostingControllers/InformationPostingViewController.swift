@@ -12,6 +12,8 @@ import MapKit
 class InformationPostingViewController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var EnterLocationVC: UIView!
+    @IBOutlet weak var PostLocationVC: UIView!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

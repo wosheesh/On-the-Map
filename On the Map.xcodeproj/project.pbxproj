@@ -39,7 +39,7 @@
 		FEDAFE5B1C422F81006055B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEDAFE5D1C422F81006055B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEDAFE661C42332A006055B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controller/LoginViewController.swift; sourceTree = "<group>"; };
-		FEFE4BF01C57B1EF00C525DE /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationPostingViewController.swift; path = Controller/InformationPostingViewController.swift; sourceTree = "<group>"; };
+		FEFE4BF01C57B1EF00C525DE /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InformationPostingViewController.swift; path = Controller/InformationPostingControllers/InformationPostingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +70,14 @@
 			);
 			name = Udacity;
 			path = Model/Clients/Udacity;
+			sourceTree = "<group>";
+		};
+		FE3A6D9F1C58FBA1008BB290 /* InformationPostingControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FEFE4BF01C57B1EF00C525DE /* InformationPostingViewController.swift */,
+			);
+			name = InformationPostingControllers;
 			sourceTree = "<group>";
 		};
 		FE6C2C4C1C514DDE004A0963 /* Parse */ = {
@@ -139,11 +147,11 @@
 		FEDAFE651C422FC2006055B6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FE3A6D9F1C58FBA1008BB290 /* InformationPostingControllers */,
 				FEDAFE661C42332A006055B6 /* LoginViewController.swift */,
 				FED22F501C554F0C00685B8A /* OTMViewController.swift */,
 				FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */,
 				FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */,
-				FEFE4BF01C57B1EF00C525DE /* InformationPostingViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
