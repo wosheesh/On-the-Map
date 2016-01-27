@@ -9,18 +9,42 @@
 import UIKit
 import MapKit
 
-class InformationPostingViewController: UIViewController {
+class InformationPostingViewController: UIViewController, EnterLocationVCDelegate {
     
     @IBOutlet weak var cancelButton: UIBarButtonItem!
-    @IBOutlet weak var EnterLocationVC: UIView!
-    @IBOutlet weak var PostLocationVC: UIView!
+    @IBOutlet weak var EnterLocationContainer: UIView!
+    @IBOutlet weak var PostLocationContainer: UIView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "EnterLocationSegue" {
+            let childViewController = segue.destinationViewController as! EnterLocationVC
+            childViewController.delegate = self
+        }
     }
     
     @IBAction func cancelButtonTouchUp(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func changeViews() {
+        EnterLocationContainer.hidden = true
+        PostLocationContainer.hidden = false
+    }
+    
+    // MARK: EnterLocationVCDelegate
+    func enterLocationVCDidPressButton(childViewController: EnterLocationVC) {
+        print("button clicked")
+        self.changeViews()
     }
     
 }
