@@ -18,7 +18,9 @@ class UClient: NSObject {
     var session: NSURLSession
     
     /* Authentication state */
-    var sessionID: String? = nil
+    var sessionID: String?
+    var userID: String?
+    var userData: [String:AnyObject]?
     
     // MARK: Initializers
     
@@ -35,11 +37,26 @@ class UClient: NSObject {
         } else if password.isEmpty {
             completionHandler(success: false, errorString: "Password is Empty")
         } else {
-            getSessionID(email, password: password) { (success, sessionID, errorString) in
+            
+            getSessionID(email, password: password) { (success, sessionID, userID, errorString) in
+                
                 if success {
-                    /* Success we have sessionID */
+                    /* set sessionID and userID */
                     self.sessionID = sessionID
-                    completionHandler(success: success, errorString: errorString)
+                    self.userID = userID
+                    
+                    /* get user data */
+                    self.getUserDataWithUserID(self.userID!) { (success, userData, errorString) in
+                        
+                        if success {
+                            print(userData)
+                            self.userData = userData
+                            
+                            completionHandler(success: success, errorString: errorString)
+                        } else {
+                            completionHandler(success: success, errorString: errorString)
+                        }
+                    }
                 } else {
                     completionHandler(success: success, errorString: errorString)
                 }
@@ -47,8 +64,42 @@ class UClient: NSObject {
         }
     }
     
+    func getUserDataWithUserID(userID: String, completionHandler: (success: Bool, userData: [String:AnyObject]?, errorString: String?) -> Void) {
+        
+        if userID.isEmpty {
+            completionHandler(success: false, userData: nil, errorString: "UserID not provided or empty")
+        } else {
+            
+            /* 1. Specify methods (if has {key}) */
+            var mutableMethod : String = Methods.UdacityUserData
+            mutableMethod = UClient.subtituteKeyInMethod(mutableMethod, key: UClient.URLKeys.UserId, value: String(UClient.sharedInstance().userID!))!
+            
+            /* 2. Make the request */
+            taskForGETMethod(mutableMethod) { JSONResult, error in
+                
+                print("\(__FUNCTION__) JSONResult : \(JSONResult)")
+                
+                /* 3. send the results to completionHandler */
+                
+                if let error = error {
+                    print(error)
+                    /* catching the timeout error */
+                    if error.code == NSURLErrorTimedOut {
+                        completionHandler(success: false, userData: nil, errorString: "Cannot connect to Udacity server. Please check your connection.")
+                    } else {
+                        completionHandler(success: false, userData: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")
+                    }
+                } else if let userData = JSONResult[UClient.JSONResponseKeys.userResults] as? [String : AnyObject] {
+                    completionHandler(success: true, userData: userData, errorString: nil)
+                } else {
+                    completionHandler(success: false, userData: nil, errorString: "Could not parse getUserDataWithUserID")
+                }
+            }
+        }
+    }
+
     
-    func getSessionID(email: String, password: String, completionHandler: (success: Bool, sessionID: String?, errorString: String?) -> Void) {
+    func getSessionID(email: String, password: String, completionHandler: (success: Bool, sessionID: String?, userID: String?, errorString: String?) -> Void) {
         
         /* 1. Specify HTTP Body */
         let jsonBody : [String:AnyObject] = [
@@ -61,7 +112,7 @@ class UClient: NSObject {
         /* 2. Make the request */
         taskForPOSTMethod(UClient.Methods.UdacitySession, jsonBody: jsonBody) { JSONResult, error in
             
-            print("JSONResult : \(JSONResult)")
+            print("\(__FUNCTION__) JSONResult : \(JSONResult)")
             
             /* 3. Send the desired value to completion handler */
             /* check for errors and return info to user */
@@ -70,27 +121,31 @@ class UClient: NSObject {
                 
                 /* catching the timeout error */
                 if error.code == NSURLErrorTimedOut {
-                    completionHandler(success: false, sessionID: nil, errorString: "Cannot connect to Udacity server. Please check your connection.")
+                    completionHandler(success: false, sessionID: nil, userID: nil, errorString: "Cannot connect to Udacity server. Please check your connection.")
                 } else {
-                    completionHandler(success: false, sessionID: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")
+                    completionHandler(success: false, sessionID: nil, userID: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")
                 }
                 
             /* what if 403 ie invalid credentials? */
             } else if let error = JSONResult[UClient.JSONResponseKeys.ErrorMessage] as? String {
                 print("\(error)")
                 if JSONResult[UClient.JSONResponseKeys.Status] as? Int == 403 {
-                    completionHandler(success: false, sessionID: nil, errorString: "Invalid username or password. Try again.")
+                    completionHandler(success: false, sessionID: nil, userID: nil, errorString: "Invalid username or password. Try again.")
                 } else {
-                    completionHandler(success: false, sessionID: nil, errorString: error)
+                    completionHandler(success: false, sessionID: nil, userID: nil, errorString: error)
                 }
                 
             /* do we have session? */
-            } else if let sessionID = JSONResult.valueForKeyPath(UClient.JSONResponseKeys.SessionID)! as? String {
-                print("found session ID: \(sessionID)")
-                completionHandler(success: true, sessionID: sessionID, errorString: nil)
+            } else if let sessionID = JSONResult.valueForKeyPath(UClient.JSONResponseKeys.SessionID) as? String {
+                
+                /* do we have user ID? */
+                if let userID = JSONResult.valueForKeyPath(UClient.JSONResponseKeys.UserID) as? String {
+                
+                    completionHandler(success: true, sessionID: sessionID, userID: userID, errorString: nil)
+                }
             } else {
                 print("Could not find \(UClient.JSONResponseKeys.SessionID) in \(JSONResult)")
-                completionHandler(success: false, sessionID: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")
+                completionHandler(success: false, sessionID: nil, userID: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")
             }
             
         }
@@ -135,7 +190,7 @@ class UClient: NSObject {
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                print("[StartUdacitySession] No data was returned by request!")
+                print("\(__FUNCTION__) in \(__FILE__) returned no data")
                 return
             }
             
@@ -149,6 +204,47 @@ class UClient: NSObject {
         task.resume()
 
         return task
+    }
+    
+    func taskForGETMethod(method: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        
+        /* 1. Build the URL */
+        let urlString = Constants.BaseURL + method
+        let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        
+        /* 2. Configure the request */
+//        request.HTTPMethod = "GET"
+        
+        /* 3. Make the request */
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            /* GUARD: was there an error? */
+            guard (error == nil) else {
+                print("There was an error: \(error) while calling method: \(method)")
+                if error?.code == NSURLErrorTimedOut {
+                    completionHandler(result: nil, error: error)
+                }
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("\(__FUNCTION__) in \(__FILE__) returned no data")
+                return
+            }
+            
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
+            
+            /* 4. Parse the data and use the data in completion handler */
+            UClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+        }
+        
+        /* 5. Start the request */
+        task.resume()
+        
+        return task
+        
     }
 
     // MARK: Shared Instance
@@ -177,6 +273,15 @@ class UClient: NSObject {
         }
         
         completionHandler(result: parsedResult, error: nil)
+    }
+    
+    /* Helper: Substitute the key for the value that is contained within the method name */
+    class func subtituteKeyInMethod(method: String, key: String, value: String) -> String? {
+        if method.rangeOfString("{\(key)}") != nil {
+            return method.stringByReplacingOccurrencesOfString("{\(key)}", withString: value)
+        } else {
+            return nil
+        }
     }
 }
 

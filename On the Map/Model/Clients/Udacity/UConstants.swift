@@ -26,13 +26,13 @@ extension UClient {
         static let UdacitySession = "session"
         
         // MARK: User Data
-        static let UdacityUserData = "users/{id}"
+        static let UdacityUserData = "users/{user_id}"
     }
     
     // MARK: URL Keys
     struct URLKeys {
         
-        static let UserId = "id"
+        static let UserId = "user_id"
         
     }
     
@@ -53,10 +53,11 @@ extension UClient {
         static let ErrorMessage = "error"
         
         // MARK: Authorization
-        static let UserID = "key"
+        static let UserID = "account.key"
         static let SessionID = "session.id"
         
         // MARK: Public User Data
+        static let userResults = "user"
         static let FirstName = "first_name"
         static let LastName = "last_name"
         
