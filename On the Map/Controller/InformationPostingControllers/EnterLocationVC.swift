@@ -10,28 +10,26 @@ import UIKit
 import MapKit
 
 protocol EnterLocationVCDelegate {
-    func enterLocationVCDidPressButton(childViewController: EnterLocationVC)
+    func enterLocationVCDidReturnMapItem(mapItem: MKMapItem)
 }
 
 class EnterLocationVC: UIViewController, AlertRenderer {
     
     var enterLocationDelegate: EnterLocationVCDelegate?
     
+    
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var FindOnMapButton: UIButton!
     
     @IBAction func FindOnMapButtonTouchUp(sender: AnyObject) {
         // TODO: Change button state if textfield is not empty [http://stackoverflow.com/questions/28394933/how-do-i-check-when-a-uitextfield-changes]
+        // TODO: progress indicator if searching
         
-//        print(__FUNCTION__)
-//        self.delegate?.enterLocationVCDidPressButton(self)
-        
-        /* setup the location search request */
-        let request = MKLocalSearchRequest()
         if locationTextField.text!.isEmpty {
-            print("Enter Location field empty")
             presentAlert("Map Search", message: "Please enter location")
         } else {
+            /* setup the location search request */
+            let request = MKLocalSearchRequest()
             request.naturalLanguageQuery = locationTextField.text
             
             /* make the location search request */
@@ -39,12 +37,13 @@ class EnterLocationVC: UIViewController, AlertRenderer {
             search.startWithCompletionHandler { response, error in
                 guard let response = response else {
                     print("There was an error: \(error) while searching for: \(request.naturalLanguageQuery)")
+                    self.presentAlert("Map Search", message: "Couldn't find the location. Check your internet connection.")
                     return
                 }
                 
-                for item in response.mapItems {
-                    print(item)
-                }
+                /* pass the first mapItem found */
+                self.enterLocationDelegate?.enterLocationVCDidReturnMapItem(response.mapItems[0])
+                
             }
         }
         

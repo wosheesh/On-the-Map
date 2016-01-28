@@ -14,7 +14,7 @@ protocol AlertRenderer {
 
 extension AlertRenderer where Self: UIViewController {
     func presentAlert(title: String, message: String) {
-        print("showAlert executied through AlertControllerProtocol")
+        print("AlertRenderer protocol executed by \(self)")
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
 

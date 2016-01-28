@@ -155,7 +155,7 @@
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSX-Od-Zrr" userLabel="PostLocation">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
-                                    <segue destination="uDc-ZP-Wyq" kind="embed" id="wgf-Ud-ZAS"/>
+                                    <segue destination="uDc-ZP-Wyq" kind="embed" identifier="PostLocationSegue" id="wgf-Ud-ZAS"/>
                                 </connections>
                             </containerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bup-4V-TlL">
@@ -296,7 +296,7 @@
         <!--Enter LocationVC-->
         <scene sceneID="ycE-GA-NiT">
             <objects>
-                <viewController id="LXi-pr-xQg" customClass="EnterLocationVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterLocation" id="LXi-pr-xQg" customClass="EnterLocationVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IJj-qb-UoK"/>
                         <viewControllerLayoutGuide type="bottom" id="Q6K-qo-TRM"/>
@@ -349,7 +349,7 @@
         <!--Post LocationVC-->
         <scene sceneID="BcA-rl-4yi">
             <objects>
-                <viewController id="uDc-ZP-Wyq" customClass="PostLocationVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostLocation" id="uDc-ZP-Wyq" customClass="PostLocationVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6jz-hS-tMd"/>
                         <viewControllerLayoutGuide type="bottom" id="0eC-uV-wfj"/>
@@ -383,6 +383,10 @@
                             <constraint firstItem="QV1-Uk-56X" firstAttribute="top" secondItem="qvd-jv-1CO" secondAttribute="bottom" constant="33" id="pt5-NJ-bnv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapForPosting" destination="QV1-Uk-56X" id="m5e-P8-Cc9"/>
+                        <outlet property="urlTextField" destination="qvd-jv-1CO" id="XQP-M1-bP4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vd-zm-Ytu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

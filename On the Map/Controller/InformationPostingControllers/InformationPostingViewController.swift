@@ -15,28 +15,20 @@ class InformationPostingViewController: UIViewController {
     @IBOutlet weak var EnterLocationContainer: UIView!
     @IBOutlet weak var PostLocationContainer: UIView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
+    var postLocationVC: PostLocationVC?
     
     @IBAction func cancelButtonTouchUp(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func changeViews() {
-        EnterLocationContainer.hidden = true
-        PostLocationContainer.hidden = false
+    override func viewWillAppear(animated: Bool) {
+        EnterLocationContainer.hidden = false
+        PostLocationContainer.hidden = true
     }
     
-
-    
 }
+
+// MARK: EnterLocationVCDelegate
 
 extension InformationPostingViewController: EnterLocationVCDelegate {
     
@@ -44,12 +36,23 @@ extension InformationPostingViewController: EnterLocationVCDelegate {
         if segue.identifier == "EnterLocationSegue" {
             let childViewController = segue.destinationViewController as! EnterLocationVC
             childViewController.enterLocationDelegate = self
+        } else if segue.identifier == "PostLocationSegue" {
+            self.postLocationVC = segue.destinationViewController as? PostLocationVC
         }
+        
     }
     
-    // MARK: EnterLocationVCDelegate
-    func enterLocationVCDidPressButton(childViewController: EnterLocationVC) {
-        print("button clicked")
-        self.changeViews()
+    
+    func enterLocationVCDidReturnMapItem(mapItem: MKMapItem) {
+        
+        /* make the PostLocation Container visible */
+        EnterLocationContainer.hidden = true
+        PostLocationContainer.hidden = false
+        
+        /* add annotation to the mapView */
+        self.postLocationVC?.addAnnotationToMapFromMapItem(mapItem)
+        
     }
+        
+        
 }

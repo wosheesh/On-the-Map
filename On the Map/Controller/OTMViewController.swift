@@ -11,7 +11,7 @@
 
 import UIKit
 
-class OTMViewController: UIViewController {
+class OTMViewController: UIViewController, AlertRenderer {
 
     // MARK: Properties
     
@@ -75,28 +75,13 @@ class OTMViewController: UIViewController {
     }
     
     
-    // MARK: AlertViewController
-    
-    func showAlert(title: String, message: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { action in
-            print("OK pressed on Alert Controller")
-        }
-        
-        alertController.addAction(OKAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
     /* Helpers */
     
     func displayError(alertTitle: String?, message: String?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let message = message {
                 
-                self.showAlert("Alert", message: message)
+                self.presentAlert("Alert", message: message)
             }
         })
     }

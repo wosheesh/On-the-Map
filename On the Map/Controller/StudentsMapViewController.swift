@@ -39,6 +39,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
         /* clear the existing annotations */
         self.mapView.removeAnnotations(mapView.annotations)
         annotations = []
+
         
         /* define the allocations and load the array with student location data  */
         loadStudentData { success, error in

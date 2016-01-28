@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, AlertRenderer {
     
     // MARK: Properties
     
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
             self.setUIEnabled(enabled: true)
             if let errorString = errorString {
                 
-                self.showAlert("Alert", message: errorString)
+                self.presentAlert("On The Map", message: errorString)
             }
         })
     }
@@ -88,19 +88,5 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // MARK: AlertViewController
-    
-    func showAlert(title: String, message: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { action in
-            print("OK pressed on Alert Controller")
-        }
-        
-        alertController.addAction(OKAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
     
 }
