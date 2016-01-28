@@ -7,6 +7,7 @@
 //
 
 /* Superclass for map and list views */
+// TODO: Change this into a delegate
 
 import UIKit
 

@@ -43,7 +43,7 @@ extension InformationPostingViewController: EnterLocationVCDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "EnterLocationSegue" {
             let childViewController = segue.destinationViewController as! EnterLocationVC
-            childViewController.delegate = self
+            childViewController.enterLocationDelegate = self
         }
     }
     

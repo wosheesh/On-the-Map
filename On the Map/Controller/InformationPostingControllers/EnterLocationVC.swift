@@ -13,9 +13,9 @@ protocol EnterLocationVCDelegate {
     func enterLocationVCDidPressButton(childViewController: EnterLocationVC)
 }
 
-class EnterLocationVC: UIViewController {
+class EnterLocationVC: UIViewController, AlertRenderer {
     
-    var delegate: EnterLocationVCDelegate?
+    var enterLocationDelegate: EnterLocationVCDelegate?
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var FindOnMapButton: UIButton!
@@ -28,18 +28,23 @@ class EnterLocationVC: UIViewController {
         
         /* setup the location search request */
         let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = locationTextField.text
-        
-        /* make the location search request */
-        let search = MKLocalSearch(request: request)
-        search.startWithCompletionHandler { response, error in
-            guard let response = response else {
-                print("There was an error: \(error) while searching for: \(request.naturalLanguageQuery)")
-                return
-            }
+        if locationTextField.text!.isEmpty {
+            print("Enter Location field empty")
+            presentAlert("Map Search", message: "Please enter location")
+        } else {
+            request.naturalLanguageQuery = locationTextField.text
             
-            for item in response.mapItems {
-                print(item)
+            /* make the location search request */
+            let search = MKLocalSearch(request: request)
+            search.startWithCompletionHandler { response, error in
+                guard let response = response else {
+                    print("There was an error: \(error) while searching for: \(request.naturalLanguageQuery)")
+                    return
+                }
+                
+                for item in response.mapItems {
+                    print(item)
+                }
             }
         }
         
