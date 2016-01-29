@@ -74,6 +74,12 @@ class OTMViewController: UIViewController, AlertRenderer {
         self.presentViewController(nextController, animated: true, completion: nil)
     }
     
+    /* returns true if student found in parse database */
+    /* (assumption that it has a location if it is in parse) */
+//    func checkUserLocation() -> Bool {
+//        //
+//    }
+    
     
     /* Helpers */
     
@@ -96,7 +102,5 @@ class OTMViewController: UIViewController, AlertRenderer {
             app.openURL(NSURL(fileURLWithPath: urlString, relativeToURL: NSURL(string: "http://")))
         }
     }
-    
-
     
 }

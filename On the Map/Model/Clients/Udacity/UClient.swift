@@ -30,7 +30,7 @@ class UClient: NSObject {
     }
     
     // MARK: Authenticate
-    
+    /* Authenticate with emaill and password, and pull user data */
     func authenticateWithUserCredentials(email: String, password: String, completionHandler: (success: Bool, errorString: String?) -> Void) {
         if email.isEmpty {
             completionHandler(success: false, errorString: "Email is Empty")
@@ -49,7 +49,7 @@ class UClient: NSObject {
                     self.getUserDataWithUserID(self.userID!) { (success, userData, errorString) in
                         
                         if success {
-                            print(userData)
+                            
                             self.userData = userData
                             
                             completionHandler(success: success, errorString: errorString)
@@ -89,7 +89,7 @@ class UClient: NSObject {
                     } else {
                         completionHandler(success: false, userData: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")
                     }
-                } else if let userData = JSONResult[UClient.JSONResponseKeys.userResults] as? [String : AnyObject] {
+                } else if let userData = JSONResult[UClient.JSONResponseKeys.UserResults] as? [String : AnyObject] {
                     completionHandler(success: true, userData: userData, errorString: nil)
                 } else {
                     completionHandler(success: false, userData: nil, errorString: "Could not parse getUserDataWithUserID")

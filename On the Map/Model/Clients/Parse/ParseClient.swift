@@ -14,6 +14,9 @@ class ParseClient: NSObject {
 
     /* Array to hold studentInformation in a single place */
     var studentInformationArray: [StudentInformation] = [StudentInformation]()
+    
+    /* UdacityUser information */
+    var user: UserInformation
 
     /* Shared session */
     var session: NSURLSession
@@ -22,6 +25,7 @@ class ParseClient: NSObject {
     
     override init() {
         session = NSURLSession.sharedSession()
+        user = UserInformation.UserInformationFromUserData(UClient.sharedInstance().userData!)
         super.init()
     }
     

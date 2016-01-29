@@ -57,9 +57,10 @@ extension UClient {
         static let SessionID = "session.id"
         
         // MARK: Public User Data
-        static let userResults = "user"
+        static let UserResults = "user"
         static let FirstName = "first_name"
         static let LastName = "last_name"
+        static let UserKey = "key"
         
     }
 }
