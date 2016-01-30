@@ -15,9 +15,6 @@ class OTMViewController: UIViewController, AlertRenderer {
 
     // MARK: Properties
     
-    var session: NSURLSession!
-    
-    
     // MARK: LifeCycle
     
     override func viewDidLoad() {
@@ -40,6 +37,12 @@ class OTMViewController: UIViewController, AlertRenderer {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        /* check if the user is in the Parse db */
+        /* if yes update user information with information in Parse */
+        /* if not set userHasLocation to false */
+        
+
+        
         
     }
     
@@ -47,6 +50,7 @@ class OTMViewController: UIViewController, AlertRenderer {
     
     func loadStudentData(completionHandler: (success: Bool, error: NSError?) -> Void) {
         
+        /* Get all the student data */
         ParseClient.sharedInstance().getStudentLocations { success, error in
             if success {
                 completionHandler(success: true, error: nil)
@@ -66,7 +70,27 @@ class OTMViewController: UIViewController, AlertRenderer {
     
     @IBAction func setStudentLocation() {
         
-        // TODO: Check if the user has a student location already set
+        // TODO: Check if the user has a location set already in StudentInformation on Parse
+        
+        ParseClient.sharedInstance().queryForStudentLocation(ParseClient.sharedInstance().user.udacityKey) { results, error in
+            if let error = error {
+                print("\(__FUNCTION__) Error : \(error)")
+            } else {
+                print("\(__FUNCTION__) Results: \(results)")
+                if results != nil {
+                    print("user has no info")
+                } else {
+                    
+                    /* Ask the user for permission to update the data */
+//                    dispatch_async(dispatch_get_main_queue(), {
+//                        
+//                    })
+                    
+                    // TODO: Update the user info with information from Parse StudentInformation
+                    print("user data: \(results)")
+                }
+            }
+        }
 
         let nextController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationPosting") as! InformationPostingViewController
         print(nextController)
@@ -74,11 +98,6 @@ class OTMViewController: UIViewController, AlertRenderer {
         self.presentViewController(nextController, animated: true, completion: nil)
     }
     
-    /* returns true if student found in parse database */
-    /* (assumption that it has a location if it is in parse) */
-//    func checkUserLocation() -> Bool {
-//        //
-//    }
     
     
     /* Helpers */

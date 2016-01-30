@@ -25,8 +25,13 @@ class ParseClient: NSObject {
     
     override init() {
         session = NSURLSession.sharedSession()
+        
+        /* instantiate 'user' for possible Parse updates */
         user = UserInformation.UserInformationFromUserData(UClient.sharedInstance().userData!)
+        
         super.init()
+        
+
     }
     
     // MARK: getStudentLocations
@@ -36,7 +41,7 @@ class ParseClient: NSObject {
         // TODO: Limit to last 100 entries
         
         /* Make the request */
-        taskForGETMethod(Methods.StudentLocation) { JSONResult, error in
+        taskForGETMethod(Methods.StudentLocation, parameters: nil) { JSONResult, error in
             
             /* check for errors */
             if let error = error {
@@ -56,13 +61,74 @@ class ParseClient: NSObject {
         }
     }
     
+    // MARK: queryForStudentLocation
+    
+    func queryForStudentLocation(uniqueKey: String, completionHandler: (results: [[String:AnyObject]]?, error: NSError?) -> Void) {
+        
+        /* 1. Specify the parameters, method */
+        
+        /* declare the query for a specific userKey */
+        let query = "{\"\(JSONResponseKeys.UniqueKey)\":\"\(user.udacityKey)\"}"
+        /* declare the parameters for Parse API */
+        let parameters = [ParameterKeys.ArrayQuery : query]
+      
+        /* 2. Make the request */
+        taskForGETMethod(Methods.StudentLocation, parameters: parameters) { JSONResult, error in
+            
+            if let error = error {
+                print("[Parse: \(__FUNCTION__)] There was an error: \(error)")
+                completionHandler(results: nil, error: error)
+            } else {
+                if let results = JSONResult[ParseClient.JSONResponseKeys.Results] as? [[String:AnyObject]] {
+                    completionHandler(results: results, error: nil)
+                } else {
+                    print(JSONResult)
+                    completionHandler(results: nil, error: NSError(domain: "queryForStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not resolve query"]))
+                }
+            }
+        }
+        
+        // api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%221217518784%22%7D
+//                                                ?where=%7B%22uniqueKey%22%3A%221217518784%22%7D
+        
+//        let urlString = "https://api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(uniqueKey)%22%7D"
+//        let url = NSURL(string: urlString)
+//        print(url)
+//        let request = NSMutableURLRequest(URL: url!)
+//        request.addValue(Constants.ParseAppID, forHTTPHeaderField: Constants.ParseAppIDHTTPHeader)
+//        request.addValue(Constants.ParseRESTAPIKey, forHTTPHeaderField: Constants.ParseRESTAPIKeyHTTPHeader)
+//        let session = NSURLSession.sharedSession()
+//        let task = session.dataTaskWithRequest(request) { data, response, error in
+//            if error != nil {
+//                print("\(__FUNCTION__) Error: \(error)")
+//                return
+//            }
+//            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+//        }
+//        task.resume()
+        
+        
+    }
+    
+    
     // MARK: Convenience functions
     
-    func taskForGETMethod(method: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForGETMethod(method: String, parameters: [String : AnyObject]?,
+        completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         /* 1. Build the URL */
-        let urlString = Constants.BaseURLSecure + method
+        var urlString = String()
+            
+        if let mutableParameters = parameters {
+            print("MutableParameters: \(mutableParameters)")
+            urlString = Constants.BaseURLSecure + method + ParseClient.escapedParameters(mutableParameters)
+        } else {
+            urlString = Constants.BaseURLSecure + method
+        }
+            
+        print("urlString: \(urlString)")
         let url = NSURL(string: urlString)!
+        print("\(__FUNCTION__) Url: \(url)")
         let request = NSMutableURLRequest(URL: url)
         
         /* 2. Configure the request */
@@ -131,6 +197,27 @@ class ParseClient: NSObject {
         }
         
         completionHandler(result: parsedResult, error: nil)
+    }
+    
+    /* Helper function: Given a dictionary of parameters, convert to a string for a url */
+    class func escapedParameters(parameters: [String : AnyObject]) -> String {
+        
+        var urlVars = [String]()
+        
+        for (key, value) in parameters {
+            
+            /* Make sure that it is a string value */
+            let stringValue = "\(value)"
+            
+            /* Escape it */
+            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLUserAllowedCharacterSet())
+            
+            /* Append it */
+            urlVars += [key + "=" + "\(escapedValue!)"]
+            
+        }
+        
+        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
     
 }

@@ -12,7 +12,8 @@ struct UserInformation {
     var udacityKey : String
     var firstName : String
     var lastName : String
-    var hasLocation: Bool? = nil
+    var mapString : String?
+    var mediaURL : String?
     var lat: Float? = nil
     var long: Float? = nil
     
@@ -22,6 +23,7 @@ struct UserInformation {
         self.lastName = lastName
     }
     
+    /* Convert JSON result from UClient login to UserInformation */
     static func UserInformationFromUserData(userData: [String:AnyObject]) -> UserInformation {
         
         let user = UserInformation(
@@ -31,6 +33,7 @@ struct UserInformation {
         
         return user
     }
+    
     
 }
 

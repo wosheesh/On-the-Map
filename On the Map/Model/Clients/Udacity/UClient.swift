@@ -77,7 +77,7 @@ class UClient: NSObject {
             /* 2. Make the request */
             taskForGETMethod(mutableMethod) { JSONResult, error in
                 
-                print("\(__FUNCTION__) JSONResult : \(JSONResult)")
+//                print("\(__FUNCTION__) JSONResult : \(JSONResult)")
                 
                 /* 3. send the results to completionHandler */
                 

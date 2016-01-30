@@ -37,6 +37,11 @@ extension ParseClient {
         static let StudentLocation = "classes/StudentLocation"
     }
     
+    // MARK: Parameter key
+    struct ParameterKeys {
+        static let ArrayQuery = "where"
+    }
+    
     // MARK: JSON Response Keys
     
     struct JSONResponseKeys {
