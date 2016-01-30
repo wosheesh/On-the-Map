@@ -14,6 +14,7 @@ import UIKit
 class OTMViewController: UIViewController, AlertRenderer {
 
     // MARK: Properties
+    var isNewUser: Bool = true
     
     // MARK: LifeCycle
     
@@ -37,13 +38,6 @@ class OTMViewController: UIViewController, AlertRenderer {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        /* check if the user is in the Parse db */
-        /* if yes update user information with information in Parse */
-        /* if not set userHasLocation to false */
-        
-
-        
-        
     }
     
     // MARK: loadStudentData
@@ -66,38 +60,61 @@ class OTMViewController: UIViewController, AlertRenderer {
         }
     }
     
-    // MARK: setStudentLocation
-    
-    @IBAction func setStudentLocation() {
-        
-        // TODO: Check if the user has a location set already in StudentInformation on Parse
-        
+    // MARK: updateUserInformation
+    /* Check if user has location already set */
+    /* If yes update user information with data from StudentInformation array */
+    func updateUserInformation(uniqueKey: String) {
         ParseClient.sharedInstance().queryForStudentLocation(ParseClient.sharedInstance().user.udacityKey) { results, error in
+            
             if let error = error {
                 print("\(__FUNCTION__) Error : \(error)")
             } else {
                 print("\(__FUNCTION__) Results: \(results)")
+                
                 if results != nil {
                     print("user has no info")
+
                 } else {
-                    
-                    /* Ask the user for permission to update the data */
-//                    dispatch_async(dispatch_get_main_queue(), {
-//                        
-//                    })
-                    
-                    // TODO: Update the user info with information from Parse StudentInformation
                     print("user data: \(results)")
+                            
+                    // TODO: Update the user variable with information from results
+                    
                 }
             }
         }
-
-        let nextController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationPosting") as! InformationPostingViewController
-        print(nextController)
-        
-        self.presentViewController(nextController, animated: true, completion: nil)
     }
     
+    // MARK: setStudentLocation
+    
+    @IBAction func setStudentLocation() {
+        
+        /* queue the controller for location updating */
+        let nextController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationPosting") as! InformationPostingViewController
+        
+        if isNewUser {
+            /* go ahead and present the informationPosting controller */
+            self.presentViewController(nextController, animated: true, completion: nil)
+            
+        } else {
+            
+            /* ask for user permission to update location */
+            let alertController = UIAlertController(title: "On the Map", message: "You already have a location set. Do you want to update it?", preferredStyle: .Alert)
+            
+            let YESAction = UIAlertAction(title: "Yes", style: .Default) { action in
+                print("Yes pressed on Alert Controller")
+                self.presentViewController(nextController, animated: true, completion: nil)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action in
+                print("Cancel pressed on Alert Controller")
+            }
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(YESAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
     
     
     /* Helpers */
