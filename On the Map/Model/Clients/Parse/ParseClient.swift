@@ -80,6 +80,7 @@ class ParseClient: NSObject {
                 completionHandler(results: nil, error: error)
             } else {
                 if let results = JSONResult[ParseClient.JSONResponseKeys.Results] as? [[String:AnyObject]] {
+                    print("Results: \(results)")
                     completionHandler(results: results, error: nil)
                 } else {
                     print(JSONResult)
@@ -87,27 +88,6 @@ class ParseClient: NSObject {
                 }
             }
         }
-        
-        // api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%221217518784%22%7D
-//                                                ?where=%7B%22uniqueKey%22%3A%221217518784%22%7D
-        
-//        let urlString = "https://api.parse.com/1/classes/StudentLocation?where=%7B%22uniqueKey%22%3A%22\(uniqueKey)%22%7D"
-//        let url = NSURL(string: urlString)
-//        print(url)
-//        let request = NSMutableURLRequest(URL: url!)
-//        request.addValue(Constants.ParseAppID, forHTTPHeaderField: Constants.ParseAppIDHTTPHeader)
-//        request.addValue(Constants.ParseRESTAPIKey, forHTTPHeaderField: Constants.ParseRESTAPIKeyHTTPHeader)
-//        let session = NSURLSession.sharedSession()
-//        let task = session.dataTaskWithRequest(request) { data, response, error in
-//            if error != nil {
-//                print("\(__FUNCTION__) Error: \(error)")
-//                return
-//            }
-//            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-//        }
-//        task.resume()
-        
-        
     }
     
     
@@ -173,6 +153,104 @@ class ParseClient: NSObject {
         return task
     }
     
+    // MARK: submitStudentLocation
+    
+    func submitStudentLocation(user: UserInformation, completionHandler: (success: Bool, error: NSError?) -> Void) {
+        
+        var httpMethod : String
+        
+        // TODO: if the user has objectID than use PUT, otherwise it's a new POST
+        
+        /* 1. Specify parameters, method and HTTP Body */
+        var mutableMethod : String = Methods.UpdateStudentLocation
+        
+        if let objectID = user.objectID {
+            print("objectID: \(user.objectID)")
+            mutableMethod = ParseClient.subtituteKeyInMethod(mutableMethod, key: ParseClient.URLKeys.UniqueKey, value: objectID)! // user.objectID!
+            httpMethod = ParseClient.HttpMethods.UpdateExistingUser
+        } else {
+            print("objectID: \(user.objectID)")
+            mutableMethod = ParseClient.subtituteKeyInMethod(mutableMethod, key: ParseClient.URLKeys.UniqueKey, value: "")!
+            httpMethod = ParseClient.HttpMethods.PostNewUser
+        }
+        
+        let jsonBody : [String : AnyObject] = [
+            ParseClient.JSONResponseKeys.UniqueKey : user.udacityKey,
+            ParseClient.JSONResponseKeys.FirstName : user.firstName,
+            ParseClient.JSONResponseKeys.LastName : user.lastName,
+            ParseClient.JSONResponseKeys.MapString : user.mapString!,
+            ParseClient.JSONResponseKeys.MediaURL : user.mediaURL!,
+            ParseClient.JSONResponseKeys.Latitude : user.lat!,
+            ParseClient.JSONResponseKeys.Longitude: user.long!
+        ]
+        
+        print("Calling PARSEmethod: \(mutableMethod) with HTTPmethod: \(httpMethod)")
+        
+        /* 2. make the request */
+        taskForHTTPMethod(mutableMethod, httpMethod: httpMethod, jsonBody: jsonBody) { JSONResult, error in
+            
+            print("Function: \(__FUNCTION__) JSONResult: \(JSONResult)")
+            
+            /* 3. Send the desired value(s) to completion handler */
+            if let error = error {
+                completionHandler(success: false, error: error)
+            } else if let PUTResponse = JSONResult[ParseClient.JSONResponseKeys.PUTResponse] as? String {
+                completionHandler(success: true, error: nil)
+            } else if let POSTResponse = JSONResult[ParseClient.JSONResponseKeys.POSTResponse] as? String {
+                completionHandler(success: true, error: nil)
+            } else {
+                completionHandler(success: false, error: NSError(domain: "submitStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not PUT new user information"]))
+            }
+            
+        }
+    }
+    
+    // MARK: taskForPUTMethod
+    
+    func taskForHTTPMethod(method: String, httpMethod: String, jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        
+        /* 1. Build the URL and configure the request */
+        let urlString = Constants.BaseURLSecure + method
+        let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = httpMethod
+        
+        // Setup the HTTPHeaders
+        request.addValue(Constants.ParseAppID, forHTTPHeaderField: Constants.ParseAppIDHTTPHeader)
+        request.addValue(Constants.ParseRESTAPIKey, forHTTPHeaderField: Constants.ParseRESTAPIKeyHTTPHeader)
+        do {
+            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
+        }
+        
+        print("request.HTTPBody: \(request.HTTPBody)")
+        print("url: \(url)")
+        
+        /* 2. Make the request */
+        let task = session.dataTaskWithRequest(request) { (data, result, error) in
+            
+            /* GUARD: Was there an error? */
+            guard (error == nil) else {
+                print("[Parse PUT Method: \(method)] There was an error: \(error)")
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("[Parse PUT Method: \(method)] No data returned by request")
+                completionHandler(result: nil, error: NSError(domain: "parseJSONWithCompletionHandler", code: 1, userInfo: [NSLocalizedDescriptionKey : "Could not receive any data"]))
+                return
+            }
+            
+            /* 3. Parse the data and use the data (happens in completion handler) */
+            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+        }
+        
+        /* 4. Start the request */
+        task.resume()
+        
+        return task
+        
+    }
     
     // MARK: SharedInstance
     
@@ -218,6 +296,15 @@ class ParseClient: NSObject {
         }
         
         return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
+    }
+    
+    /* Helper: Substitute the key for the value that is contained within the method name */
+    class func subtituteKeyInMethod(method: String, key: String, value: String) -> String? {
+        if method.rangeOfString("{\(key)}") != nil {
+            return method.stringByReplacingOccurrencesOfString("{\(key)}", withString: value)
+        } else {
+            return nil
+        }
     }
     
 }

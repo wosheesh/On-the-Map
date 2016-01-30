@@ -35,6 +35,19 @@ extension ParseClient {
         
         // MARK: Student Location
         static let StudentLocation = "classes/StudentLocation"
+        static let UpdateStudentLocation = "classes/StudentLocation/{objectId}"
+    }
+    
+    struct HttpMethods {
+        static let PostNewUser = "POST"
+        static let UpdateExistingUser = "PUT"
+    }
+    
+    // MARK: URL Keys
+    struct URLKeys {
+        
+        // MARK: UniqueKey
+        static let UniqueKey = "objectId"
     }
     
     // MARK: Parameter key
@@ -55,35 +68,40 @@ extension ParseClient {
         static let MediaURL = "mediaURL"
         static let Latitude = "latitude"
         static let Longitude = "longitude"
+        static let ObjectID = "objectId"
         
         static let Results = "results"
+        
+        // MARK: PUT/POST Method Response
+        static let POSTResponse = "createdAt"
+        static let PUTResponse = "updatedAt"
     }
     
     // MARK: Student Location Keys
     
     /* for convenience */
-    enum Keys : Int {
-        case KeyObjectId, KeyUniqueKey, KeyFirstName, KeyLastName, KeyMapString, KeyMediaURL, KeyLatitude, KeyLongitude
-        func toKey() -> String! {
-            switch self {
-            case .KeyObjectId:
-                return "objectId"
-            case .KeyUniqueKey:
-                return "uniqueKey"
-            case .KeyFirstName:
-                return "firstName"
-            case .KeyLastName:
-                return "lastName"
-            case .KeyMapString:
-                return "mapString"
-            case .KeyMediaURL:
-                return "mediaURL"
-            case .KeyLatitude:
-                return "latitude"
-            case .KeyLongitude:
-                return "longitude"
-            }
-        }
-    }
+//    enum Keys : Int {
+//        case KeyObjectId, KeyUniqueKey, KeyFirstName, KeyLastName, KeyMapString, KeyMediaURL, KeyLatitude, KeyLongitude
+//        func toKey() -> String! {
+//            switch self {
+//            case .KeyObjectId:
+//                return "objectId"
+//            case .KeyUniqueKey:
+//                return "uniqueKey"
+//            case .KeyFirstName:
+//                return "firstName"
+//            case .KeyLastName:
+//                return "lastName"
+//            case .KeyMapString:
+//                return "mapString"
+//            case .KeyMediaURL:
+//                return "mediaURL"
+//            case .KeyLatitude:
+//                return "latitude"
+//            case .KeyLongitude:
+//                return "longitude"
+//            }
+//        }
+//    }
     
 }

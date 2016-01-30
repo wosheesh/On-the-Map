@@ -14,8 +14,9 @@ struct UserInformation {
     var lastName : String
     var mapString : String?
     var mediaURL : String?
-    var lat: Float? = nil
-    var long: Float? = nil
+    var lat: Double? = nil
+    var long: Double? = nil
+    var objectID: String?
     
     init(udacityKey: String, firstName: String, lastName: String) {
         self.udacityKey = udacityKey
@@ -32,6 +33,18 @@ struct UserInformation {
             lastName: userData[UClient.JSONResponseKeys.LastName] as! String)
         
         return user
+    }
+    
+    static func updateUserInformationFromDictionary(user: UserInformation, userData: [String:AnyObject]) -> UserInformation {
+        var updatedUser = user
+        
+        updatedUser.mapString = userData[ParseClient.JSONResponseKeys.MapString] as? String
+        updatedUser.mediaURL = userData[ParseClient.JSONResponseKeys.MediaURL] as? String
+        updatedUser.lat = userData[ParseClient.JSONResponseKeys.Latitude] as? Double
+        updatedUser.long = userData[ParseClient.JSONResponseKeys.Longitude] as? Double
+        updatedUser.objectID = userData[ParseClient.JSONResponseKeys.ObjectID] as? String
+
+        return updatedUser
     }
     
     

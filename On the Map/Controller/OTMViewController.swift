@@ -58,6 +58,8 @@ class OTMViewController: UIViewController, AlertRenderer {
                 return
             }
         }
+        
+        updateUserInformation(ParseClient.sharedInstance().user.udacityKey)
     }
     
     // MARK: updateUserInformation
@@ -71,13 +73,14 @@ class OTMViewController: UIViewController, AlertRenderer {
             } else {
                 print("\(__FUNCTION__) Results: \(results)")
                 
-                if results != nil {
+                if results?.count == 0 {
                     print("user has no info")
 
                 } else {
                     print("user data: \(results)")
                             
-                    // TODO: Update the user variable with information from results
+                    /* Update the user variable with information from results */
+                    ParseClient.sharedInstance().user = UserInformation.updateUserInformationFromDictionary(ParseClient.sharedInstance().user, userData: results![0])
                     
                 }
             }

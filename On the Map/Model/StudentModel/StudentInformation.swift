@@ -20,7 +20,7 @@ struct StudentInformation {
         ParseClient.JSONResponseKeys.MapString : "", // the location string used for geocoding the student location
         ParseClient.JSONResponseKeys.MediaURL : "", // the URL provided by the student
         ParseClient.JSONResponseKeys.Latitude : 0.0 as Float, // the latitude of the student location (ranges from -90 to 90)
-        ParseClient.JSONResponseKeys.Longitude : 0.0 as Float // the longitude of the student location (ranges from -180 to 180)
+        ParseClient.JSONResponseKeys.Longitude : 0.0 as Float// the longitude of the student location (ranges from -180 to 180)
     ]
     
     

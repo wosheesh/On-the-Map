@@ -9,10 +9,22 @@
 import UIKit
 import MapKit
 
-class PostLocationVC: UIViewController, MKMapViewDelegate {
+class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
+    
+    // MARK: Properties
     
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var mapForPosting: MKMapView!
+    @IBOutlet weak var submitButton: UIButton!
+    
+    // MARK: Lifecycle
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        /* if the user already has a mediaURL set update the text field */
+        urlTextField.text = ParseClient.sharedInstance().user.mediaURL
+        
+    }
     
     
     // MARK: addAnnotationToMapFromMapItem
@@ -28,6 +40,30 @@ class PostLocationVC: UIViewController, MKMapViewDelegate {
     }
     
     
+    // MARK: Actions
+    
+    @IBAction func submitButtonTouchUp(sender: AnyObject) {
+        
+        if urlTextField.text!.isEmpty {
+            presentAlert("Submit New Data", message: "Please enter media URL")
+        }
+        /* update the mediaURL with new information */
+        ParseClient.sharedInstance().user.mediaURL = urlTextField.text
+        
+        // TODO: if a new user updates this information than when he hits cancel user data should go back ... or not -> ux choice?
+        
+        // TODO: submit the information to Parse DB
+        ParseClient.sharedInstance().submitStudentLocation(ParseClient.sharedInstance().user) { success, error in
+            if success {
+                print("success")
+            } else {
+                print(error)
+                print("not updated submitStudentLocation")
+            }
+        }
+
+        
+    }
     
     // MARK: MKMapDelegate
     

@@ -15,11 +15,24 @@ protocol EnterLocationVCDelegate {
 
 class EnterLocationVC: UIViewController, AlertRenderer {
     
-    var enterLocationDelegate: EnterLocationVCDelegate?
+    // MARK: Properties
     
+    var enterLocationDelegate: EnterLocationVCDelegate?
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var FindOnMapButton: UIButton!
+    
+    // MARK: Lifecycle
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        /* if the user already has a location set update the text field */
+        locationTextField.text = ParseClient.sharedInstance().user.mapString
+        
+    }
+    
+    // MARK: Actions
     
     @IBAction func FindOnMapButtonTouchUp(sender: AnyObject) {
         // TODO: Change button state if textfield is not empty [http://stackoverflow.com/questions/28394933/how-do-i-check-when-a-uitextfield-changes]

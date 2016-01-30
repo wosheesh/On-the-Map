@@ -11,15 +11,18 @@ import MapKit
 
 class InformationPostingViewController: UIViewController {
     
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
-    @IBOutlet weak var EnterLocationContainer: UIView!
-    @IBOutlet weak var PostLocationContainer: UIView!
+    // MARK: Properties
     
     var postLocationVC: PostLocationVC?
     
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var EnterLocationContainer: UIView!
+    @IBOutlet weak var PostLocationContainer: UIView!
     @IBAction func cancelButtonTouchUp(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // MARK: Lifecycle
     
     override func viewWillAppear(animated: Bool) {
         EnterLocationContainer.hidden = false
@@ -49,10 +52,17 @@ extension InformationPostingViewController: EnterLocationVCDelegate {
         EnterLocationContainer.hidden = true
         PostLocationContainer.hidden = false
         
+        /* update user info with the new mapString and location as returned by MKLocalSearch */
+        /* this will get over-written by old data unless the user submits the change in EnterLocationVC */
+        ParseClient.sharedInstance().user.mapString = mapItem.name
+        
+        // TODO: update the lat and long
+        ParseClient.sharedInstance().user.lat = mapItem.placemark.coordinate.latitude
+        ParseClient.sharedInstance().user.long = mapItem.placemark.coordinate.longitude
+        
         /* add annotation to the mapView */
         self.postLocationVC?.addAnnotationToMapFromMapItem(mapItem)
         
     }
-        
-        
+
 }

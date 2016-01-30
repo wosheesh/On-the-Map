@@ -369,6 +369,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWf-Ui-Z0E">
                                 <rect key="frame" x="276" y="512" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitButtonTouchUp:" destination="uDc-ZP-Wyq" eventType="touchUpInside" id="mef-TW-2oc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -385,6 +388,7 @@
                     </view>
                     <connections>
                         <outlet property="mapForPosting" destination="QV1-Uk-56X" id="m5e-P8-Cc9"/>
+                        <outlet property="submitButton" destination="rWf-Ui-Z0E" id="xyd-WI-8s2"/>
                         <outlet property="urlTextField" destination="qvd-jv-1CO" id="XQP-M1-bP4"/>
                     </connections>
                 </viewController>
