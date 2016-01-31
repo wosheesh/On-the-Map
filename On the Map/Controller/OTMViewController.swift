@@ -82,6 +82,8 @@ class OTMViewController: UIViewController, AlertRenderer {
                     /* Update the user variable with information from results */
                     ParseClient.sharedInstance().user = UserInformation.updateUserInformationFromDictionary(ParseClient.sharedInstance().user, userData: results![0])
                     
+                    /* change the flag */
+                    self.isNewUser = false
                 }
             }
         }
@@ -103,7 +105,7 @@ class OTMViewController: UIViewController, AlertRenderer {
             /* ask for user permission to update location */
             let alertController = UIAlertController(title: "On the Map", message: "You already have a location set. Do you want to update it?", preferredStyle: .Alert)
             
-            let YESAction = UIAlertAction(title: "Yes", style: .Default) { action in
+            let YESAction = UIAlertAction(title: "Update", style: .Default) { action in
                 print("Yes pressed on Alert Controller")
                 self.presentViewController(nextController, animated: true, completion: nil)
             }

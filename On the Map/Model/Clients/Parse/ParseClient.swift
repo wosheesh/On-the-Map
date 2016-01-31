@@ -159,8 +159,6 @@ class ParseClient: NSObject {
         
         var httpMethod : String
         
-        // TODO: if the user has objectID than use PUT, otherwise it's a new POST
-        
         /* 1. Specify parameters, method and HTTP Body */
         var mutableMethod : String = Methods.UpdateStudentLocation
         
@@ -194,9 +192,12 @@ class ParseClient: NSObject {
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 completionHandler(success: false, error: error)
+                
             } else if let PUTResponse = JSONResult[ParseClient.JSONResponseKeys.PUTResponse] as? String {
+                print("Function: \(__FUNCTION__) PUTResponse: \(PUTResponse)")
                 completionHandler(success: true, error: nil)
             } else if let POSTResponse = JSONResult[ParseClient.JSONResponseKeys.POSTResponse] as? String {
+                print("Function: \(__FUNCTION__) POSTResponse: \(POSTResponse)")
                 completionHandler(success: true, error: nil)
             } else {
                 completionHandler(success: false, error: NSError(domain: "submitStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not PUT new user information"]))

@@ -12,6 +12,8 @@ protocol AlertRenderer {
     func presentAlert(title: String, message: String)
 }
 
+// TODO: extend protocol with more customisable alerts completions and buttons
+
 extension AlertRenderer where Self: UIViewController {
     func presentAlert(title: String, message: String) {
         print("AlertRenderer protocol executed by \(self)")

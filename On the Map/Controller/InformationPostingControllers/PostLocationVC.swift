@@ -52,10 +52,27 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
         
         // TODO: if a new user updates this information than when he hits cancel user data should go back ... or not -> ux choice?
         
-        // TODO: submit the information to Parse DB
         ParseClient.sharedInstance().submitStudentLocation(ParseClient.sharedInstance().user) { success, error in
             if success {
                 print("success")
+                
+                /* inform the user of the successful update and dismiss the view */
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertController = UIAlertController(title: "On the Map", message: "Data updated successfully", preferredStyle: .Alert)
+                    
+                    let OKAction = UIAlertAction(title: "OK", style: .Default) { action in
+                        print("OK pressed on Alert Controller")
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                    
+                    alertController.addAction(OKAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })
+                
+                
+                
             } else {
                 print(error)
                 print("not updated submitStudentLocation")
