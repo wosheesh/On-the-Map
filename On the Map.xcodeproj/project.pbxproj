@@ -11,11 +11,15 @@
 		FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1E56A01C4F38AB0042B258 /* UConstants.swift */; };
 		FE3A6DA11C5901D6008BB290 /* EnterLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3A6DA01C5901D6008BB290 /* EnterLocationVC.swift */; };
 		FE3A6DA31C590265008BB290 /* PostLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3A6DA21C590265008BB290 /* PostLocationVC.swift */; };
+		FE426B291C5E63600057B2F0 /* FBLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE426B281C5E63600057B2F0 /* FBLoginButton.swift */; };
+		FE426B2B1C5E65130057B2F0 /* BorderedButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE426B2A1C5E65130057B2F0 /* BorderedButtonProtocol.swift */; };
+		FE426B2E1C5E88AB0057B2F0 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE426B2D1C5E88AB0057B2F0 /* LoginTextField.swift */; };
 		FE587CF11C5E2940001A64A9 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE587CEE1C5E2940001A64A9 /* Roboto-Medium.ttf */; };
 		FE587CF21C5E2940001A64A9 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE587CEF1C5E2940001A64A9 /* Roboto-Regular.ttf */; };
 		FE587CF31C5E2940001A64A9 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE587CF01C5E2940001A64A9 /* Roboto-Thin.ttf */; };
-		FE587CF51C5E4301001A64A9 /* BorderedButtonFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE587CF41C5E4301001A64A9 /* BorderedButtonFB.swift */; };
+		FE587CF51C5E4301001A64A9 /* UdacityLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE587CF41C5E4301001A64A9 /* UdacityLoginButton.swift */; };
 		FE587CF91C5E49F9001A64A9 /* LoginViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE587CF81C5E49F9001A64A9 /* LoginViewUI.swift */; };
+		FE587CFB1C5E5D09001A64A9 /* OTMColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE587CFA1C5E5D09001A64A9 /* OTMColors.swift */; };
 		FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */; };
 		FE6C2C491C5132A9004A0963 /* StudentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */; };
 		FE6C2C4B1C514DCF004A0963 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6C2C4A1C514DCF004A0963 /* ParseClient.swift */; };
@@ -37,11 +41,15 @@
 		FE1E56A01C4F38AB0042B258 /* UConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UConstants.swift; sourceTree = "<group>"; };
 		FE3A6DA01C5901D6008BB290 /* EnterLocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterLocationVC.swift; path = Controller/InformationPostingControllers/EnterLocationVC.swift; sourceTree = "<group>"; };
 		FE3A6DA21C590265008BB290 /* PostLocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostLocationVC.swift; path = Controller/InformationPostingControllers/PostLocationVC.swift; sourceTree = "<group>"; };
+		FE426B281C5E63600057B2F0 /* FBLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FBLoginButton.swift; path = View/FBLoginButton.swift; sourceTree = "<group>"; };
+		FE426B2A1C5E65130057B2F0 /* BorderedButtonProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BorderedButtonProtocol.swift; path = View/BorderedButtonProtocol.swift; sourceTree = "<group>"; };
+		FE426B2D1C5E88AB0057B2F0 /* LoginTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginTextField.swift; path = View/LoginTextField.swift; sourceTree = "<group>"; };
 		FE587CEE1C5E2940001A64A9 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../../on the map assets/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		FE587CEF1C5E2940001A64A9 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../on the map assets/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		FE587CF01C5E2940001A64A9 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "../../on the map assets/Roboto-Thin.ttf"; sourceTree = "<group>"; };
-		FE587CF41C5E4301001A64A9 /* BorderedButtonFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BorderedButtonFB.swift; path = View/BorderedButtonFB.swift; sourceTree = "<group>"; };
+		FE587CF41C5E4301001A64A9 /* UdacityLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UdacityLoginButton.swift; path = View/UdacityLoginButton.swift; sourceTree = "<group>"; };
 		FE587CF81C5E49F9001A64A9 /* LoginViewUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewUI.swift; path = View/LoginViewUI.swift; sourceTree = "<group>"; };
+		FE587CFA1C5E5D09001A64A9 /* OTMColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OTMColors.swift; path = View/OTMColors.swift; sourceTree = "<group>"; };
 		FE6C2C421C5114A7004A0963 /* StudentsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentsMapViewController.swift; path = Controller/StudentsMapViewController.swift; sourceTree = "<group>"; };
 		FE6C2C481C5132A9004A0963 /* StudentsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentsListViewController.swift; path = Controller/StudentsListViewController.swift; sourceTree = "<group>"; };
 		FE6C2C4A1C514DCF004A0963 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseClient.swift; path = Model/Clients/Parse/ParseClient.swift; sourceTree = "<group>"; };
@@ -98,6 +106,16 @@
 				FE3A6DA21C590265008BB290 /* PostLocationVC.swift */,
 			);
 			name = InformationPostingControllers;
+			sourceTree = "<group>";
+		};
+		FE426B2C1C5E88450057B2F0 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				FE426B2A1C5E65130057B2F0 /* BorderedButtonProtocol.swift */,
+				FE587CF41C5E4301001A64A9 /* UdacityLoginButton.swift */,
+				FE426B281C5E63600057B2F0 /* FBLoginButton.swift */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 		FE587CED1C5E2924001A64A9 /* Resources */ = {
@@ -180,8 +198,10 @@
 		FEDAFE641C422FBA006055B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FE587CF41C5E4301001A64A9 /* BorderedButtonFB.swift */,
+				FE426B2C1C5E88450057B2F0 /* Buttons */,
 				FE587CF81C5E49F9001A64A9 /* LoginViewUI.swift */,
+				FE587CFA1C5E5D09001A64A9 /* OTMColors.swift */,
+				FE426B2D1C5E88AB0057B2F0 /* LoginTextField.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -276,11 +296,14 @@
 			files = (
 				FED22F491C52584F00685B8A /* StudentInformation.swift in Sources */,
 				FE3A6DA31C590265008BB290 /* PostLocationVC.swift in Sources */,
-				FE587CF51C5E4301001A64A9 /* BorderedButtonFB.swift in Sources */,
+				FE587CF51C5E4301001A64A9 /* UdacityLoginButton.swift in Sources */,
 				FEDAFE671C42332A006055B6 /* LoginViewController.swift in Sources */,
+				FE587CFB1C5E5D09001A64A9 /* OTMColors.swift in Sources */,
 				FEA412241C5A02AC005E2408 /* AlertRenderer.swift in Sources */,
+				FE426B2E1C5E88AB0057B2F0 /* LoginTextField.swift in Sources */,
 				FE6C2C491C5132A9004A0963 /* StudentsListViewController.swift in Sources */,
 				FE6C2C4B1C514DCF004A0963 /* ParseClient.swift in Sources */,
+				FE426B2B1C5E65130057B2F0 /* BorderedButtonProtocol.swift in Sources */,
 				FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */,
 				FE1E569F1C4F351E0042B258 /* UClient.swift in Sources */,
 				FED22F511C554F0C00685B8A /* OTMViewController.swift in Sources */,
@@ -289,6 +312,7 @@
 				FE8BA8A01C5B67CA00B988D6 /* UserInformation.swift in Sources */,
 				FE3A6DA11C5901D6008BB290 /* EnterLocationVC.swift in Sources */,
 				FEDAFE521C422F81006055B6 /* AppDelegate.swift in Sources */,
+				FE426B291C5E63600057B2F0 /* FBLoginButton.swift in Sources */,
 				FEFE4BF11C57B1EF00C525DE /* InformationPostingViewController.swift in Sources */,
 				FE6C2C4E1C5235B2004A0963 /* ParseConstants.swift in Sources */,
 			);

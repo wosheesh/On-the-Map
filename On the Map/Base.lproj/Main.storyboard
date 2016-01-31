@@ -10,7 +10,7 @@
         <scene sceneID="Xcg-Wi-pFs">
             <objects>
                 <navigationController id="cAX-sb-N4A" userLabel="MapNav" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="w2o-Rd-JkY"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="MapTabIcon" selectedImage="MapTabIcon" id="w2o-Rd-JkY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rW8-2c-vJ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -187,12 +187,12 @@
                                     <constraint firstAttribute="height" constant="100" id="J6C-WP-NRm"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtd-k3-VmX">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtd-k3-VmX" customClass="LoginTextField" customModule="On_the_Map" customModuleProvider="target">
                                 <rect key="frame" x="20" y="196" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A8k-EO-J9R">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A8k-EO-J9R" customClass="LoginTextField" customModule="On_the_Map" customModuleProvider="target">
                                 <rect key="frame" x="20" y="236" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
@@ -203,10 +203,13 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6M-9s-aFx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6M-9s-aFx" customClass="UdacityLoginButton" customModule="On_the_Map" customModuleProvider="target">
                                 <rect key="frame" x="20" y="276" width="560" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="loginButtonTouch:" destination="pqS-0g-lHo" eventType="touchUpInside" id="oSE-A8-dqa"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uce-p5-e0N">
                                 <rect key="frame" x="156" y="327" width="288" height="36"/>
@@ -215,7 +218,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lf6-6L-tQ0" customClass="BorderedButtonFB" customModule="On_the_Map" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lf6-6L-tQ0" customClass="FBLoginButton" customModule="On_the_Map" customModuleProvider="target">
                                 <rect key="frame" x="20" y="544" width="560" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Login with Facebook"/>
@@ -283,7 +286,7 @@
         <scene sceneID="NmR-7O-umy">
             <objects>
                 <navigationController id="OXW-qY-UOV" userLabel="ListNav" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" id="Sdi-XN-FJr"/>
+                    <tabBarItem key="tabBarItem" title="List" image="ListTabIcon" selectedImage="ListTabIcon" id="Sdi-XN-FJr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jlp-Qo-4Nv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -401,6 +404,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ListTabIcon" width="32" height="32"/>
+        <image name="MapTabIcon" width="32" height="32"/>
         <image name="Udacity U" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -19,14 +19,19 @@ extension LoginViewController {
         
         /* Configure background gradient */
         self.view.backgroundColor = UIColor.clearColor()
-        let colorTop = UIColor(red: 0.949, green: 0.592, blue: 0.243, alpha: 1.00).CGColor
-        let colorBottom = UIColor(red: 0.937, green: 0.455, blue: 0.231, alpha: 1.00).CGColor
+        let colorTop = OTMColors.bgLightOrange.CGColor
+        let colorBottom = OTMColors.bgDarkOrange.CGColor
         let backgroundGradient = CAGradientLayer()
         backgroundGradient.colors = [colorTop, colorBottom]
         backgroundGradient.locations = [0.0, 1.0]
         backgroundGradient.frame = view.frame
         self.view.layer.insertSublayer(backgroundGradient, atIndex: 0)
         
+        /* configure buttons */
+//        loginWithFBButton.darkerFace = OTMColors.FBloginButtonDark
+//        loginWithFBButton.lighterFace = OTMColors.FBloginButtonLight
+        
+
 //        /* Add Udacity Logo */
 //        let udacityLogo = UIImageView(image: UIImage(named: "Udacity U"))
 //        udacityLogo.frame = CGRect(x: 0, y: 0, width: 128, height: 128)

@@ -15,11 +15,11 @@ class LoginViewController: UIViewController, AlertRenderer {
     // MARK: Properties
     
     @IBOutlet weak var loginToUdacityLabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var emailTextField: LoginTextField!
+    @IBOutlet weak var passwordTextField: LoginTextField!
+    @IBOutlet weak var loginButton: UdacityLoginButton!
     @IBOutlet weak var signupButton: UIButton!
-    @IBOutlet weak var loginWithFBButton: BorderedButtonFB!
+    @IBOutlet weak var loginWithFBButton: FBLoginButton!
     
     
     // TODO: signup at Udacity
@@ -38,7 +38,6 @@ class LoginViewController: UIViewController, AlertRenderer {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        
         setupUI()
     }
     
@@ -49,13 +48,13 @@ class LoginViewController: UIViewController, AlertRenderer {
 
         self.setUIEnabled(enabled: false)
         
-//        UClient.sharedInstance().authenticateWithUserCredentials(emailTextField.text!, password: passwordTextField.text!) { (success, errorString) in
-//            if success {
-//                self.completeLogin()
-//            } else {
-//                self.displayError(errorString)
-//            }
-//        }
+        UClient.sharedInstance().authenticateWithUserCredentials(emailTextField.text!, password: passwordTextField.text!) { (success, errorString) in
+            if success {
+                self.completeLogin()
+            } else {
+                self.displayError(errorString)
+            }
+        }
     }
     
     // MARK: LoginViewController
