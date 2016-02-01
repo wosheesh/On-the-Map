@@ -10,6 +10,7 @@
 // TODO: lift view with keyboard
 // TODO: FB login
 // TODO: Sigin In
+// TODO: Logout
 
 import UIKit
 
