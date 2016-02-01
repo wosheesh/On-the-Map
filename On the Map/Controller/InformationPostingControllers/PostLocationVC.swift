@@ -26,6 +26,12 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
         
     }
     
+    // MARK: showLocationfromMapItem
+    func showLocationfromMapItem(mapItem: MKMapItem) {
+        
+        mapForPosting.setCenterCoordinate(mapItem.placemark.coordinate, animated: true)
+        
+    }
     
     // MARK: addAnnotationToMapFromMapItem
     func addAnnotationToMapFromMapItem(mapItem: MKMapItem) {

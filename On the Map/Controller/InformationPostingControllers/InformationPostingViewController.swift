@@ -62,6 +62,9 @@ extension InformationPostingViewController: EnterLocationVCDelegate {
         
         /* add annotation to the mapView */
         self.postLocationVC?.addAnnotationToMapFromMapItem(mapItem)
+        self.postLocationVC?.showLocationfromMapItem(mapItem)
+        
+        
         
     }
 
