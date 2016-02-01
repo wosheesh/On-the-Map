@@ -7,6 +7,10 @@
 //
 
 // TODO: add app Transport security
+// TODO: lift view with keyboard
+// TODO: dismiss kayboard with touch outsise bounds
+// TODO: FB login
+// TODO: Sigin In
 
 import UIKit
 
@@ -20,9 +24,6 @@ class LoginViewController: UIViewController, AlertRenderer {
     @IBOutlet weak var loginButton: UdacityLoginButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var loginWithFBButton: FBLoginButton!
-    
-    
-    // TODO: signup at Udacity
     
     var session: NSURLSession!
     
@@ -39,12 +40,14 @@ class LoginViewController: UIViewController, AlertRenderer {
         super.viewWillAppear(animated)
 
         setupUI()
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     // MARK: Actions
     
     @IBAction func loginButtonTouch(sender: AnyObject) {
-        // TODO: loginButtonTouch
 
         self.setUIEnabled(enabled: false)
         
@@ -79,7 +82,19 @@ class LoginViewController: UIViewController, AlertRenderer {
         })
     }
     
+}
 
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if textField == self.passwordTextField {
+            loginButtonTouch(textField)
+        }
+        return true
+    }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
 }

@@ -14,6 +14,7 @@ class FBLoginButton: UIButton, BorderedButtonProtocol {
     /* Constants for styling and configuration */
     var darkerFace = OTMColors.FBloginButtonDark
     var lighterFace = OTMColors.FBloginButtonLight
+    var titleColor = OTMColors.FBButtonTitle
     let titleLabelFontSize : CGFloat = 17.0
     let borderedButtonHeight : CGFloat = 44.0
     let borderedButtonCornerRadius : CGFloat = 4.0

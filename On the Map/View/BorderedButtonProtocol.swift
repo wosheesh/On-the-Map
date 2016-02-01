@@ -15,6 +15,7 @@ protocol BorderedButtonProtocol : class {
     /* Constants for styling and configuration */
     var darkerFace : UIColor {get}
     var lighterFace : UIColor {get}
+    var titleColor : UIColor {get}
     var titleLabelFontSize : CGFloat {get}
     var borderedButtonHeight : CGFloat {get}
     var borderedButtonCornerRadius : CGFloat {get}
@@ -37,7 +38,7 @@ extension BorderedButtonProtocol where Self : UIButton {
         self.highlightedBackingColor = darkerFace
         self.backingColor = lighterFace
         self.backgroundColor = lighterFace
-        self.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.setTitleColor(titleColor, forState: .Normal)
         self.titleLabel?.font = UIFont(name: "Roboto-Medium", size: titleLabelFontSize)
     }
     

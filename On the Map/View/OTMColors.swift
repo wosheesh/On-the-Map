@@ -18,12 +18,26 @@ struct OTMColors {
     // MARK: Buttons
     static let loginButtonDark = UIColor(red: 0.929, green: 0.345, blue: 0.227, alpha: 1.00)
     static let loginButtonLight = UIColor(red: 0.901, green: 0.304, blue: 0.226, alpha: 1.00)
+    static let loginButtonTitle = UIColor(white: 1.0, alpha: 1.0)
+    
     static let FBloginButtonDark = UIColor(red: 0.0, green: 0.298, blue: 0.686, alpha:1.0)
     static let FBloginButtonLight = UIColor(red: 0.0, green:0.502, blue:0.839, alpha: 1.0)
+    static let FBButtonTitle = UIColor(white: 1.0, alpha: 1.0)
     
     // MARK: TextFields
     static let loginTextFieldBg = UIColor(white: 1.0, alpha: 0.35)
     static let loginTextFieldTextColor = UIColor(white: 1.0, alpha: 1.0)
     
+    // MARK: InformationPostingVC
+    static let topToolbarBgColor = UIColor(white: 1.0, alpha: 0.0)
+    static let topToolbarItemColor = UIColor(red: 0.137, green: 0.302, blue: 0.471, alpha: 1.00)
+    static let viewBgColor = UIColor(red: 0.882, green: 0.882, blue: 0.871, alpha: 1.00)
+    
+    static let enterLocationTextFieldBgColor = UIColor(red: 0.325, green: 0.537, blue: 0.702, alpha: 1.00)
+    static let enterLocationTextFieldTextColor = UIColor(white: 1.0, alpha: 1.0)
+    
+    static let findOnTheMapButtonDark = UIColor(white: 1.0, alpha: 0.5)
+    static let findOnTheMapButtonLight = UIColor(white: 1.0, alpha: 0.8)
+    static let findOnTheMapButtonTitle = UIColor(red: 0.325, green: 0.537, blue: 0.702, alpha: 1.00)
     
 }

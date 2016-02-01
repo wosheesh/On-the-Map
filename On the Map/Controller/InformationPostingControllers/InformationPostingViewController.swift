@@ -15,12 +15,8 @@ class InformationPostingViewController: UIViewController {
     
     var postLocationVC: PostLocationVC?
     
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var EnterLocationContainer: UIView!
     @IBOutlet weak var PostLocationContainer: UIView!
-    @IBAction func cancelButtonTouchUp(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
     
     // MARK: Lifecycle
     
@@ -28,8 +24,16 @@ class InformationPostingViewController: UIViewController {
         EnterLocationContainer.hidden = false
         PostLocationContainer.hidden = true
     }
+
+    // MARK: Actions
+
+    @IBAction func cancelButtonTouchUp(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }
+
+
 
 // MARK: EnterLocationVCDelegate
 
@@ -63,8 +67,6 @@ extension InformationPostingViewController: EnterLocationVCDelegate {
         /* add annotation to the mapView */
         self.postLocationVC?.addAnnotationToMapFromMapItem(mapItem)
         self.postLocationVC?.showLocationfromMapItem(mapItem)
-        
-        
         
     }
 

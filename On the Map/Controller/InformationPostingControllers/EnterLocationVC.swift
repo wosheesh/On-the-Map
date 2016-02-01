@@ -19,8 +19,11 @@ class EnterLocationVC: UIViewController, AlertRenderer {
     
     var enterLocationDelegate: EnterLocationVCDelegate?
     
-    @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var FindOnMapButton: UIButton!
+    @IBOutlet weak var locationTextField: EnterLocationTextField!
+    @IBOutlet weak var FindOnMapButton: FindOnTheMapButton!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+ 
+    @IBOutlet weak var topToolbar: UIToolbar!
     
     // MARK: Lifecycle
     
@@ -28,11 +31,22 @@ class EnterLocationVC: UIViewController, AlertRenderer {
         super.viewWillAppear(animated)
         
         /* if the user already has a location set update the text field */
-        locationTextField.text = ParseClient.sharedInstance().user.mapString
+        locationTextField.text = ParseClient.sharedInstance().user.mapString 
+    }
+    
+    override func viewDidLoad() {
+        setupUI()
+        
+        locationTextField.delegate = self
         
     }
     
     // MARK: Actions
+    
+    
+    @IBAction func cancelButtonTouchUp(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func FindOnMapButtonTouchUp(sender: AnyObject) {
         // TODO: Change button state if textfield is not empty [http://stackoverflow.com/questions/28394933/how-do-i-check-when-a-uitextfield-changes]
@@ -60,5 +74,20 @@ class EnterLocationVC: UIViewController, AlertRenderer {
             }
         }
         
+    }
+}
+
+// MARK: UITextFieldDelegate
+extension EnterLocationVC: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if textField == self.locationTextField {
+            FindOnMapButtonTouchUp(textField)
+        }
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }

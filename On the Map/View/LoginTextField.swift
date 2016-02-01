@@ -14,7 +14,7 @@ class LoginTextField : UITextField {
     let loginTextFieldCornerRadius : CGFloat = 0
     let phoneTextFieldExtraPadding : CGFloat = 34.0
     let loginTextFieldWidthBounds : CGFloat = 18
-    let loginTextFieldHeightBounts : CGFloat = 14
+    let loginTextFieldHeightBounds : CGFloat = 14
 
     
     required init(coder aDecoder: NSCoder) {
@@ -41,9 +41,9 @@ class LoginTextField : UITextField {
     override func textRectForBounds(bounds: CGRect) -> CGRect {
         return CGRectMake(
             bounds.origin.x + loginTextFieldWidthBounds / 2,
-            bounds.origin.y + loginTextFieldHeightBounts / 2,
+            bounds.origin.y + loginTextFieldHeightBounds / 2,
             bounds.size.width - loginTextFieldWidthBounds,
-            bounds.size.height - loginTextFieldHeightBounts
+            bounds.size.height - loginTextFieldHeightBounds
         )
     }
     

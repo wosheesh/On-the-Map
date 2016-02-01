@@ -1,23 +1,20 @@
 //
-//  UdacityLoginButton.swift
+//  FindOnTheMapButton.swift
 //  On the Map
 //
-//  Created by Wojtek Materka on 31/01/2016.
+//  Created by Wojtek Materka on 01/02/2016.
 //  Copyright © 2016 Wojtek Materka. All rights reserved.
 //
 
 import UIKit
 
-// MARK: - BorderedButton: Button
-
-class UdacityLoginButton: UIButton, BorderedButtonProtocol {
-    
+class FindOnTheMapButton: UIButton, BorderedButtonProtocol {
     // MARK: Properties
     
     /* Constants for styling and configuration */
-    var darkerFace = OTMColors.loginButtonDark
-    var lighterFace = OTMColors.loginButtonLight
-    var titleColor = OTMColors.loginButtonTitle
+    var darkerFace = OTMColors.findOnTheMapButtonDark
+    var lighterFace = OTMColors.findOnTheMapButtonLight
+    var titleColor = OTMColors.findOnTheMapButtonTitle
     let titleLabelFontSize : CGFloat = 20.0
     let borderedButtonHeight : CGFloat = 44.0
     let borderedButtonCornerRadius : CGFloat = 4.0
@@ -61,5 +58,5 @@ class UdacityLoginButton: UIButton, BorderedButtonProtocol {
     override func cancelTrackingWithEvent(event: UIEvent?) {
         self.backgroundColor = self.backingColor
     }
-    
+
 }
