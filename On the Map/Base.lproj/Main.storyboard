@@ -223,6 +223,9 @@
                                 <rect key="frame" x="20" y="544" width="560" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Login with Facebook"/>
+                                <connections>
+                                    <action selector="loginWithFBButtonTouchUp:" destination="pqS-0g-lHo" eventType="touchUpInside" id="NDh-zP-w8u"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.48627450979999998" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>

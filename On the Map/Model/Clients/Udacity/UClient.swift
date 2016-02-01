@@ -38,7 +38,7 @@ class UClient: NSObject {
             completionHandler(success: false, errorString: "Password is Empty")
         } else {
             
-            getSessionID(email, password: password) { (success, sessionID, userID, errorString) in
+            getSessionID(email, password: password, access_token: nil) { (success, sessionID, userID, errorString) in
                 
                 if success {
                     /* set sessionID and userID */
@@ -63,6 +63,7 @@ class UClient: NSObject {
             }
         }
     }
+    
     
     func getUserDataWithUserID(userID: String, completionHandler: (success: Bool, userData: [String:AnyObject]?, errorString: String?) -> Void) {
         
@@ -99,18 +100,34 @@ class UClient: NSObject {
     }
 
     
-    func getSessionID(email: String, password: String, completionHandler: (success: Bool, sessionID: String?, userID: String?, errorString: String?) -> Void) {
+    func getSessionID(email: String?, password: String?, access_token: String?, completionHandler: (success: Bool, sessionID: String?, userID: String?, errorString: String?) -> Void) {
+        
+        var jsonBody : [String : AnyObject]?
         
         /* 1. Specify HTTP Body */
-        let jsonBody : [String:AnyObject] = [
-            "udacity": [
-                UClient.JSONBodyKeys.Username: email as String,
-                UClient.JSONBodyKeys.Password: password as String
+        if let email = email {
+            if let password = password {
+                jsonBody = [
+                    "udacity": [
+                        UClient.JSONBodyKeys.Username: email as String!,
+                        UClient.JSONBodyKeys.Password: password as String!
+                    ]
+                ]
+            }
+        } else if let access_token = access_token {
+            print(access_token)
+            jsonBody = [
+                "facebook_mobile" : [
+                    "access_token": access_token as String!
+                ]
             ]
-        ]
+        }
+        
+        
+        print(jsonBody)
         
         /* 2. Make the request */
-        taskForPOSTMethod(UClient.Methods.UdacitySession, jsonBody: jsonBody) { JSONResult, error in
+        taskForPOSTMethod(UClient.Methods.UdacitySession, jsonBody: jsonBody!) { JSONResult, error in
             
             print("\(__FUNCTION__) JSONResult : \(JSONResult)")
             
@@ -167,6 +184,8 @@ class UClient: NSObject {
         do {
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
         }
+        
+        print("HTTPBODY: ", NSString(data: request.HTTPBody!, encoding: NSUTF8StringEncoding))
         
         /* 3. Make the request */
         

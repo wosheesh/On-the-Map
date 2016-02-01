@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE0A016A1C5FC2F300E613DC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0A01691C5FC2F300E613DC /* FBSDKCoreKit.framework */; };
+		FE0A016C1C5FC7FF00E613DC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0A016B1C5FC7FF00E613DC /* FBSDKLoginKit.framework */; };
+		FE0A016E1C5FD9B600E613DC /* UFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0A016D1C5FD9B600E613DC /* UFacebook.swift */; };
 		FE1E569F1C4F351E0042B258 /* UClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1E569E1C4F351E0042B258 /* UClient.swift */; };
 		FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1E56A01C4F38AB0042B258 /* UConstants.swift */; };
 		FE3A6DA11C5901D6008BB290 /* EnterLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3A6DA01C5901D6008BB290 /* EnterLocationVC.swift */; };
@@ -43,6 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FE0A01691C5FC2F300E613DC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../iOS/Frameworks/FacebookSDKs-iOS-20160115/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		FE0A016B1C5FC7FF00E613DC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../iOS/Frameworks/FacebookSDKs-iOS-20160115/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		FE0A016D1C5FD9B600E613DC /* UFacebook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UFacebook.swift; sourceTree = "<group>"; };
 		FE1E569E1C4F351E0042B258 /* UClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UClient.swift; sourceTree = "<group>"; };
 		FE1E56A01C4F38AB0042B258 /* UConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UConstants.swift; sourceTree = "<group>"; };
 		FE3A6DA01C5901D6008BB290 /* EnterLocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterLocationVC.swift; path = Controller/InformationPostingControllers/EnterLocationVC.swift; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE0A016C1C5FC7FF00E613DC /* FBSDKLoginKit.framework in Frameworks */,
+				FE0A016A1C5FC2F300E613DC /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,9 +108,19 @@
 			name = Clients;
 			sourceTree = "<group>";
 		};
+		FE0A01661C5FB99A00E613DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE0A016B1C5FC7FF00E613DC /* FBSDKLoginKit.framework */,
+				FE0A01691C5FC2F300E613DC /* FBSDKCoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FE1E56A21C4F3FD70042B258 /* Udacity */ = {
 			isa = PBXGroup;
 			children = (
+				FE0A016D1C5FD9B600E613DC /* UFacebook.swift */,
 				FE1E569E1C4F351E0042B258 /* UClient.swift */,
 				FE1E56A01C4F38AB0042B258 /* UConstants.swift */,
 			);
@@ -171,6 +189,7 @@
 		FEDAFE451C422F80006055B6 = {
 			isa = PBXGroup;
 			children = (
+				FE0A01661C5FB99A00E613DC /* Frameworks */,
 				FEDAFE501C422F81006055B6 /* On the Map */,
 				FEDAFE4F1C422F80006055B6 /* Products */,
 			);
@@ -313,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FED22F491C52584F00685B8A /* StudentInformation.swift in Sources */,
+				FE0A016E1C5FD9B600E613DC /* UFacebook.swift in Sources */,
 				FE3A6DA31C590265008BB290 /* PostLocationVC.swift in Sources */,
 				FE587CF51C5E4301001A64A9 /* UdacityLoginButton.swift in Sources */,
 				FEDAFE671C42332A006055B6 /* LoginViewController.swift in Sources */,
@@ -449,6 +469,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/wmaterka/Documents/Code/iOS/Frameworks/FacebookSDKs-iOS-20160115",
+				);
 				INFOPLIST_FILE = "On the Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wojtekmaterka.On-the-Map";
@@ -460,6 +485,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/wmaterka/Documents/Code/iOS/Frameworks/FacebookSDKs-iOS-20160115",
+				);
 				INFOPLIST_FILE = "On the Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wojtekmaterka.On-the-Map";

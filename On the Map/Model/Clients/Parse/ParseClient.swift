@@ -27,7 +27,13 @@ class ParseClient: NSObject {
         session = NSURLSession.sharedSession()
         
         /* instantiate 'user' for possible Parse updates */
+        
+        // TODO: Load User data only after authentication
+        
         user = UserInformation.UserInformationFromUserData(UClient.sharedInstance().userData!)
+
+            
+
         
         super.init()
         

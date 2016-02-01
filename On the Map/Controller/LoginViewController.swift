@@ -8,7 +8,6 @@
 
 // TODO: add app Transport security
 // TODO: lift view with keyboard
-// TODO: FB login
 // TODO: Sigin In
 // TODO: Logout
 
@@ -34,6 +33,7 @@ class LoginViewController: UIViewController, AlertRenderer {
         
         /* Get the shared URL session */
         session = NSURLSession.sharedSession()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -56,6 +56,25 @@ class LoginViewController: UIViewController, AlertRenderer {
                 self.completeLogin()
             } else {
                 self.displayError(errorString)
+            }
+        }
+    }
+    
+    @IBAction func loginWithFBButtonTouchUp(sender: AnyObject) {
+        
+        self.setUIEnabled(enabled: false)
+        
+        UClient.sharedInstance().authenticateWithFacebook { (success, error) in
+            if success {
+                self.completeLogin()
+            } else {
+                if error?.domain == "authenticateWithFacebook - getSessionID" {
+                    self.displayError("Couldn't link your Facebook account with Udacity profile. Check in https://www.udacity.com/account#!/linked-accounts")
+                } else if error?.domain == "authenticateWithFacebook - cancel" {
+                    self.displayError("Facebook authentication cancelled.")
+                } else {
+                    self.displayError("Something went wrong with Facebook authentication. Try again later.")
+                }
             }
         }
     }
