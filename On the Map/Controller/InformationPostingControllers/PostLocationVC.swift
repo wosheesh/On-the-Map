@@ -13,9 +13,12 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
     
     // MARK: Properties
     
-    @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var urlTextField: UrlTextField!
     @IBOutlet weak var mapForPosting: MKMapView!
-    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var submitButton: SubmitUserDataButton!
+    @IBOutlet weak var topToolbar: UIToolbar!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var updateQuery: UILabel!
     
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
@@ -26,14 +29,19 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
         
     }
     
-    // MARK: showLocationfromMapItem
+    override func viewDidLoad() {
+        setupUI()
+        
+        urlTextField.delegate = self
+        
+    }
+    
     func showLocationfromMapItem(mapItem: MKMapItem) {
         
         mapForPosting.setCenterCoordinate(mapItem.placemark.coordinate, animated: true)
         
     }
     
-    // MARK: addAnnotationToMapFromMapItem
     func addAnnotationToMapFromMapItem(mapItem: MKMapItem) {
         print(mapItem)
 
@@ -47,6 +55,10 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
     
     
     // MARK: Actions
+    
+    @IBAction func cancelButtonTouchUp(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func submitButtonTouchUp(sender: AnyObject) {
         
@@ -109,4 +121,19 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
         return pinView
     }
 
+}
+
+// MARK: UITextFieldDelegate
+extension PostLocationVC : UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if textField == self.urlTextField {
+            submitButtonTouchUp(textField)
+        }
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

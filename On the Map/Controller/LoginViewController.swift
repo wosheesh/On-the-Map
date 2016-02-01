@@ -8,7 +8,6 @@
 
 // TODO: add app Transport security
 // TODO: lift view with keyboard
-// TODO: dismiss kayboard with touch outsise bounds
 // TODO: FB login
 // TODO: Sigin In
 

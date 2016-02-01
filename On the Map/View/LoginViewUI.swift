@@ -37,6 +37,7 @@ extension LoginViewController {
             emailTextField.enabled = enabled
             passwordTextField.enabled = enabled
             loginButton.enabled = enabled
+            loginWithFBButton.enabled = enabled
     
     
             if enabled {

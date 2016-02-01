@@ -28,10 +28,9 @@ struct OTMColors {
     static let loginTextFieldBg = UIColor(white: 1.0, alpha: 0.35)
     static let loginTextFieldTextColor = UIColor(white: 1.0, alpha: 1.0)
     
-    // MARK: InformationPostingVC
-    static let topToolbarBgColor = UIColor(white: 1.0, alpha: 0.0)
-    static let topToolbarItemColor = UIColor(red: 0.137, green: 0.302, blue: 0.471, alpha: 1.00)
-    static let viewBgColor = UIColor(red: 0.882, green: 0.882, blue: 0.871, alpha: 1.00)
+    // MARK: EnterLocationVC
+    static let EnerLocationtopToolbarItemColor = UIColor(red: 0.137, green: 0.302, blue: 0.471, alpha: 1.00)
+    static let EnterLocationViewBgColor = UIColor(red: 0.882, green: 0.882, blue: 0.871, alpha: 1.00)
     
     static let enterLocationTextFieldBgColor = UIColor(red: 0.325, green: 0.537, blue: 0.702, alpha: 1.00)
     static let enterLocationTextFieldTextColor = UIColor(white: 1.0, alpha: 1.0)
@@ -39,5 +38,18 @@ struct OTMColors {
     static let findOnTheMapButtonDark = UIColor(white: 1.0, alpha: 0.5)
     static let findOnTheMapButtonLight = UIColor(white: 1.0, alpha: 0.8)
     static let findOnTheMapButtonTitle = UIColor(red: 0.325, green: 0.537, blue: 0.702, alpha: 1.00)
+    
+    // MARK: PostLocationVC
+    static let PostLocationTopToolbarItemColor = UIColor(white: 1.0, alpha: 1.0)
+    static let PostLocationViewBgColor = UIColor(red: 0.325, green: 0.537, blue: 0.702, alpha: 1.00)
+    
+    static let urlTextFieldBgColor = UIColor(red: 0.325, green: 0.537, blue: 0.702, alpha: 1.00)
+    static let urlTextFieldTextColor = UIColor(white: 1.0, alpha: 1.0)
+
+    static let submitButtonDark = UIColor(white: 1.0, alpha: 0.5)
+    static let submitButtonLight = UIColor(white: 1.0, alpha: 0.8)
+    static let submitButtonTitle = UIColor(red: 0.325, green: 0.537, blue: 0.702, alpha: 1.00)
+    
+    static let updateQueryTint = UIColor(red: 0.882, green: 0.882, blue: 0.871, alpha: 1.00)
     
 }

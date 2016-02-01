@@ -8,12 +8,15 @@
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Medium.ttf">
             <string>Roboto-Medium</string>
+            <string>Roboto-Medium</string>
         </mutableArray>
         <mutableArray key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
         <mutableArray key="Roboto-Thin.ttf">
+            <string>Roboto-Thin</string>
             <string>Roboto-Thin</string>
             <string>Roboto-Thin</string>
         </mutableArray>
@@ -51,7 +54,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZaU-Z1-vQc"/>
                     <connections>
-                        <segue destination="CkP-gJ-sqI" kind="presentation" id="LBN-er-cyb"/>
+                        <segue destination="CkP-gJ-sqI" kind="presentation" identifier="InformationPostingSegue" id="LBN-er-cyb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oet-Jr-k4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -156,7 +159,7 @@
                     <navigationItem key="navigationItem" id="4Op-gC-iPW"/>
                     <connections>
                         <outlet property="StudentTableView" destination="cjX-Az-Meh" id="Rxj-UJ-Jzf"/>
-                        <segue destination="CkP-gJ-sqI" kind="presentation" id="TMQ-ko-7mu"/>
+                        <segue destination="CkP-gJ-sqI" kind="presentation" identifier="InformationPostingSegue" id="TMQ-ko-7mu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwB-jV-weT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -415,37 +418,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qvd-jv-1CO">
-                                <rect key="frame" x="208" y="76" width="184" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qvd-jv-1CO" customClass="UrlTextField" customModule="On_the_Map" customModuleProvider="target">
+                                <rect key="frame" x="20" y="76" width="560" height="30"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QV1-Uk-56X">
                                 <rect key="frame" x="0.0" y="139" width="600" height="461"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWf-Ui-Z0E">
-                                <rect key="frame" x="276" y="512" width="49" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWf-Ui-Z0E" customClass="SubmitUserDataButton" customModule="On_the_Map" customModuleProvider="target">
+                                <rect key="frame" x="200" y="507" width="200" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="9hd-Zd-wBc"/>
+                                    <constraint firstAttribute="height" constant="55" id="Neg-R1-OEn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="22"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitButtonTouchUp:" destination="uDc-ZP-Wyq" eventType="touchUpInside" id="mef-TW-2oc"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDT-DU-Vvr">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="7z5-7F-eMT"/>
+                                    <barButtonItem systemItem="cancel" id="Sk4-Wg-NyC">
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="cancelButtonTouchUp:" destination="uDc-ZP-Wyq" id="bMN-14-whe"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update your URL:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbh-rZ-wIW">
+                                <rect key="frame" x="236" y="51" width="129" height="20"/>
+                                <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="KDT-DU-Vvr" firstAttribute="top" secondItem="6jz-hS-tMd" secondAttribute="bottom" id="3d3-xZ-Oex"/>
                             <constraint firstItem="qvd-jv-1CO" firstAttribute="top" secondItem="6jz-hS-tMd" secondAttribute="bottom" constant="76" id="EYQ-QV-jOn"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="qvd-jv-1CO" secondAttribute="leading" id="GYz-bw-jUp"/>
                             <constraint firstItem="QV1-Uk-56X" firstAttribute="centerX" secondItem="iQj-6B-eeC" secondAttribute="centerX" id="MKk-Id-jvq"/>
+                            <constraint firstItem="Zbh-rZ-wIW" firstAttribute="centerX" secondItem="iQj-6B-eeC" secondAttribute="centerX" id="PUf-Mm-QMW"/>
                             <constraint firstItem="qvd-jv-1CO" firstAttribute="centerX" secondItem="iQj-6B-eeC" secondAttribute="centerX" id="Q13-xC-yzX"/>
                             <constraint firstItem="rWf-Ui-Z0E" firstAttribute="centerX" secondItem="iQj-6B-eeC" secondAttribute="centerX" id="ROC-BQ-5ok"/>
                             <constraint firstItem="0eC-uV-wfj" firstAttribute="top" secondItem="QV1-Uk-56X" secondAttribute="bottom" id="Zu9-mP-OKq"/>
+                            <constraint firstItem="qvd-jv-1CO" firstAttribute="top" secondItem="Zbh-rZ-wIW" secondAttribute="bottom" constant="5" id="eQc-ou-63w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qvd-jv-1CO" secondAttribute="trailing" id="eeR-jv-mmX"/>
                             <constraint firstItem="QV1-Uk-56X" firstAttribute="width" secondItem="iQj-6B-eeC" secondAttribute="width" id="fDA-Sf-O0O"/>
-                            <constraint firstItem="0eC-uV-wfj" firstAttribute="top" secondItem="rWf-Ui-Z0E" secondAttribute="bottom" constant="58" id="hns-UY-LAO"/>
+                            <constraint firstItem="KDT-DU-Vvr" firstAttribute="width" secondItem="iQj-6B-eeC" secondAttribute="width" id="fca-1i-7Fr"/>
+                            <constraint firstItem="0eC-uV-wfj" firstAttribute="top" secondItem="rWf-Ui-Z0E" secondAttribute="bottom" constant="38" id="hns-UY-LAO"/>
+                            <constraint firstItem="KDT-DU-Vvr" firstAttribute="centerX" secondItem="iQj-6B-eeC" secondAttribute="centerX" id="i0W-wp-8Fz"/>
                             <constraint firstItem="QV1-Uk-56X" firstAttribute="top" secondItem="qvd-jv-1CO" secondAttribute="bottom" constant="33" id="pt5-NJ-bnv"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="Sk4-Wg-NyC" id="b9C-wY-S5n"/>
                         <outlet property="mapForPosting" destination="QV1-Uk-56X" id="m5e-P8-Cc9"/>
                         <outlet property="submitButton" destination="rWf-Ui-Z0E" id="xyd-WI-8s2"/>
+                        <outlet property="topToolbar" destination="KDT-DU-Vvr" id="RTj-f5-HKd"/>
+                        <outlet property="updateQuery" destination="Zbh-rZ-wIW" id="0mX-Fz-1DE"/>
                         <outlet property="urlTextField" destination="qvd-jv-1CO" id="XQP-M1-bP4"/>
                     </connections>
                 </viewController>

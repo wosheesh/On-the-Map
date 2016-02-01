@@ -27,6 +27,9 @@
 		FE6F76921C5F539D00D51B81 /* EnterLocationUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6F76911C5F539D00D51B81 /* EnterLocationUI.swift */; };
 		FE6F76941C5F6D3D00D51B81 /* EnterLocationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6F76931C5F6D3D00D51B81 /* EnterLocationTextField.swift */; };
 		FE6F76961C5F806000D51B81 /* FindOnTheMapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6F76951C5F806000D51B81 /* FindOnTheMapButton.swift */; };
+		FE6F76981C5F895900D51B81 /* PostLocationUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6F76971C5F895900D51B81 /* PostLocationUI.swift */; };
+		FE71B1181C5F90BB00610D1F /* UrlTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71B1171C5F90BB00610D1F /* UrlTextField.swift */; };
+		FE71B11A1C5F916500610D1F /* SubmitUserDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71B1191C5F916500610D1F /* SubmitUserDataButton.swift */; };
 		FE8BA8A01C5B67CA00B988D6 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8BA89F1C5B67CA00B988D6 /* UserInformation.swift */; };
 		FEA412241C5A02AC005E2408 /* AlertRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA412231C5A02AC005E2408 /* AlertRenderer.swift */; };
 		FED22F491C52584F00685B8A /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED22F481C52584F00685B8A /* StudentInformation.swift */; };
@@ -60,6 +63,9 @@
 		FE6F76911C5F539D00D51B81 /* EnterLocationUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterLocationUI.swift; path = View/EnterLocationUI.swift; sourceTree = "<group>"; };
 		FE6F76931C5F6D3D00D51B81 /* EnterLocationTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterLocationTextField.swift; path = View/EnterLocationTextField.swift; sourceTree = "<group>"; };
 		FE6F76951C5F806000D51B81 /* FindOnTheMapButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FindOnTheMapButton.swift; path = View/FindOnTheMapButton.swift; sourceTree = "<group>"; };
+		FE6F76971C5F895900D51B81 /* PostLocationUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostLocationUI.swift; path = View/PostLocationUI.swift; sourceTree = "<group>"; };
+		FE71B1171C5F90BB00610D1F /* UrlTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UrlTextField.swift; path = View/UrlTextField.swift; sourceTree = "<group>"; };
+		FE71B1191C5F916500610D1F /* SubmitUserDataButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubmitUserDataButton.swift; path = View/SubmitUserDataButton.swift; sourceTree = "<group>"; };
 		FE8BA89F1C5B67CA00B988D6 /* UserInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInformation.swift; path = Model/StudentModel/UserInformation.swift; sourceTree = "<group>"; };
 		FEA412231C5A02AC005E2408 /* AlertRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertRenderer.swift; path = Controller/ControllerProtocols/AlertRenderer.swift; sourceTree = "<group>"; };
 		FED22F481C52584F00685B8A /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentInformation.swift; path = Model/StudentModel/StudentInformation.swift; sourceTree = "<group>"; };
@@ -121,6 +127,7 @@
 				FE587CF41C5E4301001A64A9 /* UdacityLoginButton.swift */,
 				FE426B281C5E63600057B2F0 /* FBLoginButton.swift */,
 				FE6F76951C5F806000D51B81 /* FindOnTheMapButton.swift */,
+				FE71B1191C5F916500610D1F /* SubmitUserDataButton.swift */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -210,7 +217,9 @@
 				FE587CFA1C5E5D09001A64A9 /* OTMColors.swift */,
 				FE426B2D1C5E88AB0057B2F0 /* LoginTextField.swift */,
 				FE6F76931C5F6D3D00D51B81 /* EnterLocationTextField.swift */,
+				FE71B1171C5F90BB00610D1F /* UrlTextField.swift */,
 				FE6F76911C5F539D00D51B81 /* EnterLocationUI.swift */,
+				FE6F76971C5F895900D51B81 /* PostLocationUI.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -312,9 +321,12 @@
 				FE426B2E1C5E88AB0057B2F0 /* LoginTextField.swift in Sources */,
 				FE6C2C491C5132A9004A0963 /* StudentsListViewController.swift in Sources */,
 				FE6C2C4B1C514DCF004A0963 /* ParseClient.swift in Sources */,
+				FE71B1181C5F90BB00610D1F /* UrlTextField.swift in Sources */,
 				FE426B2B1C5E65130057B2F0 /* BorderedButtonProtocol.swift in Sources */,
 				FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */,
+				FE6F76981C5F895900D51B81 /* PostLocationUI.swift in Sources */,
 				FE1E569F1C4F351E0042B258 /* UClient.swift in Sources */,
+				FE71B11A1C5F916500610D1F /* SubmitUserDataButton.swift in Sources */,
 				FE6F76941C5F6D3D00D51B81 /* EnterLocationTextField.swift in Sources */,
 				FED22F511C554F0C00685B8A /* OTMViewController.swift in Sources */,
 				FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */,

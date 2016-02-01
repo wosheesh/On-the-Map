@@ -1,5 +1,5 @@
 //
-//  EnterLocationUI.swift
+//  PostLocationUI.swift
 //  On the Map
 //
 //  Created by Wojtek Materka on 01/02/2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension EnterLocationVC {
+extension PostLocationVC {
     
     func setupUI() {
         
@@ -17,11 +17,19 @@ extension EnterLocationVC {
         topToolbar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.Any)
         
         /* top toolbar item text color */
-        cancelButton.tintColor = OTMColors.EnerLocationtopToolbarItemColor
+        cancelButton.tintColor = OTMColors.PostLocationTopToolbarItemColor
         
         /* backround */
-        self.view.backgroundColor = OTMColors.EnterLocationViewBgColor
+        self.view.backgroundColor = OTMColors.PostLocationViewBgColor
+        
+        /* for better UX in case url already exists display a query above url textfield*/
+        updateQuery.textColor = OTMColors.updateQueryTint
+        
+        if urlTextField.text != "" {
+            updateQuery.hidden = true
+        } else {
+            updateQuery.hidden = false
+        }
         
     }
-    
 }
