@@ -31,6 +31,8 @@
 		FE6F76981C5F895900D51B81 /* PostLocationUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6F76971C5F895900D51B81 /* PostLocationUI.swift */; };
 		FE71B1181C5F90BB00610D1F /* UrlTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71B1171C5F90BB00610D1F /* UrlTextField.swift */; };
 		FE71B11A1C5F916500610D1F /* SubmitUserDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71B1191C5F916500610D1F /* SubmitUserDataButton.swift */; };
+		FE7D79D71C6140170013739C /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7D79D51C6140170013739C /* FBSDKCoreKit.framework */; };
+		FE7D79D81C6140170013739C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7D79D61C6140170013739C /* FBSDKLoginKit.framework */; };
 		FE8BA8A01C5B67CA00B988D6 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8BA89F1C5B67CA00B988D6 /* UserInformation.swift */; };
 		FEA412241C5A02AC005E2408 /* AlertRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA412231C5A02AC005E2408 /* AlertRenderer.swift */; };
 		FED22F491C52584F00685B8A /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED22F481C52584F00685B8A /* StudentInformation.swift */; };
@@ -68,6 +70,8 @@
 		FE6F76971C5F895900D51B81 /* PostLocationUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostLocationUI.swift; path = View/PostLocationUI.swift; sourceTree = "<group>"; };
 		FE71B1171C5F90BB00610D1F /* UrlTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UrlTextField.swift; path = View/UrlTextField.swift; sourceTree = "<group>"; };
 		FE71B1191C5F916500610D1F /* SubmitUserDataButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubmitUserDataButton.swift; path = View/SubmitUserDataButton.swift; sourceTree = "<group>"; };
+		FE7D79D51C6140170013739C /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		FE7D79D61C6140170013739C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		FE8BA89F1C5B67CA00B988D6 /* UserInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInformation.swift; path = Model/StudentModel/UserInformation.swift; sourceTree = "<group>"; };
 		FEA412231C5A02AC005E2408 /* AlertRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertRenderer.swift; path = Controller/ControllerProtocols/AlertRenderer.swift; sourceTree = "<group>"; };
 		FED22F481C52584F00685B8A /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentInformation.swift; path = Model/StudentModel/StudentInformation.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE7D79D81C6140170013739C /* FBSDKLoginKit.framework in Frameworks */,
+				FE7D79D71C6140170013739C /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +111,8 @@
 		FE0A01661C5FB99A00E613DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FE7D79D51C6140170013739C /* FBSDKCoreKit.framework */,
+				FE7D79D61C6140170013739C /* FBSDKLoginKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -181,9 +189,9 @@
 		FEDAFE451C422F80006055B6 = {
 			isa = PBXGroup;
 			children = (
-				FE0A01661C5FB99A00E613DC /* Frameworks */,
 				FEDAFE501C422F81006055B6 /* On the Map */,
 				FEDAFE4F1C422F80006055B6 /* Products */,
+				FE0A01661C5FB99A00E613DC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -464,6 +472,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "On the Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -479,6 +488,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "On the Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
