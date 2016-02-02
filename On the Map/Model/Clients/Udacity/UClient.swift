@@ -168,6 +168,27 @@ class UClient: NSObject {
         }
     }
     
+    func logoutUdacityUser(completionHandler: (success: Bool, errorString: String?) -> Void) {
+        let udacityMethod = UClient.Methods.UdacitySession
+        
+        logoutFromFacebook()
+        
+        taskForDELETEMethod(udacityMethod) { JSONResult, error in
+            print("\(__FUNCTION__) JSONResult : \(JSONResult)")
+            
+            if let error = error {
+                print(error)
+            } else if let response = JSONResult.valueForKeyPath(UClient.JSONResponseKeys.SessionID) as? String {
+                completionHandler(success: true, errorString: nil)
+            } else {
+                print("Could not find \(UClient.JSONResponseKeys.SessionID) in \(JSONResult)")
+                completionHandler(success: false, errorString: "There was an error while trying to logout from Udacity. Please try again later.")
+            }
+        }
+        
+        
+    }
+    
     // MARK: Convenience functions
     
     func taskForPOSTMethod(method: String, jsonBody: [String: AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
@@ -265,6 +286,57 @@ class UClient: NSObject {
         return task
         
     }
+    
+    func taskForDELETEMethod(method: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        
+        /* 1. Build the URL */
+        let urlString = Constants.BaseURL + method
+        let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        
+        /* 2. Configure the request with cookie info */
+        request.HTTPMethod = "DELETE"
+        
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        /* 3. Make the request */
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            /* GUARD: was there an error? */
+            guard (error == nil) else {
+                print("There was an error: \(error) while calling method: \(method)")
+                if error?.code == NSURLErrorTimedOut {
+                    completionHandler(result: nil, error: error)
+                }
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("\(__FUNCTION__) in \(__FILE__) returned no data")
+                return
+            }
+            
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
+            
+            /* 4. Parse the data and use the data in completion handler */
+            UClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+        }
+        
+        /* 5. Start the request */
+        task.resume()
+        
+        return task
+        
+    }
+
 
     // MARK: Shared Instance
     

@@ -25,8 +25,8 @@ class OTMViewController: UIViewController, AlertRenderer {
         
         // TODO: see if this can be abstracted
         let button1 = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logout")
-        let button2 = UIBarButtonItem(title: "Pin", style: .Plain, target: self, action: "setStudentLocation")
-        let button3 = UIBarButtonItem(title: "Refresh", style: .Plain, target: self, action: "refreshStudentData")
+        let button2 = UIBarButtonItem(image: UIImage(named: "PinIcon"), style: .Plain, target: self, action: "setStudentLocation")
+        let button3 = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "refreshStudentData")
         
         self.navigationItem.hidesBackButton = true
         
@@ -119,6 +119,21 @@ class OTMViewController: UIViewController, AlertRenderer {
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func logout() {
+        /* check if it was a facebook login? */
+        
+        UClient.sharedInstance().logoutUdacityUser() { success, errorString in
+            if success {
+                print("success logging out from Udacity")
+                let nextController = self.storyboard?.instantiateViewControllerWithIdentifier("Login") as! LoginViewController
+                self.presentViewController(nextController, animated: true, completion: nil)
+            } else {
+                print(errorString)
+            }
+        }
+        /* Udacity logout */
     }
     
     

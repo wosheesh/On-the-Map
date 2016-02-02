@@ -14,6 +14,12 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
         <mutableArray key="Roboto-Thin.ttf">
             <string>Roboto-Thin</string>
@@ -169,7 +175,7 @@
         <!--Login View Controller-->
         <scene sceneID="1VW-GZ-yNX">
             <objects>
-                <viewController id="pqS-0g-lHo" customClass="LoginViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="pqS-0g-lHo" customClass="LoginViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gqy-jq-NwN"/>
                         <viewControllerLayoutGuide type="bottom" id="2d4-Kk-cbX"/>
@@ -186,47 +192,47 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtd-k3-VmX" customClass="LoginTextField" customModule="On_the_Map" customModuleProvider="target">
-                                <rect key="frame" x="20" y="196" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="20" y="195" width="560" height="30"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A8k-EO-J9R" customClass="LoginTextField" customModule="On_the_Map" customModuleProvider="target">
-                                <rect key="frame" x="20" y="236" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="pqS-0g-lHo" id="44M-ww-7LD"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Vu-9R-4Ab">
-                                <rect key="frame" x="220" y="154" width="161" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <rect key="frame" x="219" y="154" width="162" height="26"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6M-9s-aFx" customClass="UdacityLoginButton" customModule="On_the_Map" customModuleProvider="target">
-                                <rect key="frame" x="20" y="276" width="560" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="20" y="275" width="560" height="36"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginButtonTouch:" destination="pqS-0g-lHo" eventType="touchUpInside" id="oSE-A8-dqa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uce-p5-e0N">
-                                <rect key="frame" x="156" y="327" width="288" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="158" y="326" width="285" height="36"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                 <state key="normal" title="Don't have an account? Sign Up">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lf6-6L-tQ0" customClass="FBLoginButton" customModule="On_the_Map" customModuleProvider="target">
                                 <rect key="frame" x="20" y="544" width="560" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                 <state key="normal" title="Login with Facebook"/>
                                 <connections>
                                     <action selector="loginWithFBButtonTouchUp:" destination="pqS-0g-lHo" eventType="touchUpInside" id="NDh-zP-w8u"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A8k-EO-J9R" customClass="LoginTextField" customModule="On_the_Map" customModuleProvider="target">
+                                <rect key="frame" x="20" y="235" width="560" height="30"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pqS-0g-lHo" id="44M-ww-7LD"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.48627450979999998" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

@@ -103,7 +103,11 @@ class LoginViewController: UIViewController, AlertRenderer {
     
 }
 
+// MARK: UITextFieldDelegate
+
 extension LoginViewController: UITextFieldDelegate {
+    
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         if textField == self.passwordTextField {
@@ -112,6 +116,7 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
     
+    /* tapping outside of text field will dismiss keyboard */
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }

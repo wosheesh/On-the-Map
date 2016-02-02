@@ -67,4 +67,12 @@ extension UClient {
 
     }
     
+    
+    func logoutFromFacebook() {
+        
+//        FBSDKAccessToken.currentAccessToken() = nil
+        FBSDKLoginManager().logOut()
+        
+    }
+    
 }
