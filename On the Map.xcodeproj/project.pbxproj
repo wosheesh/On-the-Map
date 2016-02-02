@@ -10,8 +10,6 @@
 		FE0A016E1C5FD9B600E613DC /* UFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0A016D1C5FD9B600E613DC /* UFacebook.swift */; };
 		FE1E569F1C4F351E0042B258 /* UClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1E569E1C4F351E0042B258 /* UClient.swift */; };
 		FE1E56A11C4F38AB0042B258 /* UConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1E56A01C4F38AB0042B258 /* UConstants.swift */; };
-		FE24BFF91C613CAB002BC004 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE24BFF71C613CAB002BC004 /* FBSDKCoreKit.framework */; };
-		FE24BFFA1C613CAB002BC004 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE24BFF81C613CAB002BC004 /* FBSDKLoginKit.framework */; };
 		FE3A6DA11C5901D6008BB290 /* EnterLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3A6DA01C5901D6008BB290 /* EnterLocationVC.swift */; };
 		FE3A6DA31C590265008BB290 /* PostLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3A6DA21C590265008BB290 /* PostLocationVC.swift */; };
 		FE426B291C5E63600057B2F0 /* FBLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE426B281C5E63600057B2F0 /* FBLoginButton.swift */; };
@@ -49,8 +47,6 @@
 		FE0A016D1C5FD9B600E613DC /* UFacebook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UFacebook.swift; sourceTree = "<group>"; };
 		FE1E569E1C4F351E0042B258 /* UClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UClient.swift; sourceTree = "<group>"; };
 		FE1E56A01C4F38AB0042B258 /* UConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UConstants.swift; sourceTree = "<group>"; };
-		FE24BFF71C613CAB002BC004 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "On the Map/Frameworks/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
-		FE24BFF81C613CAB002BC004 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "On the Map/Frameworks/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		FE3A6DA01C5901D6008BB290 /* EnterLocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnterLocationVC.swift; path = Controller/InformationPostingControllers/EnterLocationVC.swift; sourceTree = "<group>"; };
 		FE3A6DA21C590265008BB290 /* PostLocationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostLocationVC.swift; path = Controller/InformationPostingControllers/PostLocationVC.swift; sourceTree = "<group>"; };
 		FE426B281C5E63600057B2F0 /* FBLoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FBLoginButton.swift; path = View/FBLoginButton.swift; sourceTree = "<group>"; };
@@ -91,8 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE24BFFA1C613CAB002BC004 /* FBSDKLoginKit.framework in Frameworks */,
-				FE24BFF91C613CAB002BC004 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,8 +105,6 @@
 		FE0A01661C5FB99A00E613DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FE24BFF71C613CAB002BC004 /* FBSDKCoreKit.framework */,
-				FE24BFF81C613CAB002BC004 /* FBSDKLoginKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -472,9 +464,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/On",
-					the,
-					Map/Frameworks,
 				);
 				INFOPLIST_FILE = "On the Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -490,9 +479,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/On",
-					the,
-					Map/Frameworks,
 				);
 				INFOPLIST_FILE = "On the Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
