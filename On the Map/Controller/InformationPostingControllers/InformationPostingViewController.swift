@@ -13,10 +13,10 @@ class InformationPostingViewController: UIViewController {
     
     // MARK: Properties
     
-    var postLocationVC: PostLocationVC?
-    
     @IBOutlet weak var EnterLocationContainer: UIView!
     @IBOutlet weak var PostLocationContainer: UIView!
+    
+    var postLocationVC: PostLocationVC?
     
     // MARK: Lifecycle
     

@@ -16,14 +16,19 @@ protocol EnterLocationVCDelegate {
 class EnterLocationVC: UIViewController, AlertRenderer {
     
     // MARK: Properties
-    
-    var enterLocationDelegate: EnterLocationVCDelegate?
+
     
     @IBOutlet weak var locationTextField: EnterLocationTextField!
     @IBOutlet weak var FindOnMapButton: FindOnTheMapButton!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
- 
     @IBOutlet weak var topToolbar: UIToolbar!
+    
+    var enterLocationDelegate: EnterLocationVCDelegate?
+    
+    /* for progress view */
+    var messageFrame = UIView()
+    var activityIndicator = UIActivityIndicatorView()
+    var strLabel = UILabel()
     
     // MARK: Lifecycle
     
@@ -55,6 +60,9 @@ class EnterLocationVC: UIViewController, AlertRenderer {
         if locationTextField.text!.isEmpty {
             presentAlert("Map Search", message: "Please enter location")
         } else {
+            
+            showProgressView("Searching...")
+            
             /* setup the location search request */
             let request = MKLocalSearchRequest()
             request.naturalLanguageQuery = locationTextField.text
@@ -70,11 +78,32 @@ class EnterLocationVC: UIViewController, AlertRenderer {
                 
                 /* pass the first mapItem found */
                 self.enterLocationDelegate?.enterLocationVCDidReturnMapItem(response.mapItems[0])
-                
+                self.messageFrame.removeFromSuperview()
             }
         }
         
     }
+    
+    /* shows an activity indicator with a simple message */
+    func showProgressView(message: String) {
+        
+        strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 50))
+        strLabel.text = message
+        strLabel.textColor = UIColor.whiteColor()
+        messageFrame = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25 , width: 180, height: 50))
+        messageFrame.layer.cornerRadius = 15
+        messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.startAnimating()
+        messageFrame.addSubview(activityIndicator)
+        
+        messageFrame.addSubview(strLabel)
+        view.addSubview(messageFrame)
+        
+    }
+    
 }
 
 // MARK: UITextFieldDelegate
