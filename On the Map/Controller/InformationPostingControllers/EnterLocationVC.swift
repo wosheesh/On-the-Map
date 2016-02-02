@@ -54,8 +54,6 @@ class EnterLocationVC: UIViewController, AlertRenderer {
     }
     
     @IBAction func FindOnMapButtonTouchUp(sender: AnyObject) {
-        // TODO: Change button state if textfield is not empty [http://stackoverflow.com/questions/28394933/how-do-i-check-when-a-uitextfield-changes]
-        // TODO: progress indicator if searching
         
         if locationTextField.text!.isEmpty {
             presentAlert("Map Search", message: "Please enter location")

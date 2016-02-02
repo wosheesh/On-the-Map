@@ -51,6 +51,7 @@ class UClient: NSObject {
                         if success {
                             
                             self.userData = userData
+                            ParseClient.sharedInstance().user = UserInformation.UserInformationFromUserData(self.userData!)
                             
                             completionHandler(success: success, errorString: errorString)
                         } else {
@@ -73,12 +74,12 @@ class UClient: NSObject {
             
             /* 1. Specify methods (if has {key}) */
             var mutableMethod : String = Methods.UdacityUserData
-            mutableMethod = UClient.subtituteKeyInMethod(mutableMethod, key: UClient.URLKeys.UserId, value: String(UClient.sharedInstance().userID!))!
+            mutableMethod = UClient.subtituteKeyInMethod(mutableMethod, key: UClient.URLKeys.UserId, value: userID)!
+            
+            print("------> getting \(userID)")
             
             /* 2. Make the request */
             taskForGETMethod(mutableMethod) { JSONResult, error in
-                
-//                print("\(__FUNCTION__) JSONResult : \(JSONResult)")
                 
                 /* 3. send the results to completionHandler */
                 
@@ -129,8 +130,6 @@ class UClient: NSObject {
         /* 2. Make the request */
         taskForPOSTMethod(UClient.Methods.UdacitySession, jsonBody: jsonBody!) { JSONResult, error in
             
-            print("\(__FUNCTION__) JSONResult : \(JSONResult)")
-            
             /* 3. Send the desired value to completion handler */
             /* check for errors and return info to user */
             if let error = error {
@@ -174,7 +173,6 @@ class UClient: NSObject {
         logoutFromFacebook()
         
         taskForDELETEMethod(udacityMethod) { JSONResult, error in
-            print("\(__FUNCTION__) JSONResult : \(JSONResult)")
             
             if let error = error {
                 print(error)

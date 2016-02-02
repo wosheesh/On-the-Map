@@ -6,8 +6,6 @@
 //  Copyright © 2016 Wojtek Materka. All rights reserved.
 //
 
-// TODO: Reload data func
-
 import UIKit
 
 
@@ -25,9 +23,6 @@ class StudentsListViewController: OTMViewController {
     @IBAction func refreshStudentData() {
         loadStudentData { success, error in
             if success {
-//                print("vvvvvvvvvvvvvvvvvvvvvvvvvvv data from: \(__FUNCTION__) in \(__FILE__)")
-//                print(ParseClient.sharedInstance().studentInformationArray)
-//                print("^^^^^^^^^^^^^^^^^^^^^^^^^^^ data from: \(__FUNCTION__) in \(__FILE__)")
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.StudentTableView.reloadData()

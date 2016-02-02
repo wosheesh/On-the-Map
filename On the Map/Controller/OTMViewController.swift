@@ -7,7 +7,6 @@
 //
 
 /* Superclass for map and list views */
-// TODO: Change this into a delegate
 
 import UIKit
 
@@ -27,8 +26,7 @@ class OTMViewController: UIViewController, AlertRenderer {
         super.viewDidLoad()
         
         /* Configure the navbar */
-        
-        // TODO: see if this can be abstracted
+
         let button1 = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logout")
         let button2 = UIBarButtonItem(image: UIImage(named: "PinIcon"), style: .Plain, target: self, action: "setStudentLocation")
         let button3 = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "refreshStudentData")
@@ -82,7 +80,6 @@ class OTMViewController: UIViewController, AlertRenderer {
                     print("user has no info")
 
                 } else {
-                    print("user data: \(results)")
                             
                     /* Update the user variable with information from results */
                     ParseClient.sharedInstance().user = UserInformation.updateUserInformationFromDictionary(ParseClient.sharedInstance().user, userData: results![0])

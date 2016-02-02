@@ -17,8 +17,6 @@ extension UClient {
     // MARK: authenticateWithFacebook
     func authenticateWithFacebook(completionHandler: (success: Bool, error: NSError?) -> Void) {
         
-        // TODO: Should handle when user already logged in.
-        
         /* use FB Login Manager to authenticate */
         FBSDKLoginManager().logInWithReadPermissions(facebookReadPermissions, fromViewController: nil, handler: { result, error in
             
@@ -34,7 +32,6 @@ extension UClient {
                 completionHandler(success: false, error: NSError(domain: "authenticateWithFacebook - cancel", code: 0, userInfo: userInfo))
             } else {
                 let access_token = FBSDKAccessToken.currentAccessToken().tokenString
-                 print("Got a FB access_token: \(access_token)")
                 
                 /* if successful read user data from Udacity */
                 self.getSessionID(nil, password: nil, access_token: access_token) { success, sessionID, userID, errorString in

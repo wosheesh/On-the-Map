@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wojtek Materka. All rights reserved.
 //
 
-// TODO: add app Transport security
+// TODO: add app Transport security for Udacity servers
 // TODO: Sigin In
 
 import UIKit
@@ -52,7 +52,6 @@ class LoginViewController: UIViewController, AlertRenderer {
     // MARK: Actions
     
     @IBAction func loginButtonTouch(sender: AnyObject) {
-        
         self.setUIEnabled(enabled: false)
         showProgressView("Logging in")
         
@@ -66,7 +65,6 @@ class LoginViewController: UIViewController, AlertRenderer {
     }
     
     @IBAction func loginWithFBButtonTouchUp(sender: AnyObject) {
-        
         self.setUIEnabled(enabled: false)
         showProgressView("Logging in")
         
@@ -85,6 +83,11 @@ class LoginViewController: UIViewController, AlertRenderer {
         }
     }
     
+    /* open safari for udacity signup */
+    @IBAction func signUpButtonTouchUp(sender: AnyObject) {
+        openSafariWithURLString("https://www.udacity.com/account/auth#!/signup")
+    }
+    
     // MARK: LoginViewController
     
     func completeLogin() {
@@ -92,7 +95,6 @@ class LoginViewController: UIViewController, AlertRenderer {
             
             self.messageFrame.removeFromSuperview()
             self.setUIEnabled(enabled: false)
-            // TODO: instantiate login view
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabsController") as! UITabBarController
             self.presentViewController(controller, animated: true, completion: nil)
         })
@@ -130,6 +132,18 @@ class LoginViewController: UIViewController, AlertRenderer {
         messageFrame.addSubview(strLabel)
         view.addSubview(messageFrame)
 
+    }
+    
+    /* open with Safari helper */
+    func openSafariWithURLString(urlString: String) {
+        let app = UIApplication.sharedApplication()
+        
+        /* check if they left http(s) prefix - many students don't and safari fails to open */
+        if urlString.hasPrefix("http://") || urlString.hasPrefix("https://") {
+            app.openURL(NSURL(string: urlString)!)
+        } else {
+            app.openURL(NSURL(fileURLWithPath: urlString, relativeToURL: NSURL(string: "http://")))
+        }
     }
  
 }

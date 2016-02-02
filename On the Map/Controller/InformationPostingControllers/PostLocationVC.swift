@@ -72,7 +72,6 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
         
         ParseClient.sharedInstance().submitStudentLocation(ParseClient.sharedInstance().user) { success, error in
             if success {
-                print("success")
                 
                 /* inform the user of the successful update and dismiss the view */
                 

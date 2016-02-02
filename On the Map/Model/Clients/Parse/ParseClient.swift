@@ -27,16 +27,9 @@ class ParseClient: NSObject {
         session = NSURLSession.sharedSession()
         
         /* instantiate 'user' for possible Parse updates */
-        
-        // TODO: Load User data only after authentication
-        
         user = UserInformation.UserInformationFromUserData(UClient.sharedInstance().userData!)
 
-            
-
-        
         super.init()
-        
 
     }
     
@@ -44,8 +37,7 @@ class ParseClient: NSObject {
     
     func getStudentLocations(completionHandler: (success: Bool, error: NSError?) -> Void) {
         
-        // TODO: Limit to last 100 entries
-        
+        // Parse limits this request to 100 entries
         /* Make the request */
         taskForGETMethod(Methods.StudentLocation, parameters: nil) { JSONResult, error in
             
@@ -86,10 +78,8 @@ class ParseClient: NSObject {
                 completionHandler(results: nil, error: error)
             } else {
                 if let results = JSONResult[ParseClient.JSONResponseKeys.Results] as? [[String:AnyObject]] {
-                    print("Results: \(results)")
                     completionHandler(results: results, error: nil)
                 } else {
-                    print(JSONResult)
                     completionHandler(results: nil, error: NSError(domain: "queryForStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not resolve query"]))
                 }
             }
@@ -106,15 +96,12 @@ class ParseClient: NSObject {
         var urlString = String()
             
         if let mutableParameters = parameters {
-            print("MutableParameters: \(mutableParameters)")
             urlString = Constants.BaseURLSecure + method + ParseClient.escapedParameters(mutableParameters)
         } else {
             urlString = Constants.BaseURLSecure + method
         }
             
-        print("urlString: \(urlString)")
         let url = NSURL(string: urlString)!
-        print("\(__FUNCTION__) Url: \(url)")
         let request = NSMutableURLRequest(URL: url)
         
         /* 2. Configure the request */
@@ -169,11 +156,9 @@ class ParseClient: NSObject {
         var mutableMethod : String = Methods.UpdateStudentLocation
         
         if let objectID = user.objectID {
-            print("objectID: \(user.objectID)")
             mutableMethod = ParseClient.subtituteKeyInMethod(mutableMethod, key: ParseClient.URLKeys.UniqueKey, value: objectID)! // user.objectID!
             httpMethod = ParseClient.HttpMethods.UpdateExistingUser
         } else {
-            print("objectID: \(user.objectID)")
             mutableMethod = ParseClient.subtituteKeyInMethod(mutableMethod, key: ParseClient.URLKeys.UniqueKey, value: "")!
             httpMethod = ParseClient.HttpMethods.PostNewUser
         }
@@ -193,17 +178,12 @@ class ParseClient: NSObject {
         /* 2. make the request */
         taskForHTTPMethod(mutableMethod, httpMethod: httpMethod, jsonBody: jsonBody) { JSONResult, error in
             
-            print("Function: \(__FUNCTION__) JSONResult: \(JSONResult)")
-            
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 completionHandler(success: false, error: error)
-                
             } else if let PUTResponse = JSONResult[ParseClient.JSONResponseKeys.PUTResponse] as? String {
-                print("Function: \(__FUNCTION__) PUTResponse: \(PUTResponse)")
                 completionHandler(success: true, error: nil)
             } else if let POSTResponse = JSONResult[ParseClient.JSONResponseKeys.POSTResponse] as? String {
-                print("Function: \(__FUNCTION__) POSTResponse: \(POSTResponse)")
                 completionHandler(success: true, error: nil)
             } else {
                 completionHandler(success: false, error: NSError(domain: "submitStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not PUT new user information"]))
@@ -228,9 +208,6 @@ class ParseClient: NSObject {
         do {
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
         }
-        
-        print("request.HTTPBody: \(request.HTTPBody)")
-        print("url: \(url)")
         
         /* 2. Make the request */
         let task = session.dataTaskWithRequest(request) { (data, result, error) in

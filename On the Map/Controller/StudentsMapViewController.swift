@@ -27,6 +27,10 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
         mapView.delegate = self
         view.addSubview(mapView)
         
+        /* check if the user has Parse data */
+        /* */
+        updateUserInformation(ParseClient.sharedInstance().user.udacityKey)
+        
         /* inital load of data */
         refreshStudentData()
         
@@ -39,15 +43,10 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
         /* clear the existing annotations */
         self.mapView.removeAnnotations(mapView.annotations)
         annotations = []
-
-        print(ParseClient.sharedInstance().user)
         
         /* define the allocations and load the array with student location data  */
         loadStudentData { success, error in
             if success {
-//                print("vvvvvvvvvvvvvvvvvvvvvvvvvvv data from: \(__FUNCTION__) in \(__FILE__)")
-//                print(ParseClient.sharedInstance().studentInformationArray)
-//                print("^^^^^^^^^^^^^^^^^^^^^^^^^^^ data from: \(__FUNCTION__) in \(__FILE__)")
                 for student in ParseClient.sharedInstance().studentInformationArray {
                     let lat = CLLocationDegrees(student.studentLocation[ParseClient.JSONResponseKeys.Latitude] as! Double)
                     let long = CLLocationDegrees(student.studentLocation[ParseClient.JSONResponseKeys.Longitude] as! Double)
