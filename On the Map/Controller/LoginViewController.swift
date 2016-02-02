@@ -68,6 +68,7 @@ class LoginViewController: UIViewController, AlertRenderer {
     @IBAction func loginWithFBButtonTouchUp(sender: AnyObject) {
         
         self.setUIEnabled(enabled: false)
+        showProgressView("Logging in")
         
         UClient.sharedInstance().authenticateWithFacebook { (success, error) in
             if success {
@@ -99,6 +100,7 @@ class LoginViewController: UIViewController, AlertRenderer {
     
     func displayError(errorString: String?) {
         dispatch_async(dispatch_get_main_queue(), {
+            
             self.messageFrame.removeFromSuperview()
             self.setUIEnabled(enabled: true)
             if let errorString = errorString {
