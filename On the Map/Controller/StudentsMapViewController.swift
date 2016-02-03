@@ -11,8 +11,6 @@ import MapKit
 
 class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     
-    // var mapView: MKMapView!
-    var students: [StudentInformation] = [StudentInformation]()
     let mapView = MKMapView()
     var annotations = [MKPointAnnotation]()
     
@@ -74,6 +72,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
                 })
                 
             } else {
+                self.displayError("Oops", message: "Something went wrong while fetching Student data. Try again later.")
                 print("Error: \(error) in \(__FUNCTION__)")
             }
         }

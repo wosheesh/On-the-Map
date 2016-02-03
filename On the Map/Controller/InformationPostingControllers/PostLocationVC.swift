@@ -20,6 +20,11 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var updateQuery: UILabel!
     
+    /* for progress view */
+    var messageFrame = UIView()
+    var activityIndicator = UIActivityIndicatorView()
+    var strLabel = UILabel()
+    
     // MARK: Lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -64,38 +69,73 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
         
         if urlTextField.text!.isEmpty {
             presentAlert("Submit New Data", message: "Please enter media URL")
-        }
-        /* update the mediaURL with new information */
-        ParseClient.sharedInstance().user.mediaURL = urlTextField.text
-        
-        // TODO: if a new user updates this information than when he hits cancel user data should go back ... or not -> ux choice?
-        
-        ParseClient.sharedInstance().submitStudentLocation(ParseClient.sharedInstance().user) { success, error in
-            if success {
-                
-                /* inform the user of the successful update and dismiss the view */
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    let alertController = UIAlertController(title: "On the Map", message: "Data updated successfully", preferredStyle: .Alert)
+        } else {
+            
+            showProgressView("Submitting...")
+            
+            /* update the mediaURL with new information */
+            ParseClient.sharedInstance().user.mediaURL = urlTextField.text
+            
+            ParseClient.sharedInstance().submitStudentLocation(ParseClient.sharedInstance().user) { success, errorString in
+                if success {
                     
-                    let OKAction = UIAlertAction(title: "OK", style: .Default) { action in
-                        print("OK pressed on Alert Controller")
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    }
+                    /* inform the user of the successful update and dismiss the view */
                     
-                    alertController.addAction(OKAction)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        /* make sure we remove the activity indicator */
+                        self.messageFrame.removeFromSuperview()
+                        
+                        let alertController = UIAlertController(title: "On the Map", message: "Data updated successfully", preferredStyle: .Alert)
+                        
+                        let OKAction = UIAlertAction(title: "OK", style: .Default) { action in
+                            print("OK pressed on Alert Controller")
+                            self.dismissViewControllerAnimated(true, completion: nil)
+                        }
+                        
+                        alertController.addAction(OKAction)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    })
                     
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                })
-                
-                
-                
-            } else {
-                print(error)
-                print("not updated submitStudentLocation")
+                    
+                    
+                } else if let errorString = errorString {
+
+                    print("not updated submitStudentLocation")
+                    
+                    /* make sure the user sees an alert if the post fails */
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        /* make sure we remove the activity indicator */
+                        self.messageFrame.removeFromSuperview()
+                        
+                        self.presentAlert("On the Map", message: errorString)
+                    })
+                    
+                }
             }
         }
+        
+    }
 
+    /* shows an activity indicator with a simple message */
+    func showProgressView(message: String) {
+        
+        strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 50))
+        strLabel.text = message
+        strLabel.textColor = UIColor.whiteColor()
+        messageFrame = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25 , width: 180, height: 50))
+        messageFrame.layer.cornerRadius = 15
+        messageFrame.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.startAnimating()
+        messageFrame.addSubview(activityIndicator)
+        
+        messageFrame.addSubview(strLabel)
+        view.addSubview(messageFrame)
         
     }
     

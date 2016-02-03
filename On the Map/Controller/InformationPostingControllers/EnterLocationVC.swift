@@ -69,14 +69,21 @@ class EnterLocationVC: UIViewController, AlertRenderer {
             let search = MKLocalSearch(request: request)
             search.startWithCompletionHandler { response, error in
                 guard let response = response else {
+                    
+                    /* make sure we remove the activity indicator */
+                    self.messageFrame.removeFromSuperview()
+                    
                     print("There was an error: \(error) while searching for: \(request.naturalLanguageQuery)")
                     self.presentAlert("Map Search", message: "Couldn't find the location. Check your internet connection.")
                     return
                 }
                 
+                /* make sure we remove the activity indicator */
+                self.messageFrame.removeFromSuperview()
+                
                 /* pass the first mapItem found */
                 self.enterLocationDelegate?.enterLocationVCDidReturnMapItem(response.mapItems[0])
-                self.messageFrame.removeFromSuperview()
+                
             }
         }
         

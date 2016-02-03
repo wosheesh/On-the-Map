@@ -148,7 +148,7 @@ class ParseClient: NSObject {
     
     // MARK: submitStudentLocation
     
-    func submitStudentLocation(user: UserInformation, completionHandler: (success: Bool, error: NSError?) -> Void) {
+    func submitStudentLocation(user: UserInformation, completionHandler: (success: Bool, errorString: String?) -> Void) {
         
         var httpMethod : String
         
@@ -180,13 +180,17 @@ class ParseClient: NSObject {
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
-                completionHandler(success: false, error: error)
+                if error.code == -1001 {
+                    completionHandler(success: false, errorString: "Request timed out")
+                } else {
+                    completionHandler(success: false, errorString: "Something went wrong: \(error.userInfo.description)")
+                }
             } else if let PUTResponse = JSONResult[ParseClient.JSONResponseKeys.PUTResponse] as? String {
-                completionHandler(success: true, error: nil)
+                completionHandler(success: true, errorString: nil)
             } else if let POSTResponse = JSONResult[ParseClient.JSONResponseKeys.POSTResponse] as? String {
-                completionHandler(success: true, error: nil)
+                completionHandler(success: true, errorString: nil)
             } else {
-                completionHandler(success: false, error: NSError(domain: "submitStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not PUT new user information"]))
+                completionHandler(success: false, errorString: "Could not PUT new user information")
             }
             
         }
@@ -215,6 +219,7 @@ class ParseClient: NSObject {
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 print("[Parse PUT Method: \(method)] There was an error: \(error)")
+                completionHandler(result: nil, error: error)
                 return
             }
             
