@@ -88,8 +88,6 @@ class LoginViewController: UIViewController, AlertRenderer {
         openSafariWithURLString("https://www.udacity.com/account/auth#!/signup")
     }
     
-    // MARK: LoginViewController
-    
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
             
