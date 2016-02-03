@@ -36,6 +36,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
         
         /* inital load of data */
         refreshStudentData()
+        
     }
     
     // MARK: refreshStudentData
@@ -43,8 +44,10 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     @IBAction func refreshStudentData() {
         
         /* clear the existing annotations */
-        self.mapView.removeAnnotations(mapView.annotations)
-        annotations = []
+        if mapUpdated {
+            self.mapView.removeAnnotations(mapView.annotations)
+            annotations = []
+        }
         
         /* define the allocations and load the array with student location data  */
         loadStudentData { success, error in
@@ -73,6 +76,9 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
                 /* add new annotations to the map */
                 dispatch_async(dispatch_get_main_queue(), {
                     self.mapView.addAnnotations(self.annotations)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.mapUpdated = true
+                    })
                 })
                 
             } else {
@@ -96,7 +102,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = UIColor(red: 0.984, green: 0.227, blue: 0.184, alpha: 1.00)
-            pinView!.animatesDrop = true
+            pinView!.animatesDrop = !mapUpdated
             pinView?.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
         } else {
             pinView!.annotation = annotation

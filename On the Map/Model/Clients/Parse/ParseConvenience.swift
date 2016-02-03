@@ -107,10 +107,11 @@ extension ParseClient {
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
-                if error.code == -1001 {
-                    completionHandler(success: false, errorString: "Request timed out")
+                if error.code == NSURLErrorTimedOut ||
+                    error.code == NSURLErrorNotConnectedToInternet {
+                    completionHandler(success: false, errorString: "Request timed out - Check your connection")
                 } else {
-                    completionHandler(success: false, errorString: "Something went wrong: \(error.userInfo.description)")
+                    completionHandler(success: false, errorString: "Something went wrong while trying to update your location. Try again later.")
                 }
             } else if let _ = JSONResult[ParseClient.JSONResponseKeys.PUTResponse] as? String {
                 completionHandler(success: true, errorString: nil)

@@ -111,7 +111,8 @@ extension UClient {
                 print(error)
                 
                 /* catching the timeout error */
-                if error.code == NSURLErrorTimedOut {
+                if error.code == NSURLErrorTimedOut ||
+                error.code == NSURLErrorNotConnectedToInternet {
                     completionHandler(success: false, sessionID: nil, userID: nil, errorString: "Cannot connect to Udacity server. Please check your connection.")
                 } else {
                     completionHandler(success: false, sessionID: nil, userID: nil, errorString: "There was an error establishing a session with Udacity server. Please try again later.")

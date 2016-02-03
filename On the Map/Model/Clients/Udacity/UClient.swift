@@ -48,15 +48,14 @@ class UClient: NSObject {
             /* GUARD: was there an error? */
             guard (error == nil) else {
                 print("There was an error: \(error) while calling method: \(method)")
-                if error?.code == NSURLErrorTimedOut {
-                    completionHandler(result: nil, error: error)
-                }
+                completionHandler(result: nil, error: error)
                 return
             }
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
                 print("\(__FUNCTION__) in \(__FILE__) returned no data")
+                completionHandler(result: nil, error: error)
                 return
             }
             

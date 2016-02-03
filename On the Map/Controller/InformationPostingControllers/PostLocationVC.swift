@@ -66,6 +66,7 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
     }
     
     @IBAction func submitButtonTouchUp(sender: AnyObject) {
+        print("submit touch up")
         
         if urlTextField.text!.isEmpty {
             presentAlert("Submit New Data", message: "Please enter media URL")
