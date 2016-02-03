@@ -131,8 +131,7 @@ class OTMViewController: UIViewController, AlertRenderer {
         UClient.sharedInstance().logoutUdacityUser() { success, errorString in
             if success {
                 print("success logging out from Udacity")
-                /* clear user information */
-                UserInformation.clearUserInformation()
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     self.messageFrame.removeFromSuperview()
                 })
@@ -141,14 +140,13 @@ class OTMViewController: UIViewController, AlertRenderer {
                 self.presentViewController(nextController, animated: true, completion: nil)
             } else {
                 
+                print(errorString)
                 dispatch_async(dispatch_get_main_queue(), {
                     self.messageFrame.removeFromSuperview()
+                    self.displayError("On the Map", message: "Couldn't log you out: \(errorString)")
                 })
-                
-                print(errorString)
             }
         }
-        /* Udacity logout */
     }
     
     

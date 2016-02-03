@@ -47,13 +47,14 @@ extension UClient {
                                 completionHandler(success: success, error: nil)
                             } else {
                                 let userInfo = [NSLocalizedDescriptionKey : errorString as String!]
-                                completionHandler(success: success, error: NSError(domain: "authenticateWithFacebook - getUserDataWithUserID", code: 0, userInfo: userInfo))
+                                completionHandler(success: success, error: NSError(domain: "authenticateWithFacebook - getUserDataWithUserID", code: 0, userInfo: userInfo)) // self.getUserDataWithUserID(userID!)
                             }
                         }
                         
                     } else {
                         let userInfo = [NSLocalizedDescriptionKey : errorString as String!]
-                        completionHandler(success: success, error: NSError(domain: "authenticateWithFacebook - getSessionID", code: 0, userInfo: userInfo))
+                        completionHandler(success: success, error: NSError(domain: "authenticateWithFacebook - getSessionID",
+                            code: 0, userInfo: userInfo)) // self.getSessionID
                     }
                     
                 }
@@ -67,7 +68,6 @@ extension UClient {
     
     func logoutFromFacebook() {
         
-//        FBSDKAccessToken.currentAccessToken() = nil
         FBSDKLoginManager().logOut()
         
     }

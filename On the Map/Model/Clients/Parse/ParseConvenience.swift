@@ -11,12 +11,12 @@ import Foundation
 extension ParseClient {
     
     // MARK: getStudentLocations
-    /* GETs all lat 100 student location objects and loads them to StudentInformation.StudentArray */
+    /// GETs all lat 100 student location objects and loads them to StudentInformation.StudentArray
     func getStudentLocations(completionHandler: (success: Bool, error: NSError?) -> Void) {
         
         /* 1. Specify the parameters */
         
-        /* limit the search to last 100 entries */
+        /* limit the search to last 100 entries and sort by the most recently updated */
         let parameters = [
             ParameterKeys.LimitQuery : 100,
             ParameterKeys.OrderQuery : "-updatedAt"
@@ -47,7 +47,7 @@ extension ParseClient {
     
     
     // MARK: queryForStudentLocation
-    
+    /// Looks for StudentLocation data with uniqueKey. Returns the data through completionHandler
     func queryForStudentLocation(uniqueKey: String, completionHandler: (results: [[String:AnyObject]]?, error: NSError?) -> Void) {
         
         /* 1. Specify the parameters, method */
@@ -72,8 +72,9 @@ extension ParseClient {
             }
         }
     }
-    // MARK: submitStudentLocation
     
+    // MARK: submitStudentLocation
+    /// Submits new StudentLocation of the current app user to the Parse StudentInformation array.
     func submitStudentLocation(completionHandler: (success: Bool, errorString: String?) -> Void) {
         
         var httpMethod : String
@@ -111,9 +112,9 @@ extension ParseClient {
                 } else {
                     completionHandler(success: false, errorString: "Something went wrong: \(error.userInfo.description)")
                 }
-            } else if let PUTResponse = JSONResult[ParseClient.JSONResponseKeys.PUTResponse] as? String {
+            } else if let _ = JSONResult[ParseClient.JSONResponseKeys.PUTResponse] as? String {
                 completionHandler(success: true, errorString: nil)
-            } else if let POSTResponse = JSONResult[ParseClient.JSONResponseKeys.POSTResponse] as? String {
+            } else if let _ = JSONResult[ParseClient.JSONResponseKeys.POSTResponse] as? String {
                 completionHandler(success: true, errorString: nil)
             } else {
                 completionHandler(success: false, errorString: "Could not PUT new user information")
