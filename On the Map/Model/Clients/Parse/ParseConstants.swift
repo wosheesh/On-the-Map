@@ -53,6 +53,10 @@ extension ParseClient {
     // MARK: Parameter key
     struct ParameterKeys {
         static let ArrayQuery = "where"
+        static let LimitQuery = "limit"
+        static let OrderQuery = "order"
+        static let SkipQuery = "skip"
+        
     }
     
     // MARK: JSON Response Keys

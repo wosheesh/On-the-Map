@@ -13,6 +13,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
     
     let mapView = MKMapView()
     var annotations = [MKPointAnnotation]()
+    var mapUpdated: Bool = false
     
     // MARK: Lifecycle
     
@@ -26,12 +27,15 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
         view.addSubview(mapView)
         
         /* check if the user has Parse data */
-        /* */
         updateUserInformation()
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         /* inital load of data */
         refreshStudentData()
-        
     }
     
     // MARK: refreshStudentData
@@ -77,7 +81,7 @@ class StudentsMapViewController: OTMViewController, MKMapViewDelegate {
             }
         }
     }
-    
+
     
     // MARK: MKMapDelegate
     

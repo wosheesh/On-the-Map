@@ -35,6 +35,7 @@
 		FE7D79D81C6140170013739C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE7D79D61C6140170013739C /* FBSDKLoginKit.framework */; };
 		FE8BA8A01C5B67CA00B988D6 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8BA89F1C5B67CA00B988D6 /* UserInformation.swift */; };
 		FEA412241C5A02AC005E2408 /* AlertRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA412231C5A02AC005E2408 /* AlertRenderer.swift */; };
+		FEBE70F31C62267100767DAA /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE70F21C62267100767DAA /* ParseConvenience.swift */; };
 		FED22F491C52584F00685B8A /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED22F481C52584F00685B8A /* StudentInformation.swift */; };
 		FED22F511C554F0C00685B8A /* OTMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED22F501C554F0C00685B8A /* OTMViewController.swift */; };
 		FEDAFE521C422F81006055B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFE511C422F81006055B6 /* AppDelegate.swift */; };
@@ -74,6 +75,7 @@
 		FE7D79D61C6140170013739C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		FE8BA89F1C5B67CA00B988D6 /* UserInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInformation.swift; path = Model/StudentModel/UserInformation.swift; sourceTree = "<group>"; };
 		FEA412231C5A02AC005E2408 /* AlertRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertRenderer.swift; path = Controller/ControllerProtocols/AlertRenderer.swift; sourceTree = "<group>"; };
+		FEBE70F21C62267100767DAA /* ParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseConvenience.swift; path = Model/Clients/Parse/ParseConvenience.swift; sourceTree = "<group>"; };
 		FED22F481C52584F00685B8A /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentInformation.swift; path = Model/StudentModel/StudentInformation.swift; sourceTree = "<group>"; };
 		FED22F501C554F0C00685B8A /* OTMViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OTMViewController.swift; path = Controller/OTMViewController.swift; sourceTree = "<group>"; };
 		FEDAFE4E1C422F80006055B6 /* On the Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On the Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				FE6C2C4A1C514DCF004A0963 /* ParseClient.swift */,
+				FEBE70F21C62267100767DAA /* ParseConvenience.swift */,
 				FE6C2C4D1C5235B2004A0963 /* ParseConstants.swift */,
 			);
 			name = Parse;
@@ -350,6 +353,7 @@
 				FE6F76941C5F6D3D00D51B81 /* EnterLocationTextField.swift in Sources */,
 				FED22F511C554F0C00685B8A /* OTMViewController.swift in Sources */,
 				FE6C2C431C5114A7004A0963 /* StudentsMapViewController.swift in Sources */,
+				FEBE70F31C62267100767DAA /* ParseConvenience.swift in Sources */,
 				FE587CF91C5E49F9001A64A9 /* LoginViewUI.swift in Sources */,
 				FE8BA8A01C5B67CA00B988D6 /* UserInformation.swift in Sources */,
 				FE3A6DA11C5901D6008BB290 /* EnterLocationVC.swift in Sources */,
