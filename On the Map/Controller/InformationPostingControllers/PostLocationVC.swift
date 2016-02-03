@@ -30,7 +30,7 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
         super.viewWillAppear(animated)
         
         /* if the user already has a mediaURL set update the text field */
-        urlTextField.text = ParseClient.sharedInstance().user.mediaURL
+        urlTextField.text = UserInformation.mediaURL
         
     }
     
@@ -74,9 +74,9 @@ class PostLocationVC: UIViewController, MKMapViewDelegate, AlertRenderer {
             showProgressView("Submitting...")
             
             /* update the mediaURL with new information */
-            ParseClient.sharedInstance().user.mediaURL = urlTextField.text
+            UserInformation.mediaURL = urlTextField.text
             
-            ParseClient.sharedInstance().submitStudentLocation(ParseClient.sharedInstance().user) { success, errorString in
+            ParseClient.sharedInstance().submitStudentLocation() { success, errorString in
                 if success {
                     
                     /* inform the user of the successful update and dismiss the view */

@@ -58,10 +58,10 @@ extension InformationPostingViewController: EnterLocationVCDelegate {
         
         /* update user info with the new mapString and location as returned by MKLocalSearch */
         /* this will get over-written by old data unless the user submits the change in EnterLocationVC */
-        ParseClient.sharedInstance().user.mapString = mapItem.name
+        UserInformation.mapString = mapItem.name
 
-        ParseClient.sharedInstance().user.lat = mapItem.placemark.coordinate.latitude
-        ParseClient.sharedInstance().user.long = mapItem.placemark.coordinate.longitude
+        UserInformation.lat = mapItem.placemark.coordinate.latitude
+        UserInformation.long = mapItem.placemark.coordinate.longitude
         
         /* add annotation to the mapView */
         self.postLocationVC?.addAnnotationToMapFromMapItem(mapItem)

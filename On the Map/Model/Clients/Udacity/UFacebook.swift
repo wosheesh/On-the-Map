@@ -37,13 +37,13 @@ extension UClient {
                 self.getSessionID(nil, password: nil, access_token: access_token) { success, sessionID, userID, errorString in
                     
                     if success {
-                        self.sessionID = sessionID
-                        self.userID = userID
                         
-                        self.getUserDataWithUserID(self.userID!) { success, userData, errorString in
+                        self.getUserDataWithUserID(userID!) { success, userData, errorString in
                             
                             if success {
-                                self.userData = userData
+                                /* update User Information with Udacity data */
+                                UserInformation.UserInformationFromUserData(userData!)
+                                
                                 completionHandler(success: success, error: nil)
                             } else {
                                 let userInfo = [NSLocalizedDescriptionKey : errorString as String!]

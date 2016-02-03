@@ -11,12 +11,9 @@ import Foundation
 class ParseClient: NSObject {
     
     // MARK: Properties
-
-    /* Array to hold studentInformation in a single place */
-    var studentInformationArray: [StudentInformation] = [StudentInformation]()
     
     /* UdacityUser information */
-    var user: UserInformation
+//    var user: UserInformation
 
     /* Shared session */
     var session: NSURLSession
@@ -27,7 +24,7 @@ class ParseClient: NSObject {
         session = NSURLSession.sharedSession()
         
         /* instantiate 'user' for possible Parse updates */
-        user = UserInformation.UserInformationFromUserData(UClient.sharedInstance().userData!)
+//        user = UserInformation.UserInformationFromUserData(UClient.sharedInstance().userData!)
 
         super.init()
 
@@ -47,9 +44,11 @@ class ParseClient: NSObject {
                 completionHandler(success: false, error: error)
             } else {
                 
-                /* if JSON parse successful store the student informations as an array of ParseClient singleton */
+                /* if JSON parse successful store the student informations as an array in StudentInformation model */
                 if let results = JSONResult[ParseClient.JSONResponseKeys.Results] as? [[String:AnyObject]] {
-                    self.studentInformationArray = StudentInformation.StudentInformationFromResults(results)
+
+                    StudentInformation.StudentArray = StudentInformation.StudentInformationFromResults(results)
+            
                     completionHandler(success: true, error: nil)
                     
                 } else {
@@ -66,10 +65,10 @@ class ParseClient: NSObject {
         /* 1. Specify the parameters, method */
         
         /* declare the query for a specific userKey */
-        let query = "{\"\(JSONResponseKeys.UniqueKey)\":\"\(user.udacityKey)\"}"
+        let query = "{\"\(JSONResponseKeys.UniqueKey)\":\"\(UserInformation.udacityKey!)\"}"
         /* declare the parameters for Parse API */
         let parameters = [ParameterKeys.ArrayQuery : query]
-      
+        
         /* 2. Make the request */
         taskForGETMethod(Methods.StudentLocation, parameters: parameters) { JSONResult, error in
             
@@ -148,14 +147,14 @@ class ParseClient: NSObject {
     
     // MARK: submitStudentLocation
     
-    func submitStudentLocation(user: UserInformation, completionHandler: (success: Bool, errorString: String?) -> Void) {
+    func submitStudentLocation(completionHandler: (success: Bool, errorString: String?) -> Void) {
         
         var httpMethod : String
         
         /* 1. Specify parameters, method and HTTP Body */
         var mutableMethod : String = Methods.UpdateStudentLocation
         
-        if let objectID = user.objectID {
+        if let objectID = UserInformation.objectID {
             mutableMethod = ParseClient.subtituteKeyInMethod(mutableMethod, key: ParseClient.URLKeys.UniqueKey, value: objectID)! // user.objectID!
             httpMethod = ParseClient.HttpMethods.UpdateExistingUser
         } else {
@@ -164,13 +163,13 @@ class ParseClient: NSObject {
         }
         
         let jsonBody : [String : AnyObject] = [
-            ParseClient.JSONResponseKeys.UniqueKey : user.udacityKey,
-            ParseClient.JSONResponseKeys.FirstName : user.firstName,
-            ParseClient.JSONResponseKeys.LastName : user.lastName,
-            ParseClient.JSONResponseKeys.MapString : user.mapString!,
-            ParseClient.JSONResponseKeys.MediaURL : user.mediaURL!,
-            ParseClient.JSONResponseKeys.Latitude : user.lat!,
-            ParseClient.JSONResponseKeys.Longitude: user.long!
+            ParseClient.JSONResponseKeys.UniqueKey : UserInformation.udacityKey!,
+            ParseClient.JSONResponseKeys.FirstName : UserInformation.firstName!,
+            ParseClient.JSONResponseKeys.LastName : UserInformation.lastName!,
+            ParseClient.JSONResponseKeys.MapString : UserInformation.mapString!,
+            ParseClient.JSONResponseKeys.MediaURL : UserInformation.mediaURL!,
+            ParseClient.JSONResponseKeys.Latitude : UserInformation.lat!,
+            ParseClient.JSONResponseKeys.Longitude: UserInformation.long!
         ]
         
         print("Calling PARSEmethod: \(mutableMethod) with HTTPmethod: \(httpMethod)")

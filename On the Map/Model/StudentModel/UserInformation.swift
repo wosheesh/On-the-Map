@@ -9,19 +9,28 @@
 import Foundation
 
 struct UserInformation {
-    var udacityKey : String
-    var firstName : String
-    var lastName : String
-    var mapString : String?
-    var mediaURL : String?
-    var lat: Double? = nil
-    var long: Double? = nil
-    var objectID: String?
+    static var udacityKey : String? {
+        willSet(userUdacityKey) {
+            print("setting user udacity Key tp \(userUdacityKey)")
+        }
+        didSet {
+            if udacityKey != oldValue {
+                print("Changed user Udacity key from \(oldValue) to \(udacityKey)")
+            }
+        }
+    }
+    static var firstName : String?
+    static var lastName : String?
+    static var mapString : String?
+    static var mediaURL : String?
+    static var lat: Double? = nil
+    static var long: Double? = nil
+    static var objectID: String?
     
     init(udacityKey: String, firstName: String, lastName: String) {
-        self.udacityKey = udacityKey
-        self.firstName = firstName
-        self.lastName = lastName
+        UserInformation.udacityKey = udacityKey
+        UserInformation.firstName = firstName
+        UserInformation.lastName = lastName
     }
     
     /* Convert JSON result from UClient login to UserInformation */
@@ -35,16 +44,25 @@ struct UserInformation {
         return user
     }
     
-    static func updateUserInformationFromDictionary(user: UserInformation, userData: [String:AnyObject]) -> UserInformation {
-        var updatedUser = user
-        
-        updatedUser.mapString = userData[ParseClient.JSONResponseKeys.MapString] as? String
-        updatedUser.mediaURL = userData[ParseClient.JSONResponseKeys.MediaURL] as? String
-        updatedUser.lat = userData[ParseClient.JSONResponseKeys.Latitude] as? Double
-        updatedUser.long = userData[ParseClient.JSONResponseKeys.Longitude] as? Double
-        updatedUser.objectID = userData[ParseClient.JSONResponseKeys.ObjectID] as? String
+    static func updateUserInformationFromDictionary(userData: [String:AnyObject]) {
 
-        return updatedUser
+        UserInformation.mapString = userData[ParseClient.JSONResponseKeys.MapString] as? String
+        UserInformation.mediaURL = userData[ParseClient.JSONResponseKeys.MediaURL] as? String
+        UserInformation.lat = userData[ParseClient.JSONResponseKeys.Latitude] as? Double
+        UserInformation.long = userData[ParseClient.JSONResponseKeys.Longitude] as? Double
+        UserInformation.objectID = userData[ParseClient.JSONResponseKeys.ObjectID] as? String
+
+    }
+    
+    static func clearUserInformation() {
+        UserInformation.udacityKey = nil
+        UserInformation.firstName = nil
+        UserInformation.lastName = nil
+        UserInformation.mapString = nil
+        UserInformation.mediaURL = nil
+        UserInformation.lat = nil
+        UserInformation.long = nil
+        UserInformation.objectID = nil
     }
     
     

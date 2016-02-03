@@ -36,7 +36,7 @@ class EnterLocationVC: UIViewController, AlertRenderer {
         super.viewWillAppear(animated)
         
         /* if the user already has a location set update the text field */
-        locationTextField.text = ParseClient.sharedInstance().user.mapString 
+        locationTextField.text = UserInformation.mapString 
     }
     
     override func viewDidLoad() {

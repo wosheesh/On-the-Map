@@ -62,17 +62,17 @@ class OTMViewController: UIViewController, AlertRenderer {
             }
         }
         
-        updateUserInformation(ParseClient.sharedInstance().user.udacityKey)
+        updateUserInformation()
     }
     
     // MARK: updateUserInformation
     /* Check if user has location already set */
     /* If yes update user information with data from StudentInformation array */
-    func updateUserInformation(uniqueKey: String) {
-        ParseClient.sharedInstance().queryForStudentLocation(ParseClient.sharedInstance().user.udacityKey) { results, error in
+    func updateUserInformation() {
+        ParseClient.sharedInstance().queryForStudentLocation(UserInformation.udacityKey!) { results, error in
             
             if let error = error {
-                print("\(__FUNCTION__) Error : \(error)")
+                print("\(__FUNCTION__) Error : \(error) for userKey: \(UserInformation.udacityKey)")
             } else {
                 print("\(__FUNCTION__) Results: \(results)")
                 
@@ -82,7 +82,7 @@ class OTMViewController: UIViewController, AlertRenderer {
                 } else {
                             
                     /* Update the user variable with information from results */
-                    ParseClient.sharedInstance().user = UserInformation.updateUserInformationFromDictionary(ParseClient.sharedInstance().user, userData: results![0])
+                    UserInformation.updateUserInformationFromDictionary(results![0])
                     
                     /* change the flag */
                     self.isNewUser = false
@@ -131,7 +131,8 @@ class OTMViewController: UIViewController, AlertRenderer {
         UClient.sharedInstance().logoutUdacityUser() { success, errorString in
             if success {
                 print("success logging out from Udacity")
-                
+                /* clear user information */
+                UserInformation.clearUserInformation()
                 dispatch_async(dispatch_get_main_queue(), {
                     self.messageFrame.removeFromSuperview()
                 })

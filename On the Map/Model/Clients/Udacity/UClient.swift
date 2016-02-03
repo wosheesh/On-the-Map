@@ -50,8 +50,8 @@ class UClient: NSObject {
                         
                         if success {
                             
-                            self.userData = userData
-                            ParseClient.sharedInstance().user = UserInformation.UserInformationFromUserData(self.userData!)
+//                            self.userData = userData
+                            UserInformation.UserInformationFromUserData(userData!)
                             
                             completionHandler(success: success, errorString: errorString)
                         } else {

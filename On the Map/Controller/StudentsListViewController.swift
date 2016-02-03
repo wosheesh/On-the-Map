@@ -41,7 +41,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         
         /* Get the cell type */
         let cellReuseIdentifier = "StudentsListViewCell"
-        let student = ParseClient.sharedInstance().studentInformationArray[indexPath.row]
+        let student = StudentInformation.StudentArray[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         
         /* Set cell defaults */
@@ -56,13 +56,13 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ParseClient.sharedInstance().studentInformationArray.count
+        return StudentInformation.StudentArray.count
 
     }
     
     /* open safari on cell select */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let selectedCell = ParseClient.sharedInstance().studentInformationArray[indexPath.row]
+        let selectedCell = StudentInformation.StudentArray[indexPath.row]
         
         /* if the corresponding studentLocation has mediaURL try open safari */
         if let urlString = selectedCell.studentLocation[ParseClient.JSONResponseKeys.MediaURL] as? String {
